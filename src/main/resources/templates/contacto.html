@@ -6,16 +6,19 @@
     </head>
     <body>
       <header>
-        <a href="index.html"><img style="width: 200px; background-color: black;" src="images/FreeJobs_LettersLogo.png"></a>
+        <a th:href="@{/}"><img style="width: 200px; background-color: black;" src="imagens/FreeJobs_LettersLogo.png"></a>
         <input type="text"  placeholder="Search">
+
         <select>
-          <option>Filters</option>
+          <option>All categories</option>
         </select>
-        <a href="create-flipping.html" >Create Fliping</a>
-        <a href="#myProfileMenu">My Profile</a>
+        <a th:href="@{/criaranuncio}" >Criar anúncio</a>
+
+        <!-- Por enquanto o My profile a tag vai enviar para o profile.html -->
+        <a th:href="@{/perfil}">Meu perfil</a>
         <div id="myProfileMenu" >
-          <a href="create-profile.html">Sign in</a>
-          <a href="#" >Log in</a>
+          <a th:href="@{/criarperfil}">Criar conta</a>
+          <a href="#" >Entrar</a>
         </div>
       </header>
 
@@ -31,7 +34,7 @@
         <button type="submit">Enviar</button>
       </form>
     <footer>
-      <p>Copyright © All rights reserved</p>
+      <p>Copyright © Todos os direitos reservados</p>
     </footer>
 </body>
 </html>
