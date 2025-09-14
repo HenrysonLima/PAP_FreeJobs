@@ -1,10 +1,10 @@
-package com.pap.freejobs_website;
+package com.pap.freejobs_website.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class PathController {
+public class FreeJobsController {
 
     @GetMapping("/")
     public String home(){
@@ -27,8 +27,6 @@ public class PathController {
 
     @GetMapping("/pesquisa")
     public String pesquisa(){ return "pesquisa"; }
-
-
 
     @GetMapping("/contacto")
     public String contacto(){ return "contacto"; }
