@@ -1,4 +1,4 @@
-package com.pap.freejobs_website.web;
+package com.pap.freejobs_website.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +18,6 @@ public class FreeJobsController {
 
     @GetMapping("/perfil")
     public String perfil(){ return "perfil";}
-
-    @GetMapping("/criarperfil")
-    public String criarPerfil(){ return "criar-perfil"; }
 
     @GetMapping("/anuncio")
     public String anuncio(){ return "anuncio"; }

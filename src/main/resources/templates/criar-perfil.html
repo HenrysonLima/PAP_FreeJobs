@@ -9,16 +9,22 @@
     <a th:href="@{/}"><img style="width: 200px; background-color: black;" src="imagens/FreeJobs_LettersLogo.png"></a>
   </header>
 
-  <form>
-    <label>Nome de utilizador: <input type="text" name="username"></label><br>
-    <label>Email: <input type="email" name="email"></label><br>
-    <label>Senha: <input type="password" name="senha"></label><br>
-    <label>Contacto primário: <input type="tel" name="contacto1"></label><br>
-    <label>Contacto secundário: <input type="tel" name="contacto2"></label><br>
-    <label>Contacto terciário: <input type="tel" name="contacto3"></label><br>
-    <label>Foto de perfil: <input type="file" name="fotoPerfil"></label><br>
-    <label>CV: <input type="file" name="cv"></label><br>
+  <form th:action="@{/criarperfil}" th:object="${utilizador_dto}" method="post">
+    <label>Nome de utilizador: <input type="text" th:field="*{username}"></label><br>
+    <label>Email: <input type="email" th:field="*{email}"></label><br>
+    <label>Senha: <input type="password" th:field="*{senha}"></label><br>
+
+    <!-- depoois o type vai mudar para file e será implementada  -->
+    <label>Foto de perfil: <input type="text" th:field="*{url_foto_de_perfil}" ></label><br>
+    <label>CV: <input type="text" th:field="*{url_CV}"></label><br>
     <button type="submit">Criar</button>
+
+    <!-- JS temporário, depois vai pra um arquivo separado -->
+     <div th:if="${param.success}">
+        <script > alert("foi criado o bagui")</script>
+     </div>
+     
+
   </form>
   <footer>
     <p>Copyright © Todos os direitos reservados</p>
