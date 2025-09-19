@@ -5,12 +5,14 @@ import com.pap.freejobs_website.entity.Utilizador;
 import com.pap.freejobs_website.repository.Utilizador_repositorio;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+
 @Service
-public class Utilizador_Servico {
+public class Utilizador_servico {
 
     private final Utilizador_repositorio utilizador_repositorio;
 
-    public Utilizador_Servico(Utilizador_repositorio utilizadorRepositorio){
+    public Utilizador_servico(Utilizador_repositorio utilizadorRepositorio){
         this.utilizador_repositorio = utilizadorRepositorio;
     }
 
@@ -20,12 +22,29 @@ public class Utilizador_Servico {
         if(utilizador_repositorio.existsByEmail(dto.getEmail())){
             throw new IllegalArgumentException("Email já existente");
         }
+
+        //conversão MultipartFile para byte[]
+        byte[] fotoBytes = null;
+        byte[] cvBytes = null;
+
+        try{
+            if(dto.getFoto_de_perfil() != null && !dto.getFoto_de_perfil().isEmpty()){
+                fotoBytes = dto.getFoto_de_perfil().getBytes();
+            }
+            if(dto.getCv() != null && !dto.getCv().isEmpty()){
+                cvBytes = dto.getCv().getBytes();
+            }
+        }
+        catch (IOException e){
+            throw new RuntimeException("Erro ao processar ficheiros", e);
+        }
+
         Utilizador utilizador = new Utilizador(
                 dto.getUsername(),
                 dto.getEmail(),
                 dto.getSenha(),
-                dto.getUrl_foto_de_perfil(),
-                dto.getUrl_CV()
+                fotoBytes,
+                cvBytes
         );
         return utilizador_repositorio.save(utilizador);
     }

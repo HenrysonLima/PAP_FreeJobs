@@ -9,18 +9,16 @@
     <a th:href="@{/}"><img style="width: 200px; background-color: black;" src="imagens/FreeJobs_LettersLogo.png"></a>
   </header>
 
-  <form th:action="@{/criarperfil}" th:object="${utilizador_dto}" method="post">
-    <label>Nome de utilizador: <input type="text" th:field="*{username}"></label><br>
-    <label>Email: <input type="email" th:field="*{email}"></label><br>
-    <label>Senha: <input type="password" th:field="*{senha}"></label><br>
-
-    <!-- depoois o type vai mudar para file e será implementada  -->
-    <label>Foto de perfil: <input type="text" th:field="*{url_foto_de_perfil}" ></label><br>
-    <label>CV: <input type="text" th:field="*{url_CV}"></label><br>
+  <form th:action="@{/criarperfil}" th:object="${utilizador_dto}" method="post" enctype="multipart/form-data">
+    <label>Nome de utilizador: <input autocomplete="off" type="text" th:field="*{username}"></label><br>
+    <label>Email: <input autocomplete="off" type="email" th:field="*{email}"></label><br>
+    <label>Senha: <input autocomplete="off" type="password" th:field="*{senha}"></label><br>
+    <label>Foto de perfil: <input type="file" th:field="*{foto_de_perfil}" ></label><br>
+    <label>CV: <input type="file" th:field="*{cv}"></label><br>
     <button type="submit">Criar</button>
 
     <!-- JS temporário, depois vai pra um arquivo separado -->
-     <div th:if="${param.success}">
+     <div th:if="${param.sucesso}">
         <script > alert("foi criado o bagui")</script>
      </div>
      

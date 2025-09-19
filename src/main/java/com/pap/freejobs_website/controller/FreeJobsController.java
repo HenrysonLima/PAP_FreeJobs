@@ -11,11 +11,6 @@ public class FreeJobsController {
         return "index";
     }
 
-    @GetMapping("/criaranuncio")
-    public String criarAnuncio(){
-        return "criar-anuncio";
-    }
-
     @GetMapping("/perfil")
     public String perfil(){ return "perfil";}
 

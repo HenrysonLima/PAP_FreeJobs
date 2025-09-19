@@ -1,22 +1,20 @@
 package com.pap.freejobs_website.controller;
 
 import com.pap.freejobs_website.dto.Utilizador_dto;
-import com.pap.freejobs_website.service.Utilizador_Servico;
+import com.pap.freejobs_website.service.Utilizador_servico;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Controller
 @RequestMapping("/criarperfil")
 public class Utilizador_controller {
 
-    private final Utilizador_Servico utilizador_servico;
+    private final Utilizador_servico utilizador_servico;
 
-    public Utilizador_controller(Utilizador_Servico utilizador_servico){
+    public Utilizador_controller(Utilizador_servico utilizador_servico){
         this.utilizador_servico = utilizador_servico;
     }
 
@@ -29,13 +27,20 @@ public class Utilizador_controller {
 
     //Salvar o utilizador na base de dados
     @PostMapping
-    public String salvar_utilizador(@ModelAttribute("utilizador_dto") Utilizador_dto utilizador_dto, Model model){
+    public String salvar_utilizador(
+            @RequestParam("username") String username,
+            @RequestParam("email") String email,
+            @RequestParam("senha") String senha,
+            @RequestParam("foto_de_perfil") MultipartFile foto_de_perfil,
+            @RequestParam("cv") MultipartFile cv
+    ) {
         try {
-            utilizador_servico.salvar_utilizador(utilizador_dto);
-            return "redirect:/criarperfil?success"; //query parameter
+            Utilizador_dto dto = new Utilizador_dto(username, email, senha, foto_de_perfil, cv);
+            utilizador_servico.salvar_utilizador(dto);
+            return "redirect:/criarperfil?sucesso"; //query parameter
         }
         catch (IllegalArgumentException e){
-            model.addAttribute("errorMessage", e.getMessage());
+
             return "redirect:https://www.youtube.com/shorts/2dJ5WGuG0nk";
         }
     }

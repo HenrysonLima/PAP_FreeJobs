@@ -1,20 +1,22 @@
 package com.pap.freejobs_website.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Utilizador_dto {
     private String username;
     private String email;
     private String senha;
-    private String url_foto_de_perfil;
-    private String url_CV;
+    private MultipartFile foto_de_perfil;
+    private MultipartFile cv;
 
     public Utilizador_dto(){}
 
-    public Utilizador_dto(String username, String email, String senha, String url_foto_de_perfil, String url_CV) {
+    public Utilizador_dto(String username, String email, String senha, MultipartFile foto_de_perfil, MultipartFile cv) {
         this.username = username;
         this.email = email;
         this.senha = senha;
-        this.url_foto_de_perfil = url_foto_de_perfil;
-        this.url_CV = url_CV;
+        this.foto_de_perfil = foto_de_perfil;
+        this.cv = cv;
     }
 
     //Getters and Setters
@@ -42,19 +44,19 @@ public class Utilizador_dto {
         this.senha = senha;
     }
 
-    public String getUrl_foto_de_perfil() {
-        return url_foto_de_perfil;
+    public MultipartFile getFoto_de_perfil() {
+        return foto_de_perfil;
     }
 
-    public void setUrl_foto_de_perfil(String url_foto_de_perfil) {
-        this.url_foto_de_perfil = url_foto_de_perfil;
+    public void setFoto_de_perfil(MultipartFile foto_de_perfil) {
+        this.foto_de_perfil = foto_de_perfil;
     }
 
-    public String getUrl_CV() {
-        return url_CV;
+    public MultipartFile getCv() {
+        return cv;
     }
 
-    public void setUrl_CV(String url_CV) {
-        this.url_CV = url_CV;
+    public void setCv(MultipartFile cv) {
+        this.cv = cv;
     }
 }

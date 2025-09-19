@@ -1,6 +1,8 @@
 package com.pap.freejobs_website.entity;
 
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "utilizador")
@@ -18,21 +20,24 @@ public class Utilizador {
     @Column(nullable = false, length = 100)
     private String senha;
 
-    @Column(nullable = false, unique = true)
-    private String url_foto_de_perfil;
+    @Lob
+    private byte[] foto_de_perfil;
 
-    @Column(nullable = false, unique = true)
-    private String url_CV;
+    @Lob
+    private byte[] cv;
+
+    @OneToMany(mappedBy = "utilizador", cascade = CascadeType.ALL)
+    private List<Anuncio> anuncios = new ArrayList<>();
 
     //Contrutores
     public Utilizador() {}
 
-    public Utilizador(String username, String email, String senha, String url_foto_de_perfil, String url_CV) {
+    public Utilizador(String username, String email, String senha, byte[] foto_de_perfil, byte[] cv) {
         this.username = username;
         this.email = email;
         this.senha = senha;
-        this.url_foto_de_perfil = url_foto_de_perfil;
-        this.url_CV = url_CV;
+        this.foto_de_perfil = foto_de_perfil;
+        this.cv = cv;
     }
 
     //Getters and Setters
@@ -64,19 +69,19 @@ public class Utilizador {
         this.senha = senha;
     }
 
-    public String getUrl_foto_de_perfil() {
-        return url_foto_de_perfil;
+    public byte[] getFoto_de_perfil() {
+        return foto_de_perfil;
     }
 
-    public void setUrl_foto_de_perfil(String url_foto_de_perfil) {
-        this.url_foto_de_perfil = url_foto_de_perfil;
+    public void setFoto_de_perfil(byte[] foto_de_perfil) {
+        this.foto_de_perfil = foto_de_perfil;
     }
 
-    public String getUrl_CV() {
-        return url_CV;
+    public byte[] getCv() {
+        return cv;
     }
 
-    public void setUrl_CV(String url_CV) {
-        this.url_CV = url_CV;
+    public void setCv(byte[] cv) {
+        this.cv = cv;
     }
 }

@@ -9,12 +9,11 @@
       <a th:href="@{/}"><img style="width: 200px; background-color: black;" src="imagens/FreeJobs_LettersLogo.png"></a>
     </header>
 
-    <form>
-      <label>Título: <input type="text" name="titulo"></label><br>
+    <form th:action="@{/criaranuncio}" th:object="${anuncio_dto}" method="post">
+      <label>Título: <input autocomplete="off" type="text" th:field="*{}"></label><br>
       <label>Foto: <input type="file" name="foto"></label><br>
-      <label>Preço: <input type="number" name="preco"></label><br>
-      <label>Descrição: <textarea name="descricao"></textarea></label><br>
-      <p>Aviso: serão apresentados os contactos definidos no perfil.</p>
+      <label>Preço: <input autocomplete="off" type="number" name="preco"></label><br>
+      <label>Descrição: <textarea autocomplete="off" name="descricao"></textarea></label><br>
       <button type="submit">Enviar</button>
     </form>
     <footer>
