@@ -3,6 +3,7 @@ package com.pap.freejobs_website.service;
 import com.pap.freejobs_website.dto.Utilizador_dto;
 import com.pap.freejobs_website.entity.Utilizador;
 import com.pap.freejobs_website.repository.Utilizador_repositorio;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -11,9 +12,11 @@ import java.io.IOException;
 public class Utilizador_servico {
 
     private final Utilizador_repositorio utilizador_repositorio;
+    private final PasswordEncoder passwordEncoder;
 
-    public Utilizador_servico(Utilizador_repositorio utilizadorRepositorio){
+    public Utilizador_servico(Utilizador_repositorio utilizadorRepositorio, PasswordEncoder passwordEncoder){
         this.utilizador_repositorio = utilizadorRepositorio;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public Utilizador salvar_utilizador(Utilizador_dto dto) {
@@ -46,6 +49,9 @@ public class Utilizador_servico {
                 fotoBytes,
                 cvBytes
         );
+
+        utilizador.setSenha(passwordEncoder.encode(utilizador.getSenha()));// hash password
+
         return utilizador_repositorio.save(utilizador);
     }
 }

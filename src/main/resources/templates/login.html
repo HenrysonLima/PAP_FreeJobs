@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Criar perfil</title>
+</head>
+<body>
+  <header>
+    <a th:href="@{/}"><img style="width: 200px; background-color: black;" src="imagens/FreeJobs_LettersLogo.png"></a>
+  </header>
+
+  <form th:action="@{/login}" method="post">
+    <label>Email: <input autocomplete="off" type="email" name="username" required></label><br>
+    <label>Senha: <input autocomplete="off" type="password" name="password" required></label><br>
+    <button type="submit">Entrar</button>
+
+    <!-- JS temporário, depois vai pra um arquivo separado -->
+     <div th:if="${param.sucesso}">
+        <script > alert("Bem vindo de volta")</script>
+     </div>
+     
+
+  </form>
+  <footer>
+    <p>Copyright © Todos os direitos reservados</p>
+    <a th:href="@{/contacto}" >Contacte-nos<img style="width: 50px; background-color: black;" src="imagens/TextBox.png" ></a>
+  </footer>
+</body>
+</html>

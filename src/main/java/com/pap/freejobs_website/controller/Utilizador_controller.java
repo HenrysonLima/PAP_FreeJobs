@@ -3,9 +3,11 @@ package com.pap.freejobs_website.controller;
 import com.pap.freejobs_website.dto.Utilizador_dto;
 import com.pap.freejobs_website.service.Utilizador_servico;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
@@ -27,21 +29,14 @@ public class Utilizador_controller {
 
     //Salvar o utilizador na base de dados
     @PostMapping
-    public String salvar_utilizador(
-            @RequestParam("username") String username,
-            @RequestParam("email") String email,
-            @RequestParam("senha") String senha,
-            @RequestParam("foto_de_perfil") MultipartFile foto_de_perfil,
-            @RequestParam("cv") MultipartFile cv
-    ) {
+    public String salvar_utilizador(@ModelAttribute("utilizador_dto") Utilizador_dto utilizador_dto, Model model){
         try {
-            Utilizador_dto dto = new Utilizador_dto(username, email, senha, foto_de_perfil, cv);
-            utilizador_servico.salvar_utilizador(dto);
+            utilizador_servico.salvar_utilizador(utilizador_dto);
             return "redirect:/criarperfil?sucesso"; //query parameter
         }
         catch (IllegalArgumentException e){
-
-            return "redirect:https://www.youtube.com/shorts/2dJ5WGuG0nk";
+            model.addAttribute("errorMessage", e.getMessage());
+            return "redirect:https://www.youtube.com/shorts/2dJ5WGuG0nk"; //mudar posteriormente
         }
     }
 }

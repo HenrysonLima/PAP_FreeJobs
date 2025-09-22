@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface CustomUserDetails extends JpaRepository<Utilizador, Long> {
+public interface Utilizador_repositorio extends JpaRepository<Utilizador, Long> {
     boolean existsByEmail(String email);
 
     Optional<Utilizador> findByEmail(String email);

@@ -11,8 +11,14 @@ public class FreeJobsController {
         return "index";
     }
 
+    @GetMapping("/login")
+    public String login(){return "login";}
+
     @GetMapping("/perfil")
     public String perfil(){ return "perfil";}
+
+    @GetMapping("/meuperfil")
+    public String meuPerfil(){ return "meu-perfil"; }
 
     @GetMapping("/anuncio")
     public String anuncio(){ return "anuncio"; }
