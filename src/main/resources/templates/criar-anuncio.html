@@ -1,13 +1,8 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Criar anúncio</title>
-  </head>
+  <head th:replace="~{fragments/head :: head}"></head>
   <body>
-    <header>
-      <a th:href="@{/}"><img style="width: 200px; background-color: black;" src="imagens/FreeJobs_LettersLogo.png"></a>
-    </header>
+    <header th:replace="~{fragments/headerSecundario :: headerSecundario}"></header>
 
     <form th:action="@{/criaranuncio}" th:object="${anuncio_dto}" method="post">
       <label>Título: <input autocomplete="off" type="text" th:field="*{}"></label><br>
@@ -16,9 +11,5 @@
       <label>Descrição: <textarea autocomplete="off" name="descricao"></textarea></label><br>
       <button type="submit">Enviar</button>
     </form>
-    <footer>
-      <p>Copyright © Todos os direitos reservados</p>
-      <a th:href="@{/contacto}" >Contacte-nos<img style="width: 50px; background-color: black;" src="imagens/TextBox.png" ></a>
-    </footer>
-  </body>
+    <footer th:replace="~{fragments/footerPrincipal :: footerPrincipal}"></footer>
 </html>

@@ -1,13 +1,8 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>Criar perfil</title>
-</head>
+<head th:replace="~{fragments/head :: head}"></head>
 <body>
-  <header>
-    <a th:href="@{/}"><img style="width: 200px; background-color: black;" src="imagens/FreeJobs_LettersLogo.png"></a>
-  </header>
+  <header th:replace="~{fragments/headerSecundario :: headerSecundario}"></header>
 
   <form th:action="@{/login}" method="post">
     <label>Email: <input autocomplete="off" type="email" name="username" required></label><br>
@@ -21,9 +16,6 @@
      
 
   </form>
-  <footer>
-    <p>Copyright © Todos os direitos reservados</p>
-    <a th:href="@{/contacto}" >Contacte-nos<img style="width: 50px; background-color: black;" src="imagens/TextBox.png" ></a>
-  </footer>
+  <footer th:replace="~{fragments/footerPrincipal :: footerPrincipal}"></footer>
 </body>
 </html>

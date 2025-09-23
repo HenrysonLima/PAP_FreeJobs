@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <body>
+
+        <!-- Header com todas as funcionalidades -->
+
+        <header th:fragment="headerPrincipal">
+            <a th:href="@{/}"><img style="width: 200px; background-color: black;" src="imagens/FreeJobs_LettersLogo.png"></a>
+            <input type="text"  placeholder="Search">
+
+            <select>
+                <option>All categories</option>
+            </select>
+            <a th:href="@{/criaranuncio}" >Criar anúncio</a>
+            <a th:href="@{/meuperfil}">Meu perfil</a>
+            <div id="myProfileMenu" >
+                <a th:href="@{/criarperfil}">Criar conta</a>
+                <a th:href="@{/login}" >Entrar</a>
+            </div>
+        </header>
+    </body>
+</html>

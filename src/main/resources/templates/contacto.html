@@ -1,26 +1,8 @@
 <!DOCTYPE html>
 <html>
-    <head>
-      <meta charset="UTF-8">
-      <title>Contacte-nos</title>
-    </head>
+    <head th:replace="~{fragments/head :: head}"></head>
     <body>
-      <header>
-        <a th:href="@{/}"><img style="width: 200px; background-color: black;" src="imagens/FreeJobs_LettersLogo.png"></a>
-        <input type="text"  placeholder="Search">
-
-        <select>
-          <option>All categories</option>
-        </select>
-        <a th:href="@{/criaranuncio}" >Criar anúncio</a>
-
-        <!-- Por enquanto o My profile a tag vai enviar para o profile.html -->
-        <a th:href="@{/perfil}">Meu perfil</a>
-        <div id="myProfileMenu" >
-          <a th:href="@{/criarperfil}">Criar conta</a>
-          <a th:href="@{/login}" >Entrar</a>
-        </div>
-      </header>
+      <header th:replace="~{fragments/headerPrincipal :: headerPrincipal}"></header>
 
       <h1>Contact us</h1>
       <section>
