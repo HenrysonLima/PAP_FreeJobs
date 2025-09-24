@@ -12,13 +12,16 @@
     <label>CV: <input type="file" th:field="*{cv}"></label><br>
     <button type="submit">Criar</button>
 
-    <!-- JS temporário, depois vai pra um arquivo separado -->
-     <div th:if="${param.sucesso}">
-        <script > alert("foi criado o bagui")</script>
-     </div>
-     
-
   </form>
+  <!-- JS temporário, depois vai pra um arquivo separado -->
+  <div th:if="${param.sucesso}">
+    <script > alert("Perfil criado com sucesso!")</script>
+  </div>
+     
+  <div th:if="${param.erroaocriarperfil}">
+    <script>alert("Já existe um utilizador com essas credenciais. Por favor, escolha outro email ou username")</script>
+  </div>
+
   <footer th:replace="~{fragments/footerPrincipal :: footerPrincipal}"></footer>
 </body>
 </html>

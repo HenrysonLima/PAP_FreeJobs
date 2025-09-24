@@ -22,8 +22,8 @@ public class Utilizador_servico {
     public Utilizador salvar_utilizador(Utilizador_dto dto) {
 
         //Regras de negócio
-        if(utilizador_repositorio.existsByEmail(dto.getEmail())){
-            throw new IllegalArgumentException("Email já existente");
+        if(utilizador_repositorio.existsByEmail(dto.getEmail()) || utilizador_repositorio.existsByUsername(dto.getUsername())){
+            throw new IllegalArgumentException("Credenciais já existentes");
         }
 
         //conversão MultipartFile para byte[]

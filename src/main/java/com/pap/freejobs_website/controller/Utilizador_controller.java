@@ -36,7 +36,7 @@ public class Utilizador_controller {
         }
         catch (IllegalArgumentException e){
             model.addAttribute("errorMessage", e.getMessage());
-            return "redirect:https://www.youtube.com/shorts/2dJ5WGuG0nk"; //mudar posteriormente
+            return "redirect:/criarperfil?erroaocriarperfil"; //mudar posteriormente
         }
     }
 }

@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
     <body>
 
         <!-- Header com todas as funcionalidades -->
-
         <header th:fragment="headerPrincipal">
             <a th:href="@{/}"><img style="width: 200px; background-color: black;" src="imagens/FreeJobs_LettersLogo.png"></a>
             <input type="text"  placeholder="Search">
@@ -13,7 +12,7 @@
             </select>
             <a th:href="@{/criaranuncio}" >Criar anúncio</a>
             <a th:href="@{/meuperfil}">Meu perfil</a>
-            <div id="myProfileMenu" >
+            <div id="myProfileMenu" sec:authorize="isAnonymous()"> <!-- Só aparece se o utilizador nao está logado -->
                 <a th:href="@{/criarperfil}">Criar conta</a>
                 <a th:href="@{/login}" >Entrar</a>
             </div>

@@ -13,6 +13,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/login").anonymous()
                         .requestMatchers(
                                 "/",
                                 "/criarperfil",
@@ -29,7 +30,8 @@ public class SecurityConfig {
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/", true)
+                        .failureUrl("/login?errologin")
+                        .defaultSuccessUrl("/?loginsucesso", true)
                         .permitAll()
                 )
                 .logout(logout -> logout

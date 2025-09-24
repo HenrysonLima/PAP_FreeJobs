@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head th:replace="~{fragments/head :: head}"></head>
+
+<!-- JS temporário, depois vai pra um arquivo separado -->
+<div th:if="${param.errologin}">
+  <script>alert("Email ou password inexistente")</script>
+</div>
+
 <body>
   <header th:replace="~{fragments/headerSecundario :: headerSecundario}"></header>
 
@@ -9,13 +15,8 @@
     <label>Senha: <input autocomplete="off" type="password" name="password" required></label><br>
     <button type="submit">Entrar</button>
 
-    <!-- JS temporário, depois vai pra um arquivo separado -->
-     <div th:if="${param.sucesso}">
-        <script > alert("Bem vindo de volta")</script>
-     </div>
-     
-
   </form>
+
   <footer th:replace="~{fragments/footerPrincipal :: footerPrincipal}"></footer>
 </body>
 </html>
