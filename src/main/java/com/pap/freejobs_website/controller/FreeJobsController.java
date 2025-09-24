@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class FreeJobsController {
 
     @GetMapping("/")
-    public String home(Authentication authentication){
+    public String home(){
         return "index";
     }
 
