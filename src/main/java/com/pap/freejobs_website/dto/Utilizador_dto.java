@@ -2,7 +2,9 @@ package com.pap.freejobs_website.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
+
 public class Utilizador_dto {
+
     private String username;
     private String email;
     private String senha;

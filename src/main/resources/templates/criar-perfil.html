@@ -5,9 +5,9 @@
   <header th:replace="~{fragments/headerSecundario :: headerSecundario}"></header>
 
   <form th:action="@{/criarperfil}" th:object="${utilizador_dto}" method="post" enctype="multipart/form-data">
-    <label>Nome de utilizador: <input autocomplete="off" type="text" th:field="*{username}"></label><br>
-    <label>Email: <input autocomplete="off" type="email" th:field="*{email}"></label><br>
-    <label>Senha: <input autocomplete="off" type="password" th:field="*{senha}"></label><br>
+    <label>Nome de utilizador: <input autocomplete="off" type="text" th:field="*{username}" required></label><br>
+    <label>Email: <input autocomplete="off" type="email" th:field="*{email}" required></label><br>
+    <label>Senha: <input autocomplete="off" type="password" th:field="*{senha}" required></label><br>
     <label>Foto de perfil: <input type="file" th:field="*{foto_de_perfil}" ></label><br>
     <label>CV: <input type="file" th:field="*{cv}"></label><br>
     <button type="submit">Criar</button>

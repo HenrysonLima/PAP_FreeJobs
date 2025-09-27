@@ -18,7 +18,7 @@ public class Anuncio_servico {
         Anuncio anuncio = new Anuncio(
                 dto.getNome_do_anuncio(),
                 dto.getFoto_anuncio(),
-                dto.getPreco_em_centavos(),
+                dto.getPreco(),
                 dto.getDescricao(),
                 dto.getUtilizador()
         );

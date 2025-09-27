@@ -1,4 +1,4 @@
-package com.pap.freejobs_website.config;
+package com.pap.freejobs_website.Security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

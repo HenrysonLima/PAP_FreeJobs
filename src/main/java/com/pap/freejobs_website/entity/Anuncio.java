@@ -16,22 +16,22 @@ public class Anuncio {
     private byte[] foto_anuncio;
 
     @Column(nullable = false)
-    private int preco_em_centavos;
+    private float preco;
 
     @Column()
     private String descricao;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "utilizador_id", nullable = false)
     private Utilizador utilizador;
 
     //Construtores
     public Anuncio(){}
 
-    public Anuncio(String nome_do_anuncio, byte[] foto_anuncio, int preco_em_centavos, String descricao, Utilizador utilizador){
+    public Anuncio(String nome_do_anuncio, byte[] foto_anuncio, float preco, String descricao, Utilizador utilizador){
         this.nome_do_anuncio = nome_do_anuncio;
         this.foto_anuncio = foto_anuncio;
-        this.preco_em_centavos = preco_em_centavos;
+        this.preco = preco;
         this.descricao = descricao;
         this.utilizador = utilizador;
     }
@@ -57,12 +57,12 @@ public class Anuncio {
         this.foto_anuncio = foto_anuncio;
     }
 
-    public int getPreco_em_centavos() {
-        return preco_em_centavos;
+    public float getPreco() {
+        return preco;
     }
 
-    public void setPreco_em_centavos(int preco_em_centavos) {
-        this.preco_em_centavos = preco_em_centavos;
+    public void setPreco(float preco_em_centavos) {
+        this.preco = preco;
     }
 
     public String getDescricao() {
