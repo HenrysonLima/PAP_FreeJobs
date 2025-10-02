@@ -20,7 +20,7 @@
         <select th:field="*{contactos.contactos[__${iterStat.index}__].forma_de_contacto}"
                 th:attr="required=${iterStat.index == 0}">
 
-          <option value="none" selected disabled hidden>Selecione tipo de contacto</option>
+          <option value="none" selected hidden >Selecione tipo de contacto</option>
           <option value="Telefone">Telefone</option>
           <option value="Instagram">Instagram</option>
           <option value="Facebook">Facebook</option>

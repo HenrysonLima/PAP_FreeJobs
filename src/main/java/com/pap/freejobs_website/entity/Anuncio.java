@@ -16,7 +16,7 @@ public class Anuncio {
     private byte[] foto_anuncio;
 
     @Column(nullable = false)
-    private float preco;
+    private Float preco;
 
     @Column()
     private String descricao;

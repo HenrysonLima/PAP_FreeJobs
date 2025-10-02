@@ -7,7 +7,7 @@
     <form th:action="@{/criaranuncio}" th:object="${anuncio_dto}" method="post">
       <label>Título: <input autocomplete="off" type="text" th:field="*{nome_do_anuncio}" required></label><br> <!-- pode ter problema -->
       <label>Foto: <input type="file" th:field="*{foto_anuncio}"></label><br>
-      <label>Preço: <input autocomplete="off" type="number" th:field="*{preco}" required></label><br>
+      <label>Preço estimado: <input autocomplete="off" type="number" th:field="*{preco}" placeholder="Digite o preço..." step="0.01" required></label><br>
       <label>Descrição: <textarea autocomplete="off" th:field="*{descricao}" ></textarea></label><br>
       <button type="submit">Enviar</button>
     </form>

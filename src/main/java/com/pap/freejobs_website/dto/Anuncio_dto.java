@@ -5,14 +5,14 @@ import com.pap.freejobs_website.entity.Utilizador;
 public class Anuncio_dto {
     private String nome_do_anuncio;
     private byte[] foto_anuncio;
-    private float preco;
+    private Float preco;
     private String descricao;
     private Utilizador utilizador;
 
     //Construtores
     public Anuncio_dto(){}
 
-    public Anuncio_dto(String nome_do_anuncio, byte[] foto_anuncio, float preco, String descricao, Utilizador utilizador){
+    public Anuncio_dto(String nome_do_anuncio, byte[] foto_anuncio, Float preco, String descricao, Utilizador utilizador){
         this.nome_do_anuncio = nome_do_anuncio;
         this.foto_anuncio = foto_anuncio;
         this.preco = preco;
@@ -37,11 +37,11 @@ public class Anuncio_dto {
         this.foto_anuncio = foto_anuncio;
     }
 
-    public float getPreco() {
+    public Float getPreco() {
         return preco;
     }
 
-    public void setPreco(float preco) {
+    public void setPreco(Float preco) {
         this.preco = preco;
     }
 

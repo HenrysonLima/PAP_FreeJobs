@@ -52,13 +52,9 @@ public class ContactoDeUtilizador {
         this.nivel_de_contacto = nivel_de_contacto;
     }
 
-    public String getContacto() {
-        return contacto;
-    }
+    public String getContacto() {   return contacto;    }
 
-    public void setContacto(String contacto) {
-        this.contacto = contacto;
-    }
+    public void setContacto(String contacto) {  this.contacto = contacto;   }
 
     public Utilizador getUtilizador() {
         return utilizador;
