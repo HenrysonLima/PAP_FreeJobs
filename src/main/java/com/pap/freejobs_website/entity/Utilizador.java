@@ -29,6 +29,9 @@ public class Utilizador {
     @OneToMany(mappedBy = "utilizador", cascade = CascadeType.ALL)
     private List<Anuncio> anuncios = new ArrayList<>();
 
+    @OneToMany(mappedBy = "utilizador", cascade = CascadeType.ALL)
+    private List<ContactoDeUtilizador> contactosDeUtilizador = new ArrayList<>();
+
     //Contrutores
     public Utilizador() {}
 

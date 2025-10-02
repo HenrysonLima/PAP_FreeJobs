@@ -4,19 +4,52 @@
 <body>
   <header th:replace="~{fragments/headerSecundario :: headerSecundario}"></header>
 
-  <form th:action="@{/criarperfil}" th:object="${utilizador_dto}" method="post" enctype="multipart/form-data">
-    <label>Nome de utilizador: <input autocomplete="off" type="text" th:field="*{username}" required></label><br>
-    <label>Email: <input autocomplete="off" type="email" th:field="*{email}" required></label><br>
-    <label>Senha: <input autocomplete="off" type="password" th:field="*{senha}" required></label><br>
-    <label>Foto de perfil: <input type="file" th:field="*{foto_de_perfil}" ></label><br>
-    <label>CV: <input type="file" th:field="*{cv}"></label><br>
-    <button type="submit">Criar</button>
+  <form th:action="@{/criarperfil}" th:object="${criarPerfil_dto}" method="post" enctype="multipart/form-data">
 
+    <label>Nome de utilizador: <input autocomplete="off" type="text" th:field="*{utilizador_dto.username}" required></label><br>
+    <label>Email: <input autocomplete="off" type="email" th:field="*{utilizador_dto.email}" required></label><br>
+    <label>Senha: <input autocomplete="off" type="password" th:field="*{utilizador_dto.senha}" required></label><br>
+    <label>Foto de perfil: <input type="file" th:field="*{utilizador_dto.foto_de_perfil}" ></label><br>
+    
+    <!-- ciclo for para mostrar 4 campos de contacto -->
+    <div th:each="contacto, iterStat : *{contactos.contactos}">
+      <label>
+        Contacto [[${iterStat.index + 1}]]:
+        
+        <!-- Tipo de contacto -->
+        <select th:field="*{contactos.contactos[__${iterStat.index}__].forma_de_contacto}"
+                th:attr="required=${iterStat.index == 0}">
+
+          <option value="none" selected disabled hidden>Selecione tipo de contacto</option>
+          <option value="Telefone">Telefone</option>
+          <option value="Instagram">Instagram</option>
+          <option value="Facebook">Facebook</option>
+          <option value="Email">Email</option>
+          
+        </select>
+        
+        <!-- Contacto -->
+        <input type="text" 
+              th:field="*{contactos.contactos[__${iterStat.index}__].contacto}"
+              th:attr="required=${iterStat.index == 0}" autocomplete="off">
+
+        <!-- Nivel de contacto -->
+        <input type="hidden"
+              th:value="${iterStat.index + 1}"
+              th:field="*{contactos.contactos[__${iterStat.index}__].nivel_de_contacto}">
+         
+      </label>
+      <br>
+    </div>
+    
+    <label>CV: <input type="file" th:field="*{utilizador_dto.cv}"></label><br>
+    <button type="submit">Criar</button>
   </form>
-  <!-- JS temporário, depois vai pra um arquivo separado -->
-  <div th:if="${param.sucesso}">
-    <script > alert("Perfil criado com sucesso!")</script>
-  </div>
+    
+    <!-- JS temporário, depois vai pra um arquivo separado -->
+    <div th:if="${param.sucesso}">
+      <script > alert("Perfil criado com sucesso!")</script>
+    </div>
      
   <div th:if="${param.erroaocriarperfil}">
     <script>alert("Já existe um utilizador com essas credenciais. Por favor, escolha outro email ou username")</script>
