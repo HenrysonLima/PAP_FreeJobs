@@ -41,7 +41,9 @@ public class CriarPerfil_controller {
         //Inicializar 4 objetos do wrapper de contacto
         ContactosWrapper_dto contactosWrapper_dto = new ContactosWrapper_dto();
         for (int i = 1 ; i <= 4 ; i++){
-            contactosWrapper_dto.getContactos().add(new ContactoDeUtilizador_dto());
+            ContactoDeUtilizador_dto contacto = new ContactoDeUtilizador_dto();
+            contacto.setNivel_de_contacto(i); //inicializar nivel do contacto pelo iterador
+            contactosWrapper_dto.getContactos().add(contacto);
         }
         dto.setContactos(contactosWrapper_dto);
 
@@ -63,8 +65,7 @@ public class CriarPerfil_controller {
             return "redirect:/criarperfil";
         }
         catch (IllegalArgumentException e){
-            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
-            redirectAttributes.addFlashAttribute("criarPerfil", criarPerfil_dto);
+            redirectAttributes.addFlashAttribute("erroaocriarperfil", e.getMessage());
             return "redirect:/criarperfil";
         }
     }

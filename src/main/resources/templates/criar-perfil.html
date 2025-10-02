@@ -34,8 +34,7 @@
               th:attr="required=${iterStat.index == 0}" autocomplete="off">
 
         <!-- Nivel de contacto -->
-        <input type="hidden"
-              th:value="${iterStat.index + 1}"
+        <input type="hidden" 
               th:field="*{contactos.contactos[__${iterStat.index}__].nivel_de_contacto}">
          
       </label>
@@ -47,13 +46,9 @@
   </form>
     
     <!-- JS temporário, depois vai pra um arquivo separado -->
-    <div th:if="${param.sucesso}">
-      <script > alert("Perfil criado com sucesso!")</script>
-    </div>
-     
-  <div th:if="${param.erroaocriarperfil}">
-    <script>alert("Já existe um utilizador com essas credenciais. Por favor, escolha outro email ou username")</script>
-  </div>
+    <script th:if="${sucesso}"> alert("Perfil criado com sucesso!")</script>
+    <script th:if="${erroaocriarperfil}">alert("Já existe um utilizador com essas credenciais. Por favor, escolha outro email ou username")</script>
+
 
   <footer th:replace="~{fragments/footerPrincipal :: footerPrincipal}"></footer>
 </body>
