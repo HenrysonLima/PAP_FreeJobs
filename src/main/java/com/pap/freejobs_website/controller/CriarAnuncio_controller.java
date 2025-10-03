@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/criaranuncio")
@@ -35,8 +36,8 @@ public class CriarAnuncio_controller {
     //Salvar o anuncio na base de dados
     @PostMapping
     public String salvarAnuncio(@ModelAttribute("anuncio_dto") Anuncio_dto anuncio_dto,
-                                Model model,
-                                @AuthenticationPrincipal CustomUserDetails userDetails){
+                                @AuthenticationPrincipal CustomUserDetails userDetails,
+                                RedirectAttributes redirectAttributes){
 
         //buscar username do utilizador logado
         Long IdUtilizador = userDetails.getId();
@@ -50,6 +51,8 @@ public class CriarAnuncio_controller {
 
         // salvar anuncio
         anuncio_servico.salvar_anuncio(anuncio_dto);
-        return "redirect:/meuperfil?anunciocriado"; //query parameter
+
+        redirectAttributes.addFlashAttribute("anunciocriado" , true);
+        return "redirect:/meuperfil";
     }
 }
