@@ -61,8 +61,8 @@ public class CriarPerfil_controller {
             Utilizador utilizadorSalvo = utilizador_servico.salvar_utilizador(utilizador_dto);
             contactoDeUtilizador_servico.salvar_contacto(contactos, utilizadorSalvo);
 
-            redirectAttributes.addFlashAttribute("sucesso", true);
-            return "redirect:/criarperfil";
+            redirectAttributes.addFlashAttribute("sucessocriarperfil", true);
+            return "redirect:/login";
         }
         catch (IllegalArgumentException e){
             redirectAttributes.addFlashAttribute("erroaocriarperfil", e.getMessage());
