@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head th:replace="~{fragments/head :: head}"></head>
+    <body>
+
+        <header th:replace="~{fragments/headerSecundario :: headerSecundario}"></header>
+        
+        <h2>Editar Perfil</h2>
+        
+        <form th:action="@{/editarperfil}" th:object="${editarPerfil_dto}" method="post" enctype="multipart/form-data">
+            
+            <label>Nome de utilizador:
+                <input type="text" th:field="*{utilizador_dto.username}" required autocomplete="off">
+            </label><br>
+                
+            <label>Foto de perfil:
+                <input type="file" th:field="*{utilizador_dto.foto_de_perfil}">
+            </label><br>
+            
+            <!-- Contactos -->
+            <div th:each="contacto, iterStat : *{contactos.contactos}">
+                <label>Contacto [[${iterStat.index + 1}]]:
+                    <select th:field="*{contactos.contactos[__${iterStat.index}__].forma_de_contacto}">
+                        <option value="none" hidden>Selecione tipo</option>
+                        <option value="Telefone">Telefone</option>
+                        <option value="Instagram">Instagram</option>
+                        <option value="Facebook">Facebook</option>
+                        <option value="Email">Email</option>
+                    </select>
+                    
+                    <input type="text" th:field="*{contactos.contactos[__${iterStat.index}__].contacto}" autocomplete="off">
+                    
+                    <input type="hidden" th:field="*{contactos.contactos[__${iterStat.index}__].nivel_de_contacto}">
+
+                </label><br>
+            </div>
+            
+        <label>CV:
+            <input type="file" th:field="*{utilizador_dto.cv}">
+        </label><br>
+        
+        <button type="submit">Salvar alterações</button>
+    </form>
+    
+    <!-- Mensagens -->
+    <script th:if="${sucessoEdicao}">alert("Perfil atualizado com sucesso!")</script>
+    <script th:if="${erroEdicao}">alert("Erro ao atualizar: [[${erroEdicao}]]")</script>
+    
+    <footer th:replace="~{fragments/footerPrincipal :: footerPrincipal}"></footer>
+</body>
+</html>

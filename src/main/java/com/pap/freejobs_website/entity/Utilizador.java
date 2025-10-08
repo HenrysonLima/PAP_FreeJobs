@@ -29,18 +29,16 @@ public class Utilizador {
     @OneToMany(mappedBy = "utilizador", cascade = CascadeType.ALL)
     private List<Anuncio> anuncios = new ArrayList<>();
 
-    @OneToMany(mappedBy = "utilizador", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "utilizador", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ContactoDeUtilizador> contactosDeUtilizador = new ArrayList<>();
 
     //Contrutores
     public Utilizador() {}
 
-    public Utilizador(String username, String email, String senha, byte[] foto_de_perfil, byte[] cv) {
+    public Utilizador(String username, String email, String senha) {
         this.username = username;
         this.email = email;
         this.senha = senha;
-        this.foto_de_perfil = foto_de_perfil;
-        this.cv = cv;
     }
 
     //Getters and Setters
@@ -86,5 +84,9 @@ public class Utilizador {
 
     public void setCv(byte[] cv) {
         this.cv = cv;
+    }
+
+    public List<ContactoDeUtilizador> getContactosDeUtilizador() {
+        return contactosDeUtilizador;
     }
 }

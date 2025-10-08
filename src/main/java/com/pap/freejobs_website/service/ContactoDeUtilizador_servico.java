@@ -34,7 +34,12 @@ public class ContactoDeUtilizador_servico {
             );
             contactoDeUtilizador_repositorio.save(contactoDeUtilizador);
         }
+    }
 
+    public void atualizar_contactos(Utilizador utilizador, List<ContactoDeUtilizador_dto> contactos_dto){
 
+        contactoDeUtilizador_repositorio.deleteAll(utilizador.getContactosDeUtilizador()); // Limpar contactos antigos
+
+        salvar_contacto(contactos_dto, utilizador); // Salvar novamente
     }
 }

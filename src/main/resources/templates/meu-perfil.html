@@ -5,7 +5,7 @@
       <header th:replace="~{fragments/headerPrincipal :: headerPrincipal}"></header>
 
       <section>
-        <a href="#">Alterar perfil</a>
+        <a th:href="@{/editarperfil}">Alterar perfil</a>
 
         <!-- logout form -->
         <form th:action="@{/logout}" method="post">
