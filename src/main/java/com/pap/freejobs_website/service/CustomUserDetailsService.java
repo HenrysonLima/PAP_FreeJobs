@@ -1,12 +1,14 @@
 package com.pap.freejobs_website.service;
 
-import com.pap.freejobs_website.Security.CustomUserDetails;
-import com.pap.freejobs_website.entity.Utilizador;
+import com.pap.freejobs_website.repository.UtilizadorLoginProjection;
 import com.pap.freejobs_website.repository.Utilizador_repositorio;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService{
@@ -18,10 +20,10 @@ public class CustomUserDetailsService implements UserDetailsService{
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException{
-        Utilizador utilizador = repo.findByEmail(email)
+        UtilizadorLoginProjection utilizadorProjection = repo.findUserForLogin(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Utilizador não encontrado"));
 
         //retornar CustomUserDetails ao invés de padrão
-        return new CustomUserDetails(utilizador);
+        return new User(utilizadorProjection.getEmail(), utilizadorProjection.getSenha(), new ArrayList<>());
     }
 }

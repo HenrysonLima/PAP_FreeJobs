@@ -5,7 +5,7 @@ import com.pap.freejobs_website.dto.Utilizador_dto;
 import com.pap.freejobs_website.entity.ContactoDeUtilizador;
 import com.pap.freejobs_website.entity.Utilizador;
 import com.pap.freejobs_website.repository.Utilizador_repositorio;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -64,6 +64,7 @@ public class Utilizador_servico {
     }
 
     //Editar perfil
+    @Transactional(readOnly = true)
     public Utilizador findByEmail(String email){
         return utilizador_repositorio.findByEmail(email)
                 .orElseThrow(()-> new IllegalArgumentException("Utilizador não encontrado"));
