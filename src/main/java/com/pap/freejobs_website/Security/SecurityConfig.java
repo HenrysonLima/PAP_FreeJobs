@@ -29,7 +29,8 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .loginPage("/login")
+                        .loginPage("/loginredirecionado") // Página mostrada quando o utilizador nao esta autenticado
+                        .loginProcessingUrl("/login")
                         .usernameParameter("email")
                         .failureUrl("/login?errologin")
                         .defaultSuccessUrl("/?loginsucesso", true)

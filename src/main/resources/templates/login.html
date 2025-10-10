@@ -16,6 +16,7 @@
   <!-- JS temporário, depois vai pra um arquivo separado -->
   <script th:if="${param.errologin}">alert("Email ou password inexistente")</script>
   <script th:if="${sucessocriarperfil}"> alert("Perfil criado com sucesso!")</script>
+  <script th:if="${loginnecessario}">alert("Para ter acesso a esse serviço é necessário fazer login")</script>
 
   <footer th:replace="~{fragments/footerPrincipal :: footerPrincipal}"></footer>
 </body>
