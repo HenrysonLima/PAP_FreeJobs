@@ -3,7 +3,7 @@
     <head th:replace="~{fragments/head :: head}"></head>
     <body>
 
-        <header th:replace="~{fragments/headerSecundario :: headerSecundario}"></header>
+        <header th:replace="~{fragments/header-secundario :: header-secundario}"></header>
         
         <h2>Editar Perfil</h2>
         
@@ -46,6 +46,6 @@
     <script th:if="${sucessoEdicao}">alert("Perfil atualizado com sucesso!")</script>
     <script th:if="${erroEdicao}">alert("Erro ao atualizar: [[${erroEdicao}]]")</script>
     
-    <footer th:replace="~{fragments/footerPrincipal :: footerPrincipal}"></footer>
+    <footer th:replace="~{fragments/footer-principal :: footer-principal}"></footer>
 </body>
 </html>

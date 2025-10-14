@@ -2,7 +2,7 @@
 <html>
   <head th:replace="~{fragments/head :: head}"></head>
   <body>
-    <header th:replace="~{fragments/headerSecundario :: headerSecundario}"></header>
+    <header th:replace="~{fragments/header-secundario :: header-secundario}"></header>
 
     <form th:action="@{/criaranuncio}" th:object="${anuncio_dto}" method="post">
       <label>Título: <input autocomplete="off" type="text" th:field="*{nome_do_anuncio}" required></label><br> <!-- pode ter problema -->
@@ -11,6 +11,6 @@
       <label>Descrição: <textarea autocomplete="off" th:field="*{descricao}" ></textarea></label><br>
       <button type="submit">Enviar</button>
     </form>
-    <footer th:replace="~{fragments/footerPrincipal :: footerPrincipal}"></footer>
+    <footer th:replace="~{fragments/footer-principal :: footer-principal}"></footer>
   </body>
 </html>

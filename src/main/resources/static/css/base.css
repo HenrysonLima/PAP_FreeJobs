@@ -1,0 +1,26 @@
+/* Estilos que serão usados em todas as páginas */
+
+@font-face {
+    font-family: 'Neo Tech';
+    src: url("../fonts/Neo Tech Std Regular.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    font-family: 'Neo Tech', sans-serif;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(to bottom, #ff7a00, white);
+    background-position-y: 114px;
+    color: #737373;
+    text-align: center;
+}
+
+hr{
+    border: none;
+    height: 1.5px;
+    width: 100%;
+    background-color: white;
+    margin: 0;
+}

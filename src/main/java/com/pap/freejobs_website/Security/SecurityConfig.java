@@ -24,7 +24,8 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/css/**",
                                 "/js/**",
-                                "/imagens/**"
+                                "/imagens/**",
+                                "/fonts/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )

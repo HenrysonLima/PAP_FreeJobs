@@ -2,7 +2,7 @@
 <html>
     <head th:replace="~{fragments/head :: head}"></head>
     <body>
-      <header th:replace="~{fragments/headerPrincipal :: headerPrincipal}"></header>
+      <header th:replace="~{fragments/header-principal :: header-principal}"></header>
 
       <section>
         <a th:href="@{/editarperfil}">Alterar perfil</a>
@@ -38,7 +38,7 @@
           <p>Preço: €200</p>
         </article>
       </section>
-      <footer th:replace="~{fragments/footerPrincipal :: footerPrincipal}"></footer>
+      <footer th:replace="~{fragments/footer-principal :: footer-principal}"></footer>
 
       <!-- JS temporário, depois vai pra um arquivo separado -->
      <script th:if="${anunciocriado}"> alert("Anuncio criado com sucesso!")</script>

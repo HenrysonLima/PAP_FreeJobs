@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html>
-<head th:replace="~{fragments/head :: head}"></head>
+  <head>
+    <title>FreeJobs - Criar Perfil</title>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/base.css}" rel="stylesheet">
+  </head>
 <body>
-  <header th:replace="~{fragments/headerSecundario :: headerSecundario}"></header>
+  <header th:replace="~{fragments/header-secundario :: header-secundario}"></header>
+  <hr>
 
   <form th:action="@{/criarperfil}" th:object="${criarPerfil_dto}" method="post" enctype="multipart/form-data">
 
@@ -50,6 +55,6 @@
     <script th:if="${erroaocriarperfil}">alert("Já existe um utilizador com essas credenciais. Por favor, escolha outro email ou username")</script>
 
 
-  <footer th:replace="~{fragments/footerPrincipal :: footerPrincipal}"></footer>
+  <footer th:replace="~{fragments/footer-principal :: footer-principal}"></footer>
 </body>
 </html>

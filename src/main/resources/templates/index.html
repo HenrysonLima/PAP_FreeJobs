@@ -4,7 +4,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
     <head th:replace="~{fragments/head :: head}"></head>
     <body>
-        <header th:replace="~{fragments/headerPrincipal :: headerPrincipal}"></header>
+        <header th:replace="~{fragments/header-principal :: header-principal}"></header>
         <main>
 
             <!-- Temporario os links -->
@@ -18,7 +18,7 @@
                 <a th:href="@{/anuncio}">Anúncio</a>
             </div>
         </main>        
-        <footer th:replace="~{fragments/footerPrincipal :: footerPrincipal}"></footer>
+        <footer th:replace="~{fragments/footer-principal :: footer-principal}"></footer>
 
         <!-- JS query parameters -->
         <script th:if="${param.loginsucesso}">alert("Bem vindo de volta");</script>
