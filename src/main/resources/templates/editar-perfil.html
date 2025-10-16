@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-    <head th:replace="~{fragments/head :: head}"></head>
+    <head th:replace="~{fragments/head :: head('FreeJobs - Edição de Perfil')}">
     <body>
 
         <header th:replace="~{fragments/header-secundario :: header-secundario}"></header>
@@ -46,6 +46,6 @@
     <script th:if="${sucessoEdicao}">alert("Perfil atualizado com sucesso!")</script>
     <script th:if="${erroEdicao}">alert("Erro ao atualizar: [[${erroEdicao}]]")</script>
     
-    <footer th:replace="~{fragments/footer-principal :: footer-principal}"></footer>
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
 </body>
 </html>

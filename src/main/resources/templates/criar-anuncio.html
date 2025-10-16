@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head th:replace="~{fragments/head :: head}"></head>
+  <head th:replace="~{fragments/head :: head('FreeJobs - Criar Anuncio')}">
   <body>
     <header th:replace="~{fragments/header-secundario :: header-secundario}"></header>
 
@@ -11,6 +11,6 @@
       <label>Descrição: <textarea autocomplete="off" th:field="*{descricao}" ></textarea></label><br>
       <button type="submit">Enviar</button>
     </form>
-    <footer th:replace="~{fragments/footer-principal :: footer-principal}"></footer>
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
   </body>
 </html>

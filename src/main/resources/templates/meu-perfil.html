@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-    <head th:replace="~{fragments/head :: head}"></head>
+    <head th:replace="~{fragments/head :: head('FreeJobs - Meu perfil')}">
     <body>
       <header th:replace="~{fragments/header-principal :: header-principal}"></header>
 
@@ -38,7 +38,7 @@
           <p>Preço: €200</p>
         </article>
       </section>
-      <footer th:replace="~{fragments/footer-principal :: footer-principal}"></footer>
+      <footer th:replace="~{fragments/footer :: footer}"></footer>
 
       <!-- JS temporário, depois vai pra um arquivo separado -->
      <script th:if="${anunciocriado}"> alert("Anuncio criado com sucesso!")</script>

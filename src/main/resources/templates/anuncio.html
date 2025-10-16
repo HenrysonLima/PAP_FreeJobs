@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head th:replace="~{fragments/head :: head}"></head>
+  <head th:replace="~{fragments/head :: head('FreeJobs')}">
   <body>
 
     <header th:replace="~{fragments/header-principal :: header-principal}"></header>
@@ -25,7 +25,7 @@
       </ul>
     </section>
 
-    <footer th:replace="~{fragments/footer-principal :: footer-principal}"></footer>
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
 
   </body>
 </html>

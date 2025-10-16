@@ -2,9 +2,11 @@
 <html>
     <body>
         <!-- Header com link apenas para a homepage -->
-        <header th:fragment="header-secundario">
-            <link th:href="@{/css/header-secundario.css}" rel="stylesheet">
+        <header th:fragment="header-secundario" class="header-secundario">
+        <div class="container">
+            <link th:href="@{/css/header.css}" rel="stylesheet">
             <a th:href="@{/}"><img th:src="@{/imagens/FreeJobs_LettersLogo.png}"></a>
-        </header>
+        </div>
+    </header>
     </body>
 </html>

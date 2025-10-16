@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html>
     <!-- head para ser sempre chamado -->
-    <head>
-        <title>FreeJobs - Criar Perfil</title>
-        <meta charset="UTF-8">
-    </head>
+    <head th:fragment="head(title)" >
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">FreeJobs</title> <!-- é substituido pelo titulo de cada pagina -->
+    <link rel="icon" type="image/x-icon" th:href="@{/imagens/FreeJobs_Favicon.png}">
+    
+</head>
 </html>

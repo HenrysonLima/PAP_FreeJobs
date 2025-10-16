@@ -1,60 +1,93 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>FreeJobs - Criar Perfil</title>
-    <meta charset="UTF-8">
-    <link th:href="@{/css/base.css}" rel="stylesheet">
-  </head>
+<html lang="pt">
+
+<head th:replace="~{fragments/head :: head('FreeJobs - Criar Perfil')}">
+
 <body>
-  <header th:replace="~{fragments/header-secundario :: header-secundario}"></header>
-  <hr>
 
-  <form th:action="@{/criarperfil}" th:object="${criarPerfil_dto}" method="post" enctype="multipart/form-data">
+    <!-- chamar ficheiros css -->
+    <link th:href="@{/css/base.css}" rel="stylesheet">
+    <link th:href="@{css/auth.css}" rel="stylesheet">
 
-    <label>Nome de utilizador: <input autocomplete="off" type="text" th:field="*{utilizador_dto.username}" required></label><br>
-    <label>Email: <input autocomplete="off" type="email" th:field="*{utilizador_dto.email}" required></label><br>
-    <label>Senha: <input autocomplete="off" type="password" th:field="*{utilizador_dto.senha}" required></label><br>
-    <label>Foto de perfil: <input type="file" th:field="*{utilizador_dto.foto_de_perfil}" ></label><br>
-    
-    <!-- ciclo for para mostrar 4 campos de contacto -->
-    <div th:each="contacto, iterStat : *{contactos.contactos}">
-      <label>
-        Contacto [[${iterStat.index + 1}]]:
-        
-        <!-- Tipo de contacto -->
-        <select th:field="*{contactos.contactos[__${iterStat.index}__].forma_de_contacto}"
-                th:attr="required=${iterStat.index == 0}">
+    <header th:replace="~{fragments/header-secundario :: header-secundario}"></header>
 
-          <option value="none" selected hidden >Selecione tipo de contacto</option>
-          <option value="Telefone">Telefone</option>
-          <option value="Instagram">Instagram</option>
-          <option value="Facebook">Facebook</option>
-          <option value="Email">Email</option>
-          
-        </select>
-        
-        <!-- Contacto -->
-        <input type="text" 
-              th:field="*{contactos.contactos[__${iterStat.index}__].contacto}"
-              th:attr="required=${iterStat.index == 0}" autocomplete="off">
+    <main class="auth-main">
+        <div class="auth-container">
+            <div class="auth-box auth-box-large">
+                <h2 class="auth-title">Criar perfil</h2>
+                
+                <form class="auth-form" id="createAccountForm" 
+                th:action="@{/criarperfil}" 
+                th:object="${criarPerfil_dto}" 
+                method="post"
+                enctype="multipart/form-data">
 
-        <!-- Nivel de contacto -->
-        <input type="hidden" 
-              th:field="*{contactos.contactos[__${iterStat.index}__].nivel_de_contacto}">
-         
-      </label>
-      <br>
-    </div>
-    
-    <label>CV: <input type="file" th:field="*{utilizador_dto.cv}"></label><br>
-    <button type="submit">Criar</button>
-  </form>
-    
-    <!-- JS temporário, depois vai pra um arquivo separado -->
-    
-    <script th:if="${erroaocriarperfil}">alert("Já existe um utilizador com essas credenciais. Por favor, escolha outro email ou username")</script>
+                    <div class="form-group">
+                        <label for="username">Nome de utilizador</label>
+                        <input th:field="*{utilizador_dto.username}" type="text" id="username" name="username" autocomplete="off" placeholder="Digite seu nome de utilizador" required>
+                    </div>
 
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input th:field="*{utilizador_dto.email}" type="email" id="email" name="email" autocomplete="off" placeholder="Digite seu email" required>
+                    </div>
 
-  <footer th:replace="~{fragments/footer-principal :: footer-principal}"></footer>
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <input th:field="*{utilizador_dto.senha}" type="password" id="password" name="password" autocomplete="off" placeholder="Digite sua senha" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profilePhoto">Foto de perfil</label>
+                        <input th:field="*{utilizador_dto.foto_de_perfil}" type="file" id="profilePhoto" name="profilePhoto" accept="image/*">
+                    </div>
+
+                    <!-- ciclo for para mostrar 4 campos de contacto -->
+                    <div th:each="contacto, iterStat : *{contactos.contactos}"
+                        class="form-group">
+
+                        <label>Contacto [[${iterStat.index + 1}]]:</label>
+                        
+                        <!-- Tipo de contacto -->
+                        <div class="contact-group">
+                            <select th:field="*{contactos.contactos[__${iterStat.index}__].forma_de_contacto}"
+                            th:attr="required=${iterStat.index == 0}">
+                                <option value="none" selected hidden >Selecione tipo de contacto</option>
+                                <option value="Telefone">Telefone</option>
+                                <option value="Instagram">Instagram</option>
+                                <option value="Facebook">Facebook</option>
+                                <option value="Email">Email</option>
+                            </select>
+                            
+                            <!-- Contacto -->
+                            <input type="text" 
+                            id="contacto" name="contacto"
+                            th:field="*{contactos.contactos[__${iterStat.index}__].contacto}"
+                            th:attr="required=${iterStat.index == 0}" autocomplete="off" placeholder="Contacto">
+                            
+                            <!-- Nivel de contacto -->
+                            <input type="hidden" 
+                            th:field="*{contactos.contactos[__${iterStat.index}__].nivel_de_contacto}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cv">CV</label>
+                        <input th:field="*{utilizador_dto.cv}" type="file" id="cv" name="cv" accept=".pdf,.doc,.docx">
+                    </div>
+
+                    <button type="submit" class="btn-primary">Criar</button>
+                </form>
+
+                <p class="auth-switch">
+                    Já tem uma conta? <a th:href="@{/login}">Fazer login</a>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

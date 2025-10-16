@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head th:replace="~{fragments/head :: head}"></head>
+<head th:replace="~{fragments/head :: head('FreeJobs - Login')}">
 
 
 <body>
@@ -18,6 +18,6 @@
   <script th:if="${sucessocriarperfil}"> alert("Perfil criado com sucesso!")</script>
   <script th:if="${loginnecessario}">alert("Para ter acesso a esse serviço é necessário fazer login")</script>
 
-  <footer th:replace="~{fragments/footer-principal :: footer-principal}"></footer>
+  <footer th:replace="~{fragments/footer :: footer}"></footer>
 </body>
 </html>

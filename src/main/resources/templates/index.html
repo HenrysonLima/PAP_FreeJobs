@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
-    <head th:replace="~{fragments/head :: head}"></head>
+    <head th:replace="~{fragments/head :: head('FreeJobs')}">
     <body>
         <header th:replace="~{fragments/header-principal :: header-principal}"></header>
         <main>
@@ -18,7 +18,7 @@
                 <a th:href="@{/anuncio}">Anúncio</a>
             </div>
         </main>        
-        <footer th:replace="~{fragments/footer-principal :: footer-principal}"></footer>
+        <footer th:replace="~{fragments/footer :: footer}"></footer>
 
         <!-- JS query parameters -->
         <script th:if="${param.loginsucesso}">alert("Bem vindo de volta");</script>
