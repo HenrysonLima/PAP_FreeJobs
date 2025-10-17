@@ -57,6 +57,7 @@
                         <!-- Tipo de contacto -->
                         <div class="contact-group">
                             <select th:field="*{contactos.contactos[__${iterStat.index}__].forma_de_contacto}"
+                            th:id="'contactType' + ${iterStat.index + 1}"
                             th:attr="required=${iterStat.index == 0}">
                                 <option value="none" selected hidden >Selecione tipo de contacto</option>
                                 <option value="Telefone">Telefone</option>
@@ -67,9 +68,14 @@
                             
                             <!-- Contacto -->
                             <input type="text" 
-                            id="contacto" name="contacto"
+                            th:id="'contact' + ${iterStat.index + 1}" name="contacto"
                             th:field="*{contactos.contactos[__${iterStat.index}__].contacto}"
                             th:attr="required=${iterStat.index == 0}" autocomplete="off" placeholder="Contacto">
+
+                            <button type="button"
+                            class="btn-reset-contact"
+                            th:attr="data-contact=${iterStat.index + 1}"
+                            title="Limpar contacto">✕</button>
                             
                             <!-- Nivel de contacto -->
                             <input type="hidden" 

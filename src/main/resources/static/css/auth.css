@@ -131,3 +131,25 @@
 .terms-link:hover {
   text-decoration: underline;
 }
+
+/* botões de resetar contacto */
+.btn-reset-contact {
+  flex: 0 0 46px;
+  height: 46px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: white;
+  color: #999;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.btn-reset-contact:hover {
+  background-color: #ff6b35;
+  color: white;
+  border-color: #ff6b35;
+}
