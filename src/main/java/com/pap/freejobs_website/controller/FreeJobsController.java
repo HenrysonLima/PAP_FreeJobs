@@ -26,4 +26,10 @@ public class FreeJobsController {
     @GetMapping("/contacto")
     public String contacto(){ return "contacto"; }
 
+    @GetMapping("/termoscondicoes")
+    public String termoscondicoes(){ return "termos-condicoes"; }
+
+    @GetMapping("/politicasprivacidade")
+    public String politicasprivacidade(){ return "politicas-privacidade"; }
+
 }

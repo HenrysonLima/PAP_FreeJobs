@@ -5,9 +5,12 @@
 
 <body>
 
-    <!-- chamar ficheiros css -->
+    <!-- importar ficheiros css -->
     <link th:href="@{/css/base.css}" rel="stylesheet">
     <link th:href="@{css/auth.css}" rel="stylesheet">
+
+    <!-- importar ficheiro js -->
+    <script th:src="@{/js/script.js}" defer></script>
 
     <header th:replace="~{fragments/header-secundario :: header-secundario}"></header>
 
@@ -76,6 +79,15 @@
                         <input th:field="*{utilizador_dto.cv}" type="file" id="cv" name="cv" accept=".pdf,.doc,.docx">
                     </div>
 
+                    <div class="form-group">
+                        <div class="terms-group">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <label for="terms" class="terms-label">
+                                Eu aceito os <a th:href="@{/termoscondicoes}" class="terms-link">Termos e Condições</a> e a <a th:href="@{/politicasprivacidade}" class="terms-link">Política de Privacidade</a>
+                            </label>
+                        </div>
+                    </div>
+
                     <button type="submit" class="btn-primary">Criar</button>
                 </form>
 
@@ -88,6 +100,5 @@
 
     <footer th:replace="~{fragments/footer :: footer}"></footer>
 
-    <script src="script.js"></script>
 </body>
 </html>

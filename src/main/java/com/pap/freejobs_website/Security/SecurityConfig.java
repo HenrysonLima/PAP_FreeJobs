@@ -19,7 +19,10 @@ public class SecurityConfig {
                                 "/criarperfil",
                                 "/anuncio",
                                 "/perfil",
-                                "/pesquisa"
+                                "/pesquisa",
+                                "/termoscondicoes",
+                                "/politicasprivacidade",
+                                "/contacto"
                         ).permitAll()
                         .requestMatchers(
                                 "/css/**",

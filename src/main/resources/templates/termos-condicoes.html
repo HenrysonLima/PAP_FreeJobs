@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head th:replace="~{fragments/head :: head('FreeJobs - Termos e Condições')}">
+<body>
+
+    <!-- importar ficheiros css -->
+    <link th:href="@{/css/base.css}" rel="stylesheet">
+    <link th:href="@{css/legal.css}" rel="stylesheet">
+
+    <header th:replace="~{fragments/header-secundario :: header-secundario}"></header>
+
+    <main>
+        <div class="legal-container">
+            <h1>Termos e Condições</h1>
+            <p class="last-updated">Última atualização: Janeiro de 2025</p>
+
+            <h2>1. Aceitação dos Termos</h2>
+            <p>Ao acessar e usar a plataforma FreJobS, você concorda em cumprir e estar vinculado aos seguintes termos e condições de uso. Se você não concordar com qualquer parte destes termos, não deverá usar nossos serviços.</p>
+
+            <h2>2. Descrição do Serviço</h2>
+            <p>O FreJobS é uma plataforma que conecta freelancers a clientes que procuram serviços profissionais. A plataforma permite:</p>
+            <ul>
+                <li>Criação de perfis de freelancers</li>
+                <li>Publicação de "flippings" (ofertas de serviços)</li>
+                <li>Busca e contratação de serviços</li>
+                <li>Comunicação entre clientes e freelancers</li>
+            </ul>
+
+            <h2>3. Cadastro e Conta de Usuário</h2>
+            <p>Para usar determinados recursos da plataforma, você deve criar uma conta. Você concorda em:</p>
+            <ul>
+                <li>Fornecer informações precisas, atuais e completas durante o processo de cadastro</li>
+                <li>Manter a segurança de sua senha e identificação</li>
+                <li>Notificar-nos imediatamente sobre qualquer uso não autorizado de sua conta</li>
+                <li>Ser responsável por todas as atividades que ocorram em sua conta</li>
+            </ul>
+
+            <h2>4. Responsabilidades dos Freelancers</h2>
+            <p>Os freelancers que utilizam a plataforma concordam em:</p>
+            <ul>
+                <li>Fornecer serviços de qualidade conforme descrito em seus flippings</li>
+                <li>Manter comunicação profissional com os clientes</li>
+                <li>Cumprir prazos acordados</li>
+                <li>Não publicar conteúdo falso, enganoso ou ilegal</li>
+                <li>Respeitar os direitos de propriedade intelectual de terceiros</li>
+            </ul>
+
+            <h2>5. Responsabilidades dos Clientes</h2>
+            <p>Os clientes que utilizam a plataforma concordam em:</p>
+            <ul>
+                <li>Fornecer informações claras sobre os serviços desejados</li>
+                <li>Realizar pagamentos conforme acordado</li>
+                <li>Manter comunicação respeitosa com os freelancers</li>
+                <li>Não solicitar serviços ilegais ou que violem direitos de terceiros</li>
+            </ul>
+
+            <h2>6. Pagamentos e Taxas</h2>
+            <p>O FreJobS pode cobrar taxas pelos serviços prestados através da plataforma. Todas as taxas serão claramente comunicadas antes da conclusão de qualquer transação. Os pagamentos devem ser realizados através dos métodos aceitos pela plataforma.</p>
+
+            <h2>7. Propriedade Intelectual</h2>
+            <p>Todo o conteúdo da plataforma FreJobS, incluindo textos, gráficos, logos, ícones e software, é propriedade do FreJobS ou de seus fornecedores de conteúdo e está protegido por leis de propriedade intelectual.</p>
+
+            <h2>8. Conduta Proibida</h2>
+            <p>É proibido usar a plataforma para:</p>
+            <ul>
+                <li>Violar qualquer lei ou regulamento aplicável</li>
+                <li>Publicar conteúdo ofensivo, difamatório ou discriminatório</li>
+                <li>Assediar, ameaçar ou intimidar outros usuários</li>
+                <li>Tentar obter acesso não autorizado a sistemas ou dados</li>
+                <li>Interferir no funcionamento adequado da plataforma</li>
+                <li>Usar a plataforma para spam ou atividades fraudulentas</li>
+            </ul>
+
+            <h2>9. Rescisão</h2>
+            <p>Reservamo-nos o direito de suspender ou encerrar sua conta a qualquer momento, sem aviso prévio, se você violar estes termos ou se considerarmos que seu comportamento é prejudicial à plataforma ou a outros usuários.</p>
+
+            <h2>10. Limitação de Responsabilidade</h2>
+            <p>O FreJobS atua como intermediário entre freelancers e clientes. Não somos responsáveis pela qualidade dos serviços prestados, disputas entre usuários, ou quaisquer danos diretos ou indiretos resultantes do uso da plataforma.</p>
+
+            <h2>11. Modificações dos Termos</h2>
+            <p>Reservamo-nos o direito de modificar estes termos a qualquer momento. As alterações entrarão em vigor imediatamente após a publicação na plataforma. O uso continuado da plataforma após as alterações constitui aceitação dos novos termos.</p>
+
+            <h2>12. Lei Aplicável</h2>
+            <p>Estes termos são regidos pelas leis de Portugal. Qualquer disputa relacionada a estes termos será resolvida nos tribunais competentes de Portugal.</p>
+
+            <h2>13. Contato</h2>
+            <p>Se você tiver dúvidas sobre estes Termos e Condições, entre em contato conosco através da página de <a th:href="@{/contacto}">Contacto</a>.</p>
+        </div>
+    </main>
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>
