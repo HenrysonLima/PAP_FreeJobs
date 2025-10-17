@@ -13,17 +13,5 @@ document.addEventListener("DOMContentLoaded", () => {
     const randomTitle = titles[Math.floor(Math.random() * titles.length)]
     heroTitle.textContent = randomTitle
   }
-
-  // Terms and conditions validation for create account form
-  const createAccountForm = document.getElementById("createAccountForm")
-  if (createAccountForm) {
-    createAccountForm.addEventListener("submit", (e) => {
-      const terms = document.getElementById("terms")
-      if (!terms.checked) {
-        e.preventDefault()
-        alert("Deve aceitar os Termos e Condições para criar uma conta!")
-        return
-      }
-    })
-  }
+  
 })

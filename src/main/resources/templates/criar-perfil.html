@@ -12,6 +12,9 @@
     <!-- importar ficheiro js -->
     <script th:src="@{/js/script.js}" defer></script>
 
+    <!-- alerta lançado na tentativa de criar um perfil com credenciais ja existentes -->
+    <script th:if="${erroaocriarperfil}">alert("Já existe um utilizador com essas credenciais. Por favor, escolha outro email ou username")</script>
+
     <header th:replace="~{fragments/header-secundario :: header-secundario}"></header>
 
     <main class="auth-main">
@@ -83,7 +86,8 @@
                         <div class="terms-group">
                             <input type="checkbox" id="terms" name="terms" required>
                             <label for="terms" class="terms-label">
-                                Eu aceito os <a th:href="@{/termoscondicoes}" class="terms-link">Termos e Condições</a> e a <a th:href="@{/politicasprivacidade}" class="terms-link">Política de Privacidade</a>
+                                Eu aceito os <a th:href="@{/termoscondicoes}" class="terms-link" target="_blank" rel="noopener noreferrer">Termos e Condições</a>
+                                 e a <a th:href="@{/politicasprivacidade}" class="terms-link" target="_blank" rel="noopener noreferrer">Política de Privacidade</a>
                             </label>
                         </div>
                     </div>
