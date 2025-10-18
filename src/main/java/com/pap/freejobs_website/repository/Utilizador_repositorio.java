@@ -15,4 +15,7 @@ public interface Utilizador_repositorio extends JpaRepository<Utilizador, Long> 
 
     @Query("SELECT u.email AS email, u.senha AS senha FROM Utilizador u WHERE u.email = :email")
     Optional<UtilizadorLoginProjection> findUserForLogin(@Param("email") String email);
+
+    @Query("SELECT u.id FROM Utilizador u WHERE u.email = :email")
+    Optional<Long> findIdByEmail(@Param("email") String email);
 }
