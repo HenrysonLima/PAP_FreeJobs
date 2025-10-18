@@ -2,21 +2,46 @@
 <html>
 <head th:replace="~{fragments/head :: head('FreeJobs - Login')}">
 
-
 <body>
-  <header th:replace="~{fragments/header-secundario :: header-secundario}"></header>
+
+  <!-- importar ficheiros css -->
+  <link th:href="@{/css/base.css}" rel="stylesheet">
+  <link th:href="@{css/auth.css}" rel="stylesheet">
   
-  <form th:action="@{/login}" method="post">
-    <label>Email: <input autocomplete="off" type="email" name="email" required></label><br>
-    <label>Senha: <input autocomplete="off" type="password" name="password" required></label><br>
-    <button type="submit">Entrar</button>
-    
-  </form>
-  
-  <!-- JS temporário, depois vai pra um arquivo separado -->
+  <!-- alertas com js -->
   <script th:if="${param.errologin}">alert("Email ou password inexistente")</script>
   <script th:if="${sucessocriarperfil}"> alert("Perfil criado com sucesso!")</script>
   <script th:if="${loginnecessario}">alert("Para ter acesso a esse serviço é necessário fazer login")</script>
+
+
+  <header th:replace="~{fragments/header-secundario :: header-secundario}"></header>
+  
+  <main class="auth-main">
+        <div class="auth-container">
+            <div class="auth-box">
+                <h2 class="auth-title">Login</h2>
+                
+                <form th:action="@{/login}" method="post"
+                      class="auth-form" id="loginForm">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Digite seu email" required autocomplete="off">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Entrar</button>
+                </form>
+
+                <p class="auth-switch">
+                    Não tem uma conta? <a th:href="@{/criarperfil}">Criar conta</a>
+                </p>
+            </div>
+        </div>
+    </main>
 
   <footer th:replace="~{fragments/footer :: footer}"></footer>
 </body>
