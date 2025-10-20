@@ -110,3 +110,48 @@
 .flipping-grid {
   /* ... existing code here ... */
 }
+
+/* Profile Actions (top right corner) */
+.profile-actions-top {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+  gap: 35px;
+}
+
+.btn-profile-edit {
+  background: #ff6b35;
+  color: white;
+  padding: 10px 22px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.btn-profile-edit:hover {
+  background: #ff5722;
+  transform: translateY(-2px);
+}
+
+.logout-form {
+  display: inline-block;
+}
+
+.btn-logout {
+  background: #f44336;
+  color: white;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.btn-logout:hover {
+  background: #d32f2f;
+  transform: translateY(-2px);
+}

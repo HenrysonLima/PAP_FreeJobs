@@ -1,21 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
-    <body>
+  <body>
+    <!-- HEADER PRINCIPAL -->
+    <header th:fragment="header-principal" class="header">
+      <link th:href="@{/css/header.css}" rel="stylesheet">
+      <div class="container">
+        <div class="header-content">
+          <!-- LOGO -->
+          <h1 class="logo">
+            <a th:href="@{/}"><img th:src="@{/imagens/FreeJobs_LettersLogo.png}"></a>
+          </h1>
 
-        <!-- Header com todas as funcionalidades -->
-        <header th:fragment="header-principal">
-            <a th:href="@{/}"><img style="width: 200px; background-color: black;" src="imagens/FreeJobs_LettersLogo.png"></a>
-            <input type="text"  placeholder="Search">
+          <!-- SEARCH BAR -->
+          <div class="search-container">
+            <input type="text" class="search-input" placeholder="Pesquisar">
+            <button class="menu-btn">☰</button>
+          </div>
 
-            <select>
-                <option>All categories</option>
-            </select>
-            <a th:href="@{/criaranuncio}" >Criar anúncio</a>
-            <a th:href="@{/meuperfil}">Meu perfil</a>
-            <div id="myProfileMenu" sec:authorize="isAnonymous()"> <!-- Só aparece se o utilizador nao está logado -->
-                <a th:href="@{/criarperfil}">Criar conta</a>
-                <a th:href="@{/login}" >Entrar</a>
+          <!-- ACTION BUTTONS -->
+          <div class="header-actions">
+            <a th:href="@{/criaranuncio}" class="header-btn">
+              <span class="icon">$</span>
+              <span>Criar Anúncio</span>
+            </a>
+
+            <a th:href="@{/meuperfil}" class="header-btn">
+              <span class="icon">👤</span>
+              <span>Meu Perfil</span>
+            </a>
+
+            <div sec:authorize="isAnonymous()" class="auth-buttons">
+              <a th:href="@{/criarperfil}" class="sign-in-btn">Criar conta</a>
+              <a th:href="@{/login}" class="log-in-btn">Login</a>
             </div>
-        </header>
-    </body>
+          </div>
+        </div>
+      </div>
+    </header>
+  </body>
 </html>

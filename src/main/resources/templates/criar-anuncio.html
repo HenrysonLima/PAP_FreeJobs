@@ -11,14 +11,14 @@
     <main class="main-content">
         <div class="container">
             <div class="create-flipping-page">
-                <h2 class="page-title">Criar Novo Flipping</h2>
+                <h2 class="page-title">Criar Novo Anúncio</h2>
                 
                 <form th:action="@{/criaranuncio}" th:object="${anuncio_dto}" method="post"
                       class="create-flipping-form" id="createFlippingForm">
 
                     <div class="form-group">
                         <label for="title">Título</label>
-                        <input th:field="*{nome_do_anuncio}" type="text" id="title" name="title" placeholder="Digite o título do flipping" autocomplete="off" required>
+                        <input th:field="*{nome_do_anuncio}" type="text" id="title" name="title" placeholder="Digite o título do anúncio" autocomplete="off" required>
                     </div>
 
                     <div class="form-group">

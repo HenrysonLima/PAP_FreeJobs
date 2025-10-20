@@ -1,46 +1,107 @@
 <!DOCTYPE html>
 <html>
-    <head th:replace="~{fragments/head :: head('FreeJobs - Meu perfil')}">
-    <body>
-      <header th:replace="~{fragments/header-principal :: header-principal}"></header>
 
-      <section>
-        <a th:href="@{/editarperfil}">Alterar perfil</a>
+<head th:replace="~{fragments/head :: head('FreeJobs - Meu perfil')}">
 
-        <!-- logout form -->
-        <form th:action="@{/logout}" method="post">
-          <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-          <button type="submit">Sair da conta</button>
-        </form>
+<body>
+  <header th:replace="~{fragments/header-principal :: header-principal}"></header>
 
-        <form>
-          <label>Nome de utilizador: <input type="text" name="username"></label><br>
-          <label>Email: <input type="email" name="email"></label><br>
-          <label>Senha: <input type="password" name="senha"></label><br>
-          <label>Contacto primário: <input type="tel" name="contacto1"></label><br>
-          <label>Contacto secundário: <input type="tel" name="contacto2"></label><br>
-          <label>Contacto terciário: <input type="tel" name="contacto3"></label><br>
-          <label>Quarto contacto: <input type="tel" name="contacto4"></label><br>
-          <label>Foto de perfil: <input type="file" name="fotoPerfil"></label><br>
-          <label>CV: <input type="file" name="cv"></label><br>
-          <button type="submit">Guardar</button>
-        </form>
-      </section>
-      
-      <section>
-        <h2>Anúncios publicados</h2>
-        <article>
-          <h3>Anúncio 1</h3>
-          <p>Preço: €500</p>
-        </article>
-        <article>
-          <h3>Anúncio 2</h3>
-          <p>Preço: €200</p>
-        </article>
-      </section>
-      <footer th:replace="~{fragments/footer :: footer}"></footer>
+  <!-- importar ficheiros css -->
+  <link th:href="@{/css/base.css}" rel="stylesheet">
+  <link th:href="@{css/cards.css}" rel="stylesheet">
+  <link th:href="@{css/profile.css}" rel="stylesheet">
 
-      <!-- JS temporário, depois vai pra um arquivo separado -->
-     <script th:if="${anunciocriado}"> alert("Anuncio criado com sucesso!")</script>
-    </body>
+  <main class="main-content">
+    <div class="container">
+      <div class="profile-page">
+
+        <div class="profile-actions-top">
+          <a th:href="@{/editarperfil}" class="btn-profile-edit">Alterar perfil</a>
+
+          <form th:action="@{/logout}" method="post" class="logout-form">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <button type="submit" class="btn-logout">Sair da conta</button>
+          </form>
+        </div>
+
+
+        <!-- PROFILE HEADER -->
+        <div class="profile-header">
+          <div class="profile-avatar-large">JD</div>
+          <div class="profile-header-info">
+            <h2>João Silva</h2>
+            <p class="profile-type">Freelancer</p>
+          </div>
+        </div>
+
+        <div class="profile-content">
+          <!-- CONTACTS -->
+          <div class="profile-section">
+            <h3>Contactos</h3>
+            <div class="contact-list">
+              <div class="contact-item">
+                <span class="contact-type">Telefone:</span>
+                <span class="contact-value">+351 912 345 678</span>
+              </div>
+              <div class="contact-item">
+                <span class="contact-type">Email:</span>
+                <span class="contact-value">joao.silva@email.com</span>
+              </div>
+              <div class="contact-item">
+                <span class="contact-type">Instagram:</span>
+                <span class="contact-value">@joaosilva_dev</span>
+              </div>
+              <div class="contact-item">
+                <span class="contact-type">Facebook:</span>
+                <span class="contact-value">João Silva</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- FLIPPINGS -->
+          <div class="profile-section">
+            <h3>Meus Flippings</h3>
+            <div class="flipping-grid">
+              <div class="flipping-card">
+                <div class="card-image icon-card">
+                  <div class="laptop-icon">
+                    <span class="dollar-sign">$</span>
+                  </div>
+                </div>
+                <h3 class="card-title">Desenvolvimento Web</h3>
+                <p class="card-price">550€</p>
+                <div class="card-actions">
+                  <a href="flipping.html" class="card-link">Ver</a>
+                  <button class="btn-edit">Editar</button>
+                  <button class="btn-delete">Excluir</button>
+                </div>
+              </div>
+
+              <div class="flipping-card">
+                <div class="card-image icon-card">
+                  <div class="laptop-icon">
+                    <span class="dollar-sign">$</span>
+                  </div>
+                </div>
+                <h3 class="card-title">Design Responsivo</h3>
+                <p class="card-price">400€</p>
+                <div class="card-actions">
+                  <a href="flipping.html" class="card-link">Ver</a>
+                  <button class="btn-edit">Editar</button>
+                  <button class="btn-delete">Excluir</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer th:replace="~{fragments/footer :: footer}"></footer>
+
+  <!-- JS temporário, depois vai pra um arquivo separado -->
+  <script th:if="${anunciocriado}"> alert("Anuncio criado com sucesso!")</script>
+</body>
+
 </html>
