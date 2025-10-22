@@ -18,12 +18,15 @@ public class Anuncio {
     @Column(nullable = false)
     private Float preco;
 
-    @Column()
+    @Column(length = 500)
     private String descricao;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "utilizador_id", nullable = false)
     private Utilizador utilizador;
+
+    @Transient //faz com que o JPA não salve o campo na base de dados
+    private String fotoAnuncioBase64;
 
     //Construtores
     public Anuncio(){}
@@ -61,7 +64,7 @@ public class Anuncio {
         return preco;
     }
 
-    public void setPreco(float preco_em_centavos) {
+    public void setPreco(float preco) {
         this.preco = preco;
     }
 
@@ -79,5 +82,13 @@ public class Anuncio {
 
     public void setUtilizador(Utilizador utilizador) {
         this.utilizador = utilizador;
+    }
+
+    public String getFotoAnuncioBase64() {
+        return fotoAnuncioBase64;
+    }
+
+    public void setFotoAnuncioBase64(String fotoAnuncioBase64) {
+        this.fotoAnuncioBase64 = fotoAnuncioBase64;
     }
 }

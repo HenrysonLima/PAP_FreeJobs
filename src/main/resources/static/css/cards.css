@@ -102,6 +102,19 @@
   margin-top: 15px;
 }
 
+.card-actions a,
+.card-actions button {
+  display: inline-block;
+  width: 70px;               
+  text-align: center;
+  padding: 10px 0;    
+  border-radius: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+}
+
 /* Info Cards */
 .info-card {
   background: #f9f9f9;

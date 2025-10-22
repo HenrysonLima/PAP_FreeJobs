@@ -1,10 +1,11 @@
 package com.pap.freejobs_website.dto;
 
 import com.pap.freejobs_website.entity.Utilizador;
+import org.springframework.web.multipart.MultipartFile;
 
 public class Anuncio_dto {
     private String nome_do_anuncio;
-    private byte[] foto_anuncio;
+    private MultipartFile foto_anuncio;
     private Float preco;
     private String descricao;
     private Utilizador utilizador;
@@ -12,7 +13,7 @@ public class Anuncio_dto {
     //Construtores
     public Anuncio_dto(){}
 
-    public Anuncio_dto(String nome_do_anuncio, byte[] foto_anuncio, Float preco, String descricao, Utilizador utilizador){
+    public Anuncio_dto(String nome_do_anuncio, MultipartFile foto_anuncio, Float preco, String descricao, Utilizador utilizador){
         this.nome_do_anuncio = nome_do_anuncio;
         this.foto_anuncio = foto_anuncio;
         this.preco = preco;
@@ -29,11 +30,11 @@ public class Anuncio_dto {
         this.nome_do_anuncio = nome_do_anuncio;
     }
 
-    public byte[] getFoto_anuncio() {
+    public MultipartFile getFoto_anuncio() {
         return foto_anuncio;
     }
 
-    public void setFoto_anuncio(byte[] foto_anuncio) {
+    public void setFoto_anuncio(MultipartFile foto_anuncio) {
         this.foto_anuncio = foto_anuncio;
     }
 

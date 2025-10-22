@@ -2,8 +2,13 @@ package com.pap.freejobs_website.service;
 
 import com.pap.freejobs_website.dto.Anuncio_dto;
 import com.pap.freejobs_website.entity.Anuncio;
+import com.pap.freejobs_website.entity.Utilizador;
 import com.pap.freejobs_website.repository.Anuncio_repositorio;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.util.Optional;
 
 @Service
 public class Anuncio_servico {
@@ -14,15 +19,66 @@ public class Anuncio_servico {
         this.anuncio_repositorio = anuncio_repositorio;
     }
 
+    @Transactional
+    public Optional<Anuncio> findById(Long id){
+        return anuncio_repositorio.findById(id);
+    }
+
+    @Transactional
     public Anuncio salvar_anuncio(Anuncio_dto dto){
+
+        byte[] fotoBytes = null;
+
+        try {
+            if (dto.getFoto_anuncio() != null && !dto.getFoto_anuncio().isEmpty()){
+                fotoBytes = dto.getFoto_anuncio().getBytes(); //converte MultipartFile para byte
+            }
+        }
+        catch (IOException e){
+            throw new RuntimeException("Erro ao processar imagem do anuncio", e);
+        }
+
         Anuncio anuncio = new Anuncio(
                 dto.getNome_do_anuncio(),
-                dto.getFoto_anuncio(),
+                fotoBytes,
                 dto.getPreco(),
                 dto.getDescricao(),
                 dto.getUtilizador()
         );
 
         return anuncio_repositorio.save(anuncio);
+    }
+
+    @Transactional
+    public void atualizar_anuncio(Long id, Anuncio_dto dto) {
+        Anuncio anuncio = anuncio_repositorio.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Anúncio não encontrado"));
+
+        anuncio.setNome_do_anuncio(dto.getNome_do_anuncio());
+        anuncio.setPreco(dto.getPreco());
+        anuncio.setDescricao(dto.getDescricao());
+
+        try {
+            if (dto.getFoto_anuncio() != null && !dto.getFoto_anuncio().isEmpty()) {
+                anuncio.setFoto_anuncio(dto.getFoto_anuncio().getBytes());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Erro ao atualizar imagem do anúncio", e);
+        }
+
+        anuncio_repositorio.save(anuncio);
+    }
+
+    @Transactional
+    public void excluir_anuncio(Long id, Utilizador utilizador) {
+        Anuncio anuncio = anuncio_repositorio.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Anúncio não encontrado"));
+
+        // Segurança: só o dono pode excluir
+        if (!anuncio.getUtilizador().equals(utilizador)) {
+            throw new SecurityException("Você não pode excluir este anúncio");
+        }
+
+        anuncio_repositorio.delete(anuncio);
     }
 }

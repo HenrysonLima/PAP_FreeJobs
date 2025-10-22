@@ -89,4 +89,8 @@ public class Utilizador {
     public List<ContactoDeUtilizador> getContactosDeUtilizador() {
         return contactosDeUtilizador;
     }
+
+    public List<Anuncio> getAnuncios() {
+        return anuncios;
+    }
 }

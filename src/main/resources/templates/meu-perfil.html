@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html>
-
-<head th:replace="~{fragments/head :: head('FreeJobs - Meu perfil')}">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head('FreeJobs - Meu perfil')}"></head>
 
 <body>
   <header th:replace="~{fragments/header-principal :: header-principal}"></header>
 
   <!-- importar ficheiros css -->
   <link th:href="@{/css/base.css}" rel="stylesheet">
-  <link th:href="@{css/cards.css}" rel="stylesheet">
-  <link th:href="@{css/profile.css}" rel="stylesheet">
+  <link th:href="@{/css/cards.css}" rel="stylesheet">
+  <link th:href="@{/css/profile.css}" rel="stylesheet">
 
   <main class="main-content">
     <div class="container">
@@ -17,20 +16,32 @@
 
         <div class="profile-actions-top">
           <a th:href="@{/editarperfil}" class="btn-profile-edit">Alterar perfil</a>
-
           <form th:action="@{/logout}" method="post" class="logout-form">
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <input type="hidden" th:attr="name=${_csrf.parameterName}, value=${_csrf.token}" />
             <button type="submit" class="btn-logout">Sair da conta</button>
           </form>
         </div>
 
-
         <!-- PROFILE HEADER -->
         <div class="profile-header">
-          <div class="profile-avatar-large">JD</div>
+
+          <!-- mostrar foto de perfil se existente -->
+          <img th:if="${fotoBase64 != null}"
+          th:src="'data:image/jpeg;base64,' + ${fotoBase64}"
+          alt="Foto de perfil"
+          class="profile-avatar-img">
+          
+          <!-- fallback -->
+          <img th:if="${fotoBase64 == null}"
+          th:src="@{/imagens/default-avatar.jpg}"
+          alt="Avatar padrão"
+          class="profile-avatar-img">
+
+
           <div class="profile-header-info">
-            <h2>João Silva</h2>
+            <h2 th:text="${utilizador.username}"></h2>
             <p class="profile-type">Freelancer</p>
+            <p th:text="${utilizador.email}"></p>
           </div>
         </div>
 
@@ -39,59 +50,45 @@
           <div class="profile-section">
             <h3>Contactos</h3>
             <div class="contact-list">
-              <div class="contact-item">
-                <span class="contact-type">Telefone:</span>
-                <span class="contact-value">+351 912 345 678</span>
-              </div>
-              <div class="contact-item">
-                <span class="contact-type">Email:</span>
-                <span class="contact-value">joao.silva@email.com</span>
-              </div>
-              <div class="contact-item">
-                <span class="contact-type">Instagram:</span>
-                <span class="contact-value">@joaosilva_dev</span>
-              </div>
-              <div class="contact-item">
-                <span class="contact-type">Facebook:</span>
-                <span class="contact-value">João Silva</span>
+              <div class="contact-item" th:each="c : ${contactos}">
+                <span class="contact-type" th:text="${c.forma_de_contacto + ':'}">Telefone:</span>
+                <span class="contact-value" th:text="${c.contacto}">+351 912 345 678</span>
               </div>
             </div>
+            <p th:if="${#lists.isEmpty(contactos)}" class="no-contacts">Nenhum contacto adicionado.</p>
           </div>
 
-          <!-- FLIPPINGS -->
+          <!-- ADS -->
           <div class="profile-section">
-            <h3>Meus Flippings</h3>
+            <h3>Meus Anúncios</h3>
             <div class="flipping-grid">
-              <div class="flipping-card">
+              <div class="flipping-card" th:each="a : ${anuncios}">
                 <div class="card-image icon-card">
-                  <div class="laptop-icon">
-                    <span class="dollar-sign">$</span>
-                  </div>
-                </div>
-                <h3 class="card-title">Desenvolvimento Web</h3>
-                <p class="card-price">550€</p>
-                <div class="card-actions">
-                  <a href="flipping.html" class="card-link">Ver</a>
-                  <button class="btn-edit">Editar</button>
-                  <button class="btn-delete">Excluir</button>
-                </div>
-              </div>
+                  <!-- show ad photo if available -->
+                  <img th:if="${a.foto_anuncio != null}"
+                       th:src="'data:image/jpeg;base64,' + ${a.fotoAnuncioBase64}"
+                       alt="Foto do anúncio" class="ad-image">
 
-              <div class="flipping-card">
-                <div class="card-image icon-card">
-                  <div class="laptop-icon">
+                  <div class="laptop-icon" th:if="${a.foto_anuncio == null}">
                     <span class="dollar-sign">$</span>
                   </div>
                 </div>
-                <h3 class="card-title">Design Responsivo</h3>
-                <p class="card-price">400€</p>
+
+                <h3 class="card-title" th:text="${a.nome_do_anuncio}"></h3>
+                <p class="card-price" th:text="${a.preco + ' €'}"></p>
+                <p class="card-desc"
+                   th:text="${#strings.length(a.descricao) > 80 ? #strings.substring(a.descricao, 0, 80) + '...' : a.descricao}"></p> <!-- mostra apenas os primeiros 80 caracteres da descrição dos anuncios -->
+
                 <div class="card-actions">
-                  <a href="flipping.html" class="card-link">Ver</a>
-                  <button class="btn-edit">Editar</button>
-                  <button class="btn-delete">Excluir</button>
+                  <a th:href="@{'/anuncio/' + ${a.id}}" class="card-link">Ver</a>
+                  <a th:href="@{'/anuncio/editar/' + ${a.id}}" class="btn-edit">Editar</a>
+                  <form th:action="@{'/anuncio/excluir/' + ${a.id}}" method="post" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja remover este anúncio?');">
+                    <button type="submit" class="btn-delete">Excluir</button>
+                  </form>
                 </div>
               </div>
             </div>
+            <p th:if="${#lists.isEmpty(anuncios)}" class="no-flippings">Ainda não criou nenhum anúncio.</p>
           </div>
         </div>
       </div>
@@ -99,9 +96,5 @@
   </main>
 
   <footer th:replace="~{fragments/footer :: footer}"></footer>
-
-  <!-- JS temporário, depois vai pra um arquivo separado -->
-  <script th:if="${anunciocriado}"> alert("Anuncio criado com sucesso!")</script>
 </body>
-
 </html>

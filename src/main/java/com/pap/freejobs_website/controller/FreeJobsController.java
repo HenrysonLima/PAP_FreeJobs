@@ -14,12 +14,6 @@ public class FreeJobsController {
     @GetMapping("/perfil")
     public String perfil(){ return "perfil";}
 
-    @GetMapping("/meuperfil")
-    public String meuPerfil(){ return "meu-perfil"; }
-
-    @GetMapping("/anuncio")
-    public String anuncio(){ return "anuncio"; }
-
     @GetMapping("/pesquisa")
     public String pesquisa(){ return "pesquisa"; }
 
