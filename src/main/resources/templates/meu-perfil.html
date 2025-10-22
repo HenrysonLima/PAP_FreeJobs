@@ -82,7 +82,7 @@
                 <div class="card-actions">
                   <a th:href="@{'/anuncio/' + ${a.id}}" class="card-link">Ver</a>
                   <a th:href="@{'/anuncio/editar/' + ${a.id}}" class="btn-edit">Editar</a>
-                  <form th:action="@{'/anuncio/excluir/' + ${a.id}}" method="post" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja remover este anúncio?');">
+                  <form th:action="@{'/anuncio/excluir/' + ${a.id}}" method="post" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja excluir este anúncio?');" > <!-- botao para excluir anuncio com confirmação -->
                     <button type="submit" class="btn-delete">Excluir</button>
                   </form>
                 </div>

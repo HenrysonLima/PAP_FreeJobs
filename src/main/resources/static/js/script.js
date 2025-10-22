@@ -27,10 +27,5 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     })
   })
-
-
-
-
-
-
+  
 })

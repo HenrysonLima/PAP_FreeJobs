@@ -2,27 +2,65 @@
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
-    <head th:replace="~{fragments/head :: head('FreeJobs')}">
-    <body>
-        <header th:replace="~{fragments/header-principal :: header-principal}"></header>
-        <main>
 
-            <!-- Temporario os links -->
-            <div>
-                <a th:href="@{/anuncio}">Anúncio</a>
-            </div>
-            <div>
-                <a th:href="@{/anuncio}">Anúncio</a>
-            </div>
-            <div>
-                <a th:href="@{/anuncio}">Anúncio</a>
-            </div>
-        </main>        
-        <footer th:replace="~{fragments/footer :: footer}"></footer>
+<head th:replace="~{fragments/head :: head('FreeJobs')}">
 
-        <!-- JS query parameters -->
-        <script th:if="${param.loginsucesso}">alert("Bem vindo de volta");</script>
-        <script th:if="${param.logoutsucesso}">alert("Logout efetuado com sucesso");</script>
+<body>
+    <header th:replace="~{fragments/header-principal :: header-principal}"></header>
 
-    </body>
+    <!-- importar ficheiros css -->
+    <link th:href="@{/css/base.css}" rel="stylesheet">
+    <link th:href="@{/css/cards.css}" rel="stylesheet">
+
+    <!-- importar ficheiro js -->
+    <script th:src="@{/js/script.js}" defer></script>
+
+    <main class="main-content">
+        <div class="container">
+
+            <h2 class="hero-title" id="heroTitle">Conectando talentos a oportunidades</h2> <!-- hero title escolhido aleatoriamente por javascript -->            
+
+            <section class="how-it-works">
+                <h3 class="section-title">Como Funciona</h3>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h4>Crie o seu perfil</h4>
+                        <p>Registe-se gratuitamente e mostre-se para o mundo</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h4>Publique ou procure</h4>
+                        <p>Crie um anuncio ou encontre oportunidades</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h4>Conecte-se</h4>
+                        <p>Entre em contacto e comece a trabalhar</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cta-section">
+                <h3>Pronto para começar?</h3>
+                <p>Junte-se a nós e comece a mostrar seus serviços para o mundo</p>
+                <div class="cta-buttons">
+                    <a th:href="@{/criarperfil}" class="cta-btn primary">Criar Perfil</a>
+                    <a th:href="@{/pesquisa}" class="cta-btn secondary">Explorar anúncios</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+
+
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+
+    <!-- JS query parameters -->
+    <script th:if="${param.loginsucesso}">alert("Bem vindo de volta");</script>
+    <script th:if="${param.logoutsucesso}">alert("Logout efetuado com sucesso");</script>
+
+</body>
+
 </html>
