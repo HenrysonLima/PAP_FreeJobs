@@ -8,12 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Base64;
+import java.util.List;
 
 @Controller
 @RequestMapping("/anuncio")
@@ -25,6 +23,36 @@ public class Anuncio_controller {
     @Autowired
     private Utilizador_servico utilizador_servico;
 
+    // 🔍 Search anuncios by title
+    @GetMapping("/pesquisa")
+    public String buscarAnuncios(@RequestParam(value = "q", required = false) String termo, Model model) {
+
+        List<Anuncio> resultados;
+
+        if (termo != null && !termo.trim().isEmpty()) {
+            // Se o termo existir, procura por título
+            resultados = anuncio_servico.buscarPorTitulo(termo);
+        } else {
+            // Se o termo estiver vazio, mostra os 3 últimos anúncios
+            resultados = anuncio_servico.buscarUltimos3();
+            termo = null; // para o Thymeleaf saber que não há termo
+        }
+
+        // Converter as fotos em Base64 (se existirem)
+        resultados.forEach(a -> {
+            if (a.getFoto_anuncio() != null) {
+                String fotoBase64 = Base64.getEncoder().encodeToString(a.getFoto_anuncio());
+                a.setFotoAnuncioBase64(fotoBase64);
+            }
+        });
+
+        model.addAttribute("resultados", resultados);
+        model.addAttribute("termo", termo);
+
+        return "pesquisa";
+    }
+
+
     //ver anuncio
     @GetMapping("/{id}")
     public String verAnuncio(@PathVariable Long id, Model model){
@@ -33,7 +61,7 @@ public class Anuncio_controller {
 
         if (anuncio.getFoto_anuncio() != null){
             String fotoBase64 = Base64.getEncoder().encodeToString(anuncio.getFoto_anuncio());
-
+            anuncio.setFotoAnuncioBase64(fotoBase64);
         }
 
         model.addAttribute("anuncio",anuncio);

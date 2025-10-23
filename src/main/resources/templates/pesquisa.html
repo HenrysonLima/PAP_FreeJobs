@@ -1,19 +1,46 @@
 <!DOCTYPE html>
 <html lang="pt">
-  <head th:replace="~{fragments/head :: head('FreeJobs')}">
-  <body>
-    <header th:replace="~{fragments/header-principal :: header-principal}"></header>
-    
-    <h2>Anúncios de acordo com a pesquisa e com os filtros</h2>
-    <section>
-      <article>
-        <h3>Título do anúncio</h3>
-        <p>Descrição breve...</p>
-        <p>Preço: €1000</p>
-        <a th:href="@{/anuncio}">Ver anúncio</a>
-      </article>
-    </section>
-    
-    <footer th:replace="~{fragments/footer :: footer}"></footer>
-  </body>
+
+<head th:replace="~{fragments/head :: head('FreeJobs')}">
+
+<body>
+  <header th:replace="~{fragments/header-principal :: header-principal}"></header>
+
+  <!-- importar ficheiros css -->
+  <link th:href="@{/css/base.css}" rel="stylesheet">
+  <link th:href="@{/css/cards.css}" rel="stylesheet">
+  <link th:href="@{/css/search.css}" rel="stylesheet">
+
+  <main class="main-content container">
+  <h2 th:if="${termo != null}" th:text="'Resultados para: ' + ${termo}"></h2>
+
+  <h2 th:if="${termo == null}">Ultimos anúncios</h2>
+
+  <div th:if="${#lists.isEmpty(resultados)}">
+    <p>Nenhum anúncio encontrado.</p>
+  </div>
+
+  <div class="flipping-grid" th:if="${!#lists.isEmpty(resultados)}">
+    <div class="flipping-card" th:each="a : ${resultados}">
+      <div class="card-image icon-card">
+        <img th:if="${a.foto_anuncio != null}"
+             th:src="'data:image/jpeg;base64,' + ${a.fotoAnuncioBase64}"
+             alt="Foto do anúncio" class="ad-image">
+        <div class="laptop-icon" th:if="${a.foto_anuncio == null}">
+          <span class="dollar-sign">$</span>
+        </div>
+      </div>
+
+      <h3 class="card-title" th:text="${a.titulo}"></h3>
+      <p class="card-price" th:text="${a.preco + ' €'}"></p>
+      <p class="card-desc" th:text="${#strings.abbreviate(a.descricao, 100)}"></p>
+
+      <a th:href="@{'/anuncio/' + ${a.id}}" class="card-link">Ver</a>
+    </div>
+  </div>
+</main>
+
+  <footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+
 </html>

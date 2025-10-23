@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -54,7 +55,7 @@ public class Anuncio_servico {
         Anuncio anuncio = anuncio_repositorio.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Anúncio não encontrado"));
 
-        anuncio.setNome_do_anuncio(dto.getNome_do_anuncio());
+        anuncio.setTitulo(dto.getNome_do_anuncio());
         anuncio.setPreco(dto.getPreco());
         anuncio.setDescricao(dto.getDescricao());
 
@@ -81,4 +82,15 @@ public class Anuncio_servico {
 
         anuncio_repositorio.delete(anuncio);
     }
+
+    // funções para pesquisa
+    public List<Anuncio> buscarPorTitulo(String termo) {
+        return anuncio_repositorio.findBytituloContainingIgnoreCase(termo);
+    }
+
+    // para quando o termo de pesquisa é null, carregar os 3 anuncios mais recentes
+    public List<Anuncio> buscarUltimos3() {
+        return anuncio_repositorio.findTop3ByOrderByIdDesc();
+    }
+
 }

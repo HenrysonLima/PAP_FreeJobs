@@ -10,7 +10,7 @@ public class Anuncio {
     private Long id;
 
     @Column(nullable = false)
-    private String nome_do_anuncio;
+    private String titulo;
 
     @Lob
     private byte[] foto_anuncio;
@@ -31,8 +31,8 @@ public class Anuncio {
     //Construtores
     public Anuncio(){}
 
-    public Anuncio(String nome_do_anuncio, byte[] foto_anuncio, float preco, String descricao, Utilizador utilizador){
-        this.nome_do_anuncio = nome_do_anuncio;
+    public Anuncio(String titulo, byte[] foto_anuncio, float preco, String descricao, Utilizador utilizador){
+        this.titulo = titulo;
         this.foto_anuncio = foto_anuncio;
         this.preco = preco;
         this.descricao = descricao;
@@ -44,12 +44,12 @@ public class Anuncio {
         return id;
     }
 
-    public String getNome_do_anuncio() {
-        return nome_do_anuncio;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setNome_do_anuncio(String nome_do_anuncio) {
-        this.nome_do_anuncio = nome_do_anuncio;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public byte[] getFoto_anuncio() {

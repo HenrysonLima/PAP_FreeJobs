@@ -1,41 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
-  <body>
-    <!-- HEADER PRINCIPAL -->
-    <header th:fragment="header-principal" class="header">
-      <link th:href="@{/css/header.css}" rel="stylesheet">
-      <div class="container">
-        <div class="header-content">
-          <!-- LOGO -->
-          <h1 class="logo">
-            <a th:href="@{/}"><img th:src="@{/imagens/FreeJobs_LettersLogo.png}"></a>
-          </h1>
 
-          <!-- SEARCH BAR -->
-          <div class="search-container">
-            <input type="text" class="search-input" placeholder="Pesquisar">
-            <button class="menu-btn">☰</button>
-          </div>
+<body>
+  <!-- HEADER PRINCIPAL -->
+  <header th:fragment="header-principal" class="header">
+    <link th:href="@{/css/header.css}" rel="stylesheet">
+    <div class="container">
+      <div class="header-content">
+        <!-- LOGO -->
+        <h1 class="logo">
+          <a th:href="@{/}"><img th:src="@{/imagens/FreeJobs_LettersLogo.png}"></a>
+        </h1>
 
-          <!-- ACTION BUTTONS -->
-          <div class="header-actions">
-            <a th:href="@{/criaranuncio}" class="header-btn">
-              <span class="icon">$</span>
-              <span>Criar Anúncio</span>
-            </a>
+        <!-- SEARCH BAR -->
+        <div class="search-container">
+          <form th:action="@{/anuncio/pesquisa}" method="get">
+            <input type="text" name="q" class="search-input" placeholder="Escreva aqui o que procura" autocomplete="off">
+            <button type="submit" class="menu-btn">Buscar</button>
+          </form>
+        </div>
 
-            <a th:href="@{/meuperfil}" class="header-btn">
-              <span class="icon">👤</span>
-              <span>Meu Perfil</span>
-            </a>
+        <!-- ACTION BUTTONS -->
+        <div class="header-actions">
+          <a th:href="@{/criaranuncio}" class="header-btn">
+            <span class="icon">$</span>
+            <span>Criar Anúncio</span>
+          </a>
 
-            <div sec:authorize="isAnonymous()" class="auth-buttons">
-              <a th:href="@{/criarperfil}" class="sign-in-btn">Criar conta</a>
-              <a th:href="@{/login}" class="log-in-btn">Login</a>
-            </div>
+          <a th:href="@{/meuperfil}" class="header-btn">
+            <span class="icon">👤</span>
+            <span>Meu Perfil</span>
+          </a>
+
+          <div sec:authorize="isAnonymous()" class="auth-buttons">
+            <a th:href="@{/criarperfil}" class="sign-in-btn">Criar conta</a>
+            <a th:href="@{/login}" class="log-in-btn">Login</a>
           </div>
         </div>
       </div>
-    </header>
-  </body>
+    </div>
+  </header>
+</body>
+
 </html>
