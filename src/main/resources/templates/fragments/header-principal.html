@@ -4,7 +4,10 @@
 <body>
   <!-- HEADER PRINCIPAL -->
   <header th:fragment="header-principal" class="header">
-    <link th:href="@{/css/header.css}" rel="stylesheet">
+
+    <link th:href="@{/css/header.css}" rel="stylesheet"><!-- importar ficheiro css -->
+    <script th:src="@{/js/script.js}" defer></script><!-- importar ficheiro js. Todas as páginas com o header principal não precisam importar script.js-->
+
     <div class="container">
       <div class="header-content">
         <!-- LOGO -->
@@ -14,9 +17,14 @@
 
         <!-- SEARCH BAR -->
         <div class="search-container">
-          <form th:action="@{/anuncio/pesquisa}" method="get">
-            <input type="text" name="q" class="search-input" placeholder="Escreva aqui o que procura" autocomplete="off">
-            <button type="submit" class="menu-btn">Buscar</button>
+          <form th:action="@{/anuncio/pesquisa}" method="get" id="searchForm">
+            <input type="text"
+                   name="q"
+                   class="search-input"
+                   placeholder="Escreva aqui o que procura"
+                   autocomplete="off"
+                    id="searchInput">
+            <button type="submit" class="menu-btn" id="searchButton" disabled>Buscar</button>
           </form>
         </div>
 

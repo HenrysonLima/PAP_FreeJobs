@@ -51,8 +51,8 @@
             <h3>Contactos</h3>
             <div class="contact-list">
               <div class="contact-item" th:each="c : ${contactos}">
-                <span class="contact-type" th:text="${c.forma_de_contacto + ':'}">Telefone:</span>
-                <span class="contact-value" th:text="${c.contacto}">+351 912 345 678</span>
+                <span class="contact-type" th:text="${c.forma_de_contacto + ':'}"></span>
+                <span class="contact-value" th:text="${c.contacto}"></span>
               </div>
             </div>
             <p th:if="${#lists.isEmpty(contactos)}" class="no-contacts">Nenhum contacto adicionado.</p>
