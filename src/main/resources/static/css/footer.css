@@ -1,17 +1,17 @@
-.footer {
+footer {
   background: white;
   padding: 20px 0;
   margin-top: 40px;
   border-top: 2px solid #e0e0e0;
 }
 
-.footer .container {
+footer .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.footer p {
+footer p {
   color: #737373;
   font-size: 14px;
 }
@@ -34,4 +34,9 @@
   width: 40px;
   background-color: transparent;
   margin-left: 5px;
+}
+
+/* footer secundario */
+.footer-secundario{
+  text-align: center;
 }

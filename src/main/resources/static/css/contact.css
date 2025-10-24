@@ -16,15 +16,11 @@
   background: #f9f9f9;
   padding: 30px;
   border-radius: 15px;
+  width: 70%;
+  margin: auto;
 }
 
 .contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.contact-info {
   display: flex;
   flex-direction: column;
   gap: 20px;
