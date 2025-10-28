@@ -54,9 +54,10 @@
 
     <footer th:replace="~{fragments/footer :: footer}"></footer>
 
-    <!-- JS query parameters -->
+    <!-- Alertas com JS -->
     <script th:if="${param.loginsucesso}">alert("Bem vindo de volta");</script>
     <script th:if="${param.logoutsucesso}">alert("Logout efetuado com sucesso");</script>
+    <script th:if="${contactoFeitoComSucesso}">alert("Sua mensagem foi enviada com sucesso, contactaremos assim que possível")</script>
 
 </body>
 
