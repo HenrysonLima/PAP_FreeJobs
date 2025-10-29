@@ -23,9 +23,6 @@ public class Utilizador {
     @Lob
     private byte[] foto_de_perfil;
 
-    @Lob
-    private byte[] cv;
-
     @OneToMany(mappedBy = "utilizador", cascade = CascadeType.ALL)
     private List<Anuncio> anuncios = new ArrayList<>();
 
@@ -76,14 +73,6 @@ public class Utilizador {
 
     public void setFoto_de_perfil(byte[] foto_de_perfil) {
         this.foto_de_perfil = foto_de_perfil;
-    }
-
-    public byte[] getCv() {
-        return cv;
-    }
-
-    public void setCv(byte[] cv) {
-        this.cv = cv;
     }
 
     public List<ContactoDeUtilizador> getContactosDeUtilizador() {

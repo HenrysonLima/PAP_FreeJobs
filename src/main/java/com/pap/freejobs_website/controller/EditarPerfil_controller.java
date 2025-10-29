@@ -47,7 +47,6 @@ public class EditarPerfil_controller {
                 null //senha não exibida
         );
         utilizador_dto.setFoto_de_perfil_bytes(utilizador.getFoto_de_perfil());
-        utilizador_dto.setCv_bytes(utilizador.getCv());
         criarPerfil_dto.setUtilizador_dto(utilizador_dto); // passa os dados do utilizador logado para o dto principal
 
 

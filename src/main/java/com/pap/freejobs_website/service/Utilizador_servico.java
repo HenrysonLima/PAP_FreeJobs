@@ -24,18 +24,14 @@ public class Utilizador_servico {
     }
 
     public void processar_ficheiros(Utilizador utilizador, Utilizador_dto dto){
+
         //conversão MultipartFile para byte[]
         byte[] fotoBytes = null;
-        byte[] cvBytes = null;
 
         try{
             if(dto.getFoto_de_perfil() != null && !dto.getFoto_de_perfil().isEmpty()){
                 fotoBytes = dto.getFoto_de_perfil().getBytes();
                 utilizador.setFoto_de_perfil(fotoBytes);
-            }
-            if(dto.getCv() != null && !dto.getCv().isEmpty()){
-                cvBytes = dto.getCv().getBytes();
-                utilizador.setCv(cvBytes);
             }
         }
         catch (IOException e){

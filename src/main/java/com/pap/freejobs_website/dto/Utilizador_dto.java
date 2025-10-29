@@ -9,11 +9,9 @@ public class Utilizador_dto {
     private String email;
     private String senha;
     private MultipartFile foto_de_perfil;
-    private MultipartFile cv;
 
-    //Campos para o editar perfil
+    //Campo para o editar perfil
     private byte[] foto_de_perfil_bytes;
-    private byte[] cv_bytes;
 
     public Utilizador_dto(){}
 
@@ -56,14 +54,6 @@ public class Utilizador_dto {
         this.foto_de_perfil = foto_de_perfil;
     }
 
-    public MultipartFile getCv() {
-        return cv;
-    }
-
-    public void setCv(MultipartFile cv) {
-        this.cv = cv;
-    }
-
     //Campos para o editar perfil
     public byte[] getFoto_de_perfil_bytes() {
         return foto_de_perfil_bytes;
@@ -71,13 +61,5 @@ public class Utilizador_dto {
 
     public void setFoto_de_perfil_bytes(byte[] foto_de_perfil_bytes) {
         this.foto_de_perfil_bytes = foto_de_perfil_bytes;
-    }
-
-    public byte[] getCv_bytes() {
-        return cv_bytes;
-    }
-
-    public void setCv_bytes(byte[] cv_bytes) {
-        this.cv_bytes = cv_bytes;
     }
 }

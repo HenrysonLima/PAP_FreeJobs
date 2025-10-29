@@ -36,6 +36,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  font-weight: 500;
 }
 
 /* Contact group container */
@@ -152,4 +153,17 @@
   background-color: #ff6b35;
   color: white;
   border-color: #ff6b35;
+}
+
+.required-indicator {
+  color: #ff6b35;
+  font-weight: bold;
+  margin-left: 2px;
+}
+
+.optional-indicator {
+  color: #999;
+  font-size: 12px;
+  font-weight: normal;
+  margin-left: 4px;
 }
