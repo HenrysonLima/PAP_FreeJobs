@@ -19,7 +19,8 @@
           <a th:href="@{/editarperfil}" class="btn-profile-edit">Alterar perfil</a>
           <form th:action="@{/logout}" method="post" class="logout-form">
             <input type="hidden" th:attr="name=${_csrf.parameterName}, value=${_csrf.token}" />
-            <button type="submit" class="btn-logout">Sair da conta</button>
+            <button type="submit" class="btn-logout"
+                    onsubmit="return confirm('Tem certeza que deseja fazer logout?');">Sair da conta</button>
           </form>
         </div>
 
@@ -92,6 +93,9 @@
       </div>
     </div>
   </main>
+
+  <!-- alerta com JS -->
+  <script th:if="${sucessoEditarPerfil}">alert("Perfil atualizado com sucesso!")</script>
 
   <footer th:replace="~{fragments/footer :: footer}"></footer>
 </body>

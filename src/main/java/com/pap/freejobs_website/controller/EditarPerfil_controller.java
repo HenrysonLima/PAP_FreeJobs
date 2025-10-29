@@ -97,7 +97,7 @@ public class EditarPerfil_controller {
                     editarPerfil_dto.getContactos().getContactos());
 
             redirectAttributes.addFlashAttribute("sucessoEditarPerfil", true);
-            return "redirect:/editarperfil";
+            return "redirect:/meuperfil";
         }
         catch (Exception e){
             redirectAttributes.addFlashAttribute("erroEditarPerfil", e.getMessage());

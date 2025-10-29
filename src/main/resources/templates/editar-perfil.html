@@ -1,47 +1,88 @@
 <!DOCTYPE html>
 <html>
-    <head th:replace="~{fragments/head :: head('FreeJobs - Edição de Perfil')}">
-    <body>
 
-        <header th:replace="~{fragments/header-secundario :: header-secundario}"></header>
-        
-        <h2>Editar Perfil</h2>
-        
-        <form th:action="@{/editarperfil}" th:object="${editarPerfil_dto}" method="post" enctype="multipart/form-data">
-            
-            <label>Nome de utilizador:
-                <input type="text" th:field="*{utilizador_dto.username}" required autocomplete="off">
-            </label><br>
-                
-            <label>Foto de perfil:
-                <input type="file" th:field="*{utilizador_dto.foto_de_perfil}">
-            </label><br>
-            
-            <!-- Contactos -->
-            <div th:each="contacto, iterStat : *{contactos.contactos}">
-                <label>Contacto [[${iterStat.index + 1}]]:
-                    <select th:field="*{contactos.contactos[__${iterStat.index}__].forma_de_contacto}">
-                        <option value="none" hidden>Selecione tipo</option>
-                        <option value="Telefone">Telefone</option>
-                        <option value="Instagram">Instagram</option>
-                        <option value="Facebook">Facebook</option>
-                        <option value="Email">Email</option>
-                    </select>
-                    
-                    <input type="text" th:field="*{contactos.contactos[__${iterStat.index}__].contacto}" autocomplete="off">
-                    
-                    <input type="hidden" th:field="*{contactos.contactos[__${iterStat.index}__].nivel_de_contacto}">
+<head th:replace="~{fragments/head :: head('FreeJobs - Edição de Perfil')}">
 
-                </label><br>
+<body>
+
+    <header th:replace="~{fragments/header-secundario :: header-secundario}"></header>
+
+    <!-- importar ficheiros css -->
+    <link th:href="@{/css/base.css}" rel="stylesheet">
+    <link th:href="@{css/auth.css}" rel="stylesheet">
+
+    <!-- importar ficheiro js -->
+    <script th:src="@{/js/script.js}" defer></script>
+
+    <main class="auth-main">
+        <div class="auth-container">
+            <div class="auth-box auth-box-large">
+                <h2 class="auth-title">Editar Perfil</h2>
+
+                <form class="auth-form" id="editProfileForm" th:action="@{/editarperfil}"
+                    th:object="${editarPerfil_dto}" method="post" enctype="multipart/form-data">
+
+                    <div class="form-group">
+                        <label for="username">Nome de utilizador</label>
+                        <input th:field="*{utilizador_dto.username}" type="text" id="username" name="username"
+                            autocomplete="off" placeholder="Digite seu nome de utilizador" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profilePhoto">Foto de perfil</label>
+                        <input th:field="*{utilizador_dto.foto_de_perfil}" type="file" id="profilePhoto"
+                            name="profilePhoto" accept="image/*">
+                        <small class="form-hint">Deixe em branco para manter a foto actual</small>
+                    </div>
+
+                    <!-- ciclo for para mostrar 4 campos de contacto -->
+                    <div th:each="contacto, iterStat : *{contactos.contactos}" class="form-group">
+
+                        <label>Contacto [[${iterStat.index + 1}]]
+                            <!-- se o contacto tiver index 0, indica que é obrigatorio -->
+                            <span th:if="${iterStat.index == 0}" class="required-indicator">*</span>
+                            <span th:if="${iterStat.index != 0}" class="optional-indicator">(opcional)</span>
+                        </label>
+
+                        <!-- Tipo de contacto -->
+                        <div class="contact-group">
+                            <select th:field="*{contactos.contactos[__${iterStat.index}__].forma_de_contacto}"
+                                th:id="'contactType' + ${iterStat.index + 1}" th:attr="required=${iterStat.index == 0}">
+                                <option value="none" selected hidden>Selecione tipo de contacto</option>
+                                <option value="Telefone">Telefone</option>
+                                <option value="Instagram">Instagram</option>
+                                <option value="Facebook">Facebook</option>
+                                <option value="Email">Email</option>
+                            </select>
+
+                            <!-- Contacto -->
+                            <input type="text" th:id="'contact' + ${iterStat.index + 1}" name="contacto"
+                                th:field="*{contactos.contactos[__${iterStat.index}__].contacto}"
+                                th:attr="required=${iterStat.index == 0}" autocomplete="off" placeholder="Contacto">
+
+                            <button type="button" class="btn-reset-contact" th:attr="data-contact=${iterStat.index + 1}"
+                                title="Limpar contacto">✕</button>
+
+                            <!-- Nivel de contacto -->
+                            <input type="hidden"
+                                th:field="*{contactos.contactos[__${iterStat.index}__].nivel_de_contacto}">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Salvar alterações</button>
+                </form>
+
+                <p class="auth-switch">
+                    <a th:href="@{/meuperfil}">Voltar ao perfil</a>
+                </p>
             </div>
-        
-        <button type="submit">Salvar alterações</button>
-    </form>
-    
+        </div>
+    </main>
+
     <!-- Mensagens -->
-    <script th:if="${sucessoEdicao}">alert("Perfil atualizado com sucesso!")</script>
-    <script th:if="${erroEdicao}">alert("Erro ao atualizar: [[${erroEdicao}]]")</script>
-    
+    <script th:if="${erroEditarPerfil}">alert("Erro ao atualizar: [[${erroEdicao}]]")</script>
+
     <footer th:replace="~{fragments/footer :: footer}"></footer>
 </body>
+
 </html>
