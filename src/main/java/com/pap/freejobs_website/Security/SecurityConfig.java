@@ -17,8 +17,7 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/",
                                 "/criarperfil",
-                                "/anuncio",
-                                "/anuncio/pesquisa",
+                                "/anuncio/**",
                                 "/perfil",
                                 "/termoscondicoes",
                                 "/politicasprivacidade",

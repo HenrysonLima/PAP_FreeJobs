@@ -15,7 +15,28 @@
     <main class="main-content">
         <div class="container">
 
-            <h2 class="hero-title" id="heroTitle">Conectando talentos a oportunidades</h2> <!-- hero title escolhido aleatoriamente por javascript -->            
+            <h2 class="hero-title" id="heroTitle">Conectando talentos a oportunidades</h2>
+            <!-- hero title escolhido aleatoriamente por javascript -->
+
+            <!-- exibir ultimos anuncios publicados -->
+            <div class="flipping-grid" th:if="${!#lists.isEmpty(anunciosRecentes)}">
+                <div class="flipping-card" th:each="a : ${anunciosRecentes}">
+                    <div class="card-image icon-card">
+                        <img th:if="${a.foto_anuncio != null}"
+                            th:src="'data:image/jpeg;base64,' + ${a.fotoAnuncioBase64}" alt="Foto do anúncio"
+                            class="ad-image">
+                        <div class="laptop-icon" th:if="${a.foto_anuncio == null}">
+                            <span class="dollar-sign">$</span>
+                        </div>
+                    </div>
+
+                    <h3 class="card-title" th:text="${a.titulo}"></h3>
+                    <p class="card-price" th:text="${a.preco + ' €'}"></p>
+                    <p class="card-desc" th:text="${#strings.abbreviate(a.descricao, 100)}"></p>
+
+                    <a th:href="@{'/anuncio/' + ${a.id}}" class="card-link">Ver</a>
+                </div>
+            </div>
 
             <section class="how-it-works">
                 <h3 class="section-title">Como Funciona</h3>
@@ -57,7 +78,8 @@
     <!-- Alertas com JS -->
     <script th:if="${param.loginsucesso}">alert("Bem vindo de volta");</script>
     <script th:if="${param.logoutsucesso}">alert("Logout efetuado com sucesso");</script>
-    <script th:if="${contactoFeitoComSucesso}">alert("Sua mensagem foi enviada com sucesso, contactaremos assim que possível")</script>
+    <script
+        th:if="${contactoFeitoComSucesso}">alert("Sua mensagem foi enviada com sucesso, contactaremos assim que possível")</script>
 
 </body>
 
