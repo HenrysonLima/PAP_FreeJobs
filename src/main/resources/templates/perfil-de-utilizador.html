@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head('FreeJobs - Meu perfil')}"></head>
+
+<body>
+  <header th:replace="~{fragments/header-principal :: header-principal}"></header>
+
+  <!-- importar ficheiros css -->
+  <link th:href="@{/css/base.css}" rel="stylesheet">
+  <link th:href="@{/css/cards.css}" rel="stylesheet">
+  <link th:href="@{/css/profile.css}" rel="stylesheet">
+
+  <main class="main-content">
+    <div class="container">
+      <div class="profile-page">
+
+        <!-- PROFILE HEADER -->
+        <div class="profile-header">
+
+          <!-- mostrar foto de perfil se existente -->
+          <img th:if="${fotoBase64 != null}" th:src="'data:image/jpeg;base64,' + ${fotoBase64}" alt="Foto de perfil"
+            class="profile-avatar-img">
+
+          <!-- fallback -->
+          <img th:if="${fotoBase64 == null}" th:src="@{/imagens/default-avatar.jpg}" alt="Avatar padrão"
+            class="profile-avatar-img">
+
+
+          <div class="profile-header-info">
+            <h2 th:text="${utilizador.username}"></h2>
+            <p class="profile-type">Freelancer</p>
+          </div>
+        </div>
+
+        <div class="profile-content">
+          <!-- Contactos -->
+          <div class="profile-section">
+            <h3>Contactos</h3>
+            <div class="contact-list">
+              <div class="contact-item" th:each="c : ${contactos}">
+                <span class="contact-type" th:text="${c.forma_de_contacto + ':'}"></span>
+                <span class="contact-value" th:text="${c.contacto}"></span>
+              </div>
+            </div>
+            <p th:if="${#lists.isEmpty(contactos)}" class="no-contacts">Nenhum contacto adicionado.</p>
+          </div>
+
+          <!-- ADS -->
+          <div class="profile-section">
+            <h3>Meus Anúncios</h3>
+            <div class="flipping-grid">
+              <div class="flipping-card" th:each="a : ${anuncios}">
+                <div class="card-image icon-card">
+                  <!-- show ad photo if available -->
+                  <img th:if="${a.foto_anuncio != null}" th:src="'data:image/jpeg;base64,' + ${a.fotoAnuncioBase64}"
+                    alt="Foto do anúncio" class="ad-image">
+
+                  <div class="laptop-icon" th:if="${a.foto_anuncio == null}">
+                    <span class="dollar-sign">$</span>
+                  </div>
+                </div>
+
+                <h3 class="card-title" th:text="${a.titulo}"></h3>
+                <p class="card-price" th:text="${a.preco + ' €'}"></p>
+                <p class="card-desc"
+                  th:text="${#strings.length(a.descricao) > 80 ? #strings.substring(a.descricao, 0, 80) + '...' : a.descricao}">
+                </p> <!-- mostra apenas os primeiros 80 caracteres da descrição dos anuncios -->
+
+                <div class="card-actions">
+                  <a th:href="@{'/anuncio/' + ${a.id}}" class="card-link">Ver</a>
+                  <a th:href="@{'/anuncio/editar/' + ${a.id}}" class="btn-edit">Editar</a>
+                  <form th:action="@{'/anuncio/excluir/' + ${a.id}}" method="post" style="display:inline;"
+                    onsubmit="return confirm('Tem certeza que deseja excluir este anúncio?');">
+                    <!-- botao para excluir anuncio com confirmação -->
+                    <button type="submit" class="btn-delete">Excluir</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <p th:if="${#lists.isEmpty(anuncios)}" class="no-flippings">Ainda não criou nenhum anúncio.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+
+</html>

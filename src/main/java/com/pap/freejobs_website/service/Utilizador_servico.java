@@ -5,9 +5,9 @@ import com.pap.freejobs_website.dto.Utilizador_dto;
 import com.pap.freejobs_website.entity.ContactoDeUtilizador;
 import com.pap.freejobs_website.entity.Utilizador;
 import com.pap.freejobs_website.repository.Utilizador_repositorio;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.List;
@@ -42,7 +42,7 @@ public class Utilizador_servico {
     public Utilizador salvar_utilizador(Utilizador_dto dto) {
 
         //Regras de negócio
-        if(utilizador_repositorio.existsByEmail(dto.getEmail()) || utilizador_repositorio.existsByUsername(dto.getUsername())){
+        if(utilizador_repositorio.existsByEmail(dto.getEmail()) || utilizador_repositorio.existsByUsername(dto.getUsernameLowerCase())){
             throw new IllegalArgumentException("Credenciais já existentes");
         }
 
@@ -52,6 +52,9 @@ public class Utilizador_servico {
                 dto.getSenha()
         );
 
+        //definir usernameLowerCase do Utilizador
+        utilizador.setUsernameLowerCase(dto.getUsername().toLowerCase());
+
         utilizador.setSenha(passwordEncoder.encode(utilizador.getSenha()));// hash password
 
         processar_ficheiros(utilizador,dto);
@@ -59,13 +62,19 @@ public class Utilizador_servico {
         return utilizador_repositorio.save(utilizador);
     }
 
-    //Editar perfil
+    //Direcionado ao authentication
     @Transactional(readOnly = true)
     public Utilizador findByEmail(String email){
         return utilizador_repositorio.findByEmail(email)
                 .orElseThrow(()-> new IllegalArgumentException("Utilizador não encontrado"));
     }
 
+    //Encontrar utilizador por username, evitando expor ids
+    @Transactional(readOnly = true)
+    public Utilizador findByUsernameLowerCase(String usernameLowerCase){
+        return utilizador_repositorio.findByUsernameLowerCase(usernameLowerCase)
+                .orElseThrow(() -> new IllegalArgumentException("Utilizador não encontrado"));
+    }
 
 
     @Transactional
@@ -73,12 +82,14 @@ public class Utilizador_servico {
                                              Utilizador_dto dto,
                                              List<ContactoDeUtilizador_dto> contactos_dto){
 
-        if(dto.getUsername() != null && !dto.getUsername().isBlank()
-            && !dto.getUsername().equals(utilizador.getUsername())){
+        if(dto.getUsername() != null && !dto.getUsername().isBlank() && !dto.getUsername().equals(utilizador.getUsername())){
             utilizador.setUsername(dto.getUsername());
         }
 
         processar_ficheiros(utilizador, dto);
+
+        //definir usernameLowerCase do Utilizador
+        utilizador.setUsernameLowerCase(dto.getUsername().toLowerCase());
 
         // Atualizar contactos
         utilizador.getContactosDeUtilizador().clear(); // Limpa a lista de contactos

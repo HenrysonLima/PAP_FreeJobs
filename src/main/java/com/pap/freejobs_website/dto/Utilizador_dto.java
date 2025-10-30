@@ -13,6 +13,8 @@ public class Utilizador_dto {
     //Campo para o editar perfil
     private byte[] foto_de_perfil_bytes;
 
+    private String usernameLowerCase;
+
     public Utilizador_dto(){}
 
     public Utilizador_dto(String username, String email, String senha) {
@@ -61,5 +63,13 @@ public class Utilizador_dto {
 
     public void setFoto_de_perfil_bytes(byte[] foto_de_perfil_bytes) {
         this.foto_de_perfil_bytes = foto_de_perfil_bytes;
+    }
+
+    public String getUsernameLowerCase() {
+        return usernameLowerCase;
+    }
+
+    public void setUsernameLowerCase(String usernameLowerCase) {
+        this.usernameLowerCase = usernameLowerCase;
     }
 }

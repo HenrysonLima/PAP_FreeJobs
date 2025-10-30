@@ -23,6 +23,10 @@ public class Utilizador {
     @Lob
     private byte[] foto_de_perfil;
 
+    //para encontrar o utilizador ignorando lowercases
+    @Column(nullable = false, unique = true)
+    private String usernameLowerCase;
+
     @OneToMany(mappedBy = "utilizador", cascade = CascadeType.ALL)
     private List<Anuncio> anuncios = new ArrayList<>();
 
@@ -73,6 +77,14 @@ public class Utilizador {
 
     public void setFoto_de_perfil(byte[] foto_de_perfil) {
         this.foto_de_perfil = foto_de_perfil;
+    }
+
+    public String getUsernameLowerCase() {
+        return usernameLowerCase;
+    }
+
+    public void setUsernameLowerCase(String usernameLowerCase) {
+        this.usernameLowerCase = usernameLowerCase;
     }
 
     public List<ContactoDeUtilizador> getContactosDeUtilizador() {

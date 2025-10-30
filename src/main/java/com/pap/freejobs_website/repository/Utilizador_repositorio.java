@@ -12,6 +12,7 @@ public interface Utilizador_repositorio extends JpaRepository<Utilizador, Long> 
     boolean existsByUsername(String username);
     Optional<Utilizador> findByEmail(String email);
     Optional<Utilizador> findByUsername(String username);
+    Optional<Utilizador> findByUsernameLowerCase(String usernameLowerCase);
 
     @Query("SELECT u.email AS email, u.senha AS senha FROM Utilizador u WHERE u.email = :email")
     Optional<UtilizadorLoginProjection> findUserForLogin(@Param("email") String email);

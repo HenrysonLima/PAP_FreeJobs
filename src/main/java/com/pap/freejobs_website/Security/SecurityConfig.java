@@ -18,7 +18,7 @@ public class SecurityConfig {
                                 "/",
                                 "/criarperfil",
                                 "/anuncio/**",
-                                "/perfil",
+                                "/perfil/**",
                                 "/termoscondicoes",
                                 "/politicasprivacidade",
                                 "/contacto"
