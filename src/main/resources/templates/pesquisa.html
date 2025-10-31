@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt">
 
-<head th:replace="~{fragments/head :: head('FreeJobs - pesquisa')}">
+<head th:replace="~{fragments/head :: head('FreeJobs - Pesquisa')}">
 
 <body>
   <header th:replace="~{fragments/header-principal :: header-principal}"></header>
@@ -35,7 +35,7 @@
       <p class="card-price" th:text="${a.preco + ' €'}"></p>
       <p class="card-desc" th:text="${#strings.abbreviate(a.descricao, 100)}"></p>
 
-      <a th:href="@{'/anuncio/' + ${a.id}}" class="card-link">Ver</a>
+      <a th:href="@{'/anuncio/' + ${a.id}}" class="card-link">Ver detalhes</a>
     </div>
   </div>
 </main>

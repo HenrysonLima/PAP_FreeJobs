@@ -177,3 +177,19 @@
   color: #ff6b35;
   font-weight: bold;
 }
+
+.btn-remove-fav {
+  background: #ff3b30;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 10px 15px;
+  border-radius: 8px;
+  color: white;
+  transition: all 0.3s;
+}
+
+.btn-remove-fav:hover {
+  background: #e02d22;
+  transform: scale(1.05);
+}

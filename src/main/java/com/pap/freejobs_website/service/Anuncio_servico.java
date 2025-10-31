@@ -51,26 +51,6 @@ public class Anuncio_servico {
     }
 
     @Transactional
-    public void atualizar_anuncio(Long id, Anuncio_dto dto) {
-        Anuncio anuncio = anuncio_repositorio.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Anúncio não encontrado"));
-
-        anuncio.setTitulo(dto.getNome_do_anuncio());
-        anuncio.setPreco(dto.getPreco());
-        anuncio.setDescricao(dto.getDescricao());
-
-        try {
-            if (dto.getFoto_anuncio() != null && !dto.getFoto_anuncio().isEmpty()) {
-                anuncio.setFoto_anuncio(dto.getFoto_anuncio().getBytes());
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("Erro ao atualizar imagem do anúncio", e);
-        }
-
-        anuncio_repositorio.save(anuncio);
-    }
-
-    @Transactional
     public void excluir_anuncio(Long id, Utilizador utilizador) {
         Anuncio anuncio = anuncio_repositorio.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Anúncio não encontrado"));

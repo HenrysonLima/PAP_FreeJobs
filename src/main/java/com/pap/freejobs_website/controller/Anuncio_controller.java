@@ -55,7 +55,7 @@ public class Anuncio_controller {
 
     //ver anuncio
     @GetMapping("/{id}")
-    public String verAnuncio(@PathVariable Long id, Model model) {
+    public String verAnuncio(@PathVariable Long id, Model model, Authentication authentication) {
         Anuncio anuncio = anuncio_servico.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Anúncio não encontrado"));
 
@@ -74,11 +74,19 @@ public class Anuncio_controller {
             fotoPerfilBase64 = Base64.getEncoder().encodeToString(utilizador.getFoto_de_perfil());
         }
 
+        // Verificar se anuncio está presente na lista de favoritos do utilizador autenticado
+        boolean favoritado = false;
+        if (authentication != null) {
+            Utilizador userLogado = utilizador_servico.findByEmail(authentication.getName());
+            favoritado = userLogado.getFavoritos().contains(anuncio);
+        }
+        model.addAttribute("favoritado", favoritado);
+
         model.addAttribute("anuncio", anuncio);
         model.addAttribute("utilizador", utilizador);
         model.addAttribute("fotoPerfilBase64", fotoPerfilBase64);
 
-        return "anuncio"; // o nome do ficheiro .html
+        return "anuncio";
     }
 
 

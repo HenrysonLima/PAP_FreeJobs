@@ -73,10 +73,21 @@
               </p>
             </div>
 
-            <!-- Botões -->
             <div class="action-buttons">
-              <button class="btn-primary">Guardar</button>
+              <!-- Se não está na lista de favoritos -->
+              <form th:if="${!favoritado}" th:action="@{'/favoritos/adicionar/' + ${anuncio.id}}" method="post">
+                <button type="submit" class="btn-primary">Guardar como favorito</button>
+              </form>
+
+              <!-- Se está na lista de favoritos -->
+              <form th:if="${favoritado}" th:action="@{'/favoritos/remover/' + ${anuncio.id}}" method="post"
+                onsubmit="return confirm('Tem certeza que deseja remover este anúncio dos favoritos?');">
+                <button type="submit" class="btn-remove-fav" title="Remover dos favoritos">
+                  Remover dos favoritos
+                </button>
+              </form>
             </div>
+
           </div>
         </div>
       </div>
@@ -84,6 +95,10 @@
   </main>
 
   <footer th:replace="~{fragments/footer :: footer}"></footer>
+
+  <!-- Alertas com JS -->
+  <script th:if="${sucessoAdicionarFavorito}">alert("Anuncio adicionado a favoritos!");</script>
+
 
 </body>
 

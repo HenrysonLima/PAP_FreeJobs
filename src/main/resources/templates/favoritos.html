@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head th:replace="~{fragments/head :: head('FreeJobs - Favoritos')}">
+
+<body>
+    <header th:replace="~{fragments/header-principal :: header-principal}"></header>
+
+    <!-- importar ficheiros css -->
+    <link th:href="@{/css/base.css}" rel="stylesheet">
+    <link th:href="@{/css/cards.css}" rel="stylesheet">
+
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <h2>Meus Favoritos</h2>
+                <p class="page-subtitle">Anuncios que guardaste para mais tarde</p>
+            </div>
+
+            <!-- Mostra mensagem se não houver favoritos -->
+            <div th:if="${#lists.isEmpty(favoritos)}" class="no-favs">
+                <p>Ainda não adicionaste nenhum anúncio aos favoritos</p>
+            </div>
+
+            <!-- Lista de favoritos -->
+            <div class="flipping-grid" th:if="${!#lists.isEmpty(favoritos)}">
+                <div class="flipping-card" th:each="a : ${favoritos}">
+
+                    <!-- Imagem -->
+                    <div class="card-image icon-card">
+                        <img th:if="${a.fotoAnuncioBase64 != null}"
+                            th:src="'data:image/jpeg;base64,' + ${a.fotoAnuncioBase64}" alt="Foto do anúncio" />
+                        <div th:if="${a.fotoAnuncioBase64 == null}" class="laptop-icon">
+                            <span class="dollar-sign">$</span>
+                        </div>
+                    </div>
+
+                    <!-- Título e preço -->
+                    <h3 class="card-title" th:text="${a.titulo}">Título</h3>
+                    <p class="card-price" th:text="${a.preco} + '€'">Preço</p>
+
+                    <!-- Ações -->
+                    <div class="card-actions">
+                        <a th:href="@{'/anuncio/' + ${a.id}}" class="card-link">Ver</a>
+
+                        <form th:action="@{'/favoritos/remover/' + ${a.id}}" method="post" 
+                              onsubmit="return confirm('Tem certeza que deseja remover este anúncio dos favoritos?');">
+
+                            <button type="submit" class="btn-remove-fav" title="Remover dos favoritos">
+                                Remover
+                            </button>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+
+</html>

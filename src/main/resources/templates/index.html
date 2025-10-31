@@ -1,5 +1,3 @@
-<!-- apagar os styles das tags -->
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 
@@ -15,8 +13,8 @@
     <main class="main-content">
         <div class="container">
 
-            <h2 class="hero-title" id="heroTitle">Conectando talentos a oportunidades</h2>
             <!-- hero title escolhido aleatoriamente por javascript -->
+            <h2 class="hero-title" id="heroTitle">Conectando talentos a oportunidades</h2>
 
             <!-- exibir ultimos anuncios publicados -->
             <div class="flipping-grid" th:if="${!#lists.isEmpty(anunciosRecentes)}">
@@ -34,7 +32,7 @@
                     <p class="card-price" th:text="${a.preco + ' €'}"></p>
                     <p class="card-desc" th:text="${#strings.abbreviate(a.descricao, 100)}"></p>
 
-                    <a th:href="@{'/anuncio/' + ${a.id}}" class="card-link">Ver</a>
+                    <a th:href="@{'/anuncio/' + ${a.id}}" class="card-link">Ver detalhes</a>
                 </div>
             </div>
 
@@ -78,8 +76,7 @@
     <!-- Alertas com JS -->
     <script th:if="${param.loginsucesso}">alert("Bem vindo de volta");</script>
     <script th:if="${param.logoutsucesso}">alert("Logout efetuado com sucesso");</script>
-    <script
-        th:if="${contactoFeitoComSucesso}">alert("Sua mensagem foi enviada com sucesso, contactaremos assim que possível")</script>
+    <script th:if="${contactoFeitoComSucesso}">alert("Sua mensagem foi enviada com sucesso, contactaremos assim que possível")</script>
 
 </body>
 

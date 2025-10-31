@@ -33,6 +33,14 @@ public class Utilizador {
     @OneToMany(mappedBy = "utilizador", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ContactoDeUtilizador> contactosDeUtilizador = new ArrayList<>();
 
+    @ManyToMany
+    @JoinTable(
+            name = "utilizador_favoritos",
+            joinColumns = @JoinColumn(name = "utilizador_id"),
+            inverseJoinColumns = @JoinColumn(name = "anuncio_id")
+    )
+    private List<Anuncio> favoritos = new ArrayList<>();
+
     //Contrutores
     public Utilizador() {}
 
@@ -93,5 +101,9 @@ public class Utilizador {
 
     public List<Anuncio> getAnuncios() {
         return anuncios;
+    }
+
+    public List<Anuncio> getFavoritos() {
+        return favoritos;
     }
 }
