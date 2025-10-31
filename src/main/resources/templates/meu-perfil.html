@@ -17,10 +17,10 @@
 
         <div class="profile-actions-top">
           <a th:href="@{/editarperfil}" class="btn-profile-edit">Alterar perfil</a>
-          <form th:action="@{/logout}" method="post" class="logout-form">
-            <input type="hidden" th:attr="name=${_csrf.parameterName}, value=${_csrf.token}" />
-            <button type="submit" class="btn-logout"
-                    onsubmit="return confirm('Tem certeza que deseja fazer logout?');">Sair da conta</button>
+          <form th:action="@{/logout}" method="post" class="logout-form"
+                    onsubmit="return confirm('Tem certeza que deseja fazer logout?');">
+            <input type="hidden" th:attr="name=${_csrf.parameterName}, value=${_csrf.token}"/>
+            <button type="submit" class="btn-logout" >Sair da conta</button>
           </form>
         </div>
 

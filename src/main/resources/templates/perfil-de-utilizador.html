@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragments/head :: head('FreeJobs - Meu perfil')}"></head>
+<head th:replace="~{fragments/head :: head('FreeJobs - '+${utilizador.username})}"></head>
 
 <body>
   <header th:replace="~{fragments/header-principal :: header-principal}"></header>

@@ -55,18 +55,32 @@ public class Anuncio_controller {
 
     //ver anuncio
     @GetMapping("/{id}")
-    public String verAnuncio(@PathVariable Long id, Model model){
+    public String verAnuncio(@PathVariable Long id, Model model) {
         Anuncio anuncio = anuncio_servico.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Anuncio não encontrado"));
+                .orElseThrow(() -> new IllegalArgumentException("Anúncio não encontrado"));
 
-        if (anuncio.getFoto_anuncio() != null){
+        // Foto do anúncio
+        if (anuncio.getFoto_anuncio() != null) {
             String fotoBase64 = Base64.getEncoder().encodeToString(anuncio.getFoto_anuncio());
             anuncio.setFotoAnuncioBase64(fotoBase64);
         }
 
-        model.addAttribute("anuncio",anuncio);
-        return "anuncio";
+        // Utilizador dono do anúncio
+        Utilizador utilizador = anuncio.getUtilizador();
+
+        // Foto de perfil do utilizador
+        String fotoPerfilBase64 = null;
+        if (utilizador.getFoto_de_perfil() != null) {
+            fotoPerfilBase64 = Base64.getEncoder().encodeToString(utilizador.getFoto_de_perfil());
+        }
+
+        model.addAttribute("anuncio", anuncio);
+        model.addAttribute("utilizador", utilizador);
+        model.addAttribute("fotoPerfilBase64", fotoPerfilBase64);
+
+        return "anuncio"; // o nome do ficheiro .html
     }
+
 
     //Excluir anuncio
     @PostMapping("/excluir/{id}")

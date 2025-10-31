@@ -1,31 +1,90 @@
 <!DOCTYPE html>
 <html>
-  <head th:replace="~{fragments/head :: head('FreeJobs')}">
-  <body>
 
-    <header th:replace="~{fragments/header-principal :: header-principal}"></header>
+<head th:replace="~{fragments/head :: head('FreeJobs - '+${anuncio.titulo})}">
 
-    <section>
-      <p>Preço: €1000</p>
-      <p>Descrição detalhada do anúncio...</p>
-    </section>
+<body>
 
-    <section>
-      <h2>Perfil do proprietário</h2>
+  <header th:replace="~{fragments/header-principal :: header-principal}"></header>
 
-      <!-- Por enquanto vai levar para o static perfil.html -->
-      <a th:href="@{/perfil}">Ver perfil</a>
-    </section>
+  <!-- importar ficheiros css -->
+  <link th:href="@{/css/base.css}" rel="stylesheet">
+  <link th:href="@{/css/flipping-detail.css}" rel="stylesheet">
 
-    <section>
-      <h2>Contactos do perfil</h2>
-      <ul>
-        <li>+351 900 000 000</li>
-        <li>email@exemplo.com</li>
-      </ul>
-    </section>
+  <main class="main-content">
+    <div class="container">
+      <div class="flipping-detail">
+        <!-- Header -->
+        <div class="flipping-detail-header">
+          <h2 class="flipping-detail-title" th:text="${anuncio.titulo}">Título do Anúncio</h2>
+          <span class="flipping-detail-price" th:text="${anuncio.preco} + '€'">Preço</span>
+        </div>
 
-    <footer th:replace="~{fragments/footer :: footer}"></footer>
+        <!-- Conteúdo -->
+        <div class="flipping-detail-content">
+          <!-- Imagem -->
+          <div class="flipping-detail-image">
+            <img th:if="${anuncio.fotoAnuncioBase64 != null}"
+              th:src="'data:image/jpeg;base64,' + ${anuncio.fotoAnuncioBase64}" alt="Imagem do anúncio">
 
-  </body>
+            <!--se o anuncio nao tiver imagem-->
+            <div class="laptop-icon" th:if="${anuncio.foto_anuncio == null}">
+              <span class="dollar-sign">$</span>
+            </div>
+          </div>
+
+          <div class="flipping-detail-info">
+            <!-- Descrição -->
+            <div class="info-section">
+              <h3>Descrição</h3>
+              <p th:text="${anuncio.descricao}">Descrição do anúncio...</p>
+            </div>
+
+            <!-- Freelancer -->
+            <div class="info-section">
+              <h3>Freelancer</h3>
+              <div class="freelancer-info">
+                <div class="freelancer-avatar">
+                  <img th:if="${fotoPerfilBase64 != null}" th:src="'data:image/jpeg;base64,' + ${fotoPerfilBase64}"
+                    alt="Foto de perfil" class="freelancer-avatar-img">
+                  <img th:if="${fotoPerfilBase64 == null}" th:src="@{/imagens/default-avatar.jpg}" alt="Avatar padrão"
+                    class="freelancer-avatar-img">
+                </div>
+                <div>
+                  <p class="freelancer-name">
+                    <a th:href="@{'/perfil/' + ${utilizador.usernameLowerCase}}" th:text="${utilizador.username}">Nome
+                      do utilizador</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Contactos -->
+            <div class="info-section">
+              <h3>Contactos do Freelancer</h3>
+              <div class="contact-list" th:if="${#lists.isEmpty(utilizador.contactosDeUtilizador) == false}">
+                <div class="contact-item" th:each="c : ${utilizador.contactosDeUtilizador}">
+                  <span class="contact-type" th:text="${c.forma_de_contacto + ':'}">Tipo:</span>
+                  <span class="contact-value" th:text="${c.contacto}">Valor</span>
+                </div>
+              </div>
+              <p th:if="${#lists.isEmpty(utilizador.contactosDeUtilizador)}">
+                Este utilizador ainda não adicionou contactos.
+              </p>
+            </div>
+
+            <!-- Botões -->
+            <div class="action-buttons">
+              <button class="btn-primary">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer th:replace="~{fragments/footer :: footer}"></footer>
+
+</body>
+
 </html>
