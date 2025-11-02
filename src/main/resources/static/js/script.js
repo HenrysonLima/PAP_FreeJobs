@@ -37,14 +37,27 @@ document.addEventListener("DOMContentLoaded", () => {
   input.addEventListener("input", () => {
     button.disabled = input.value.trim() === "";
   });
-  
+
   document.getElementById("searchForm").addEventListener("submit", (e) => {
     if (input.value.trim() === "") {
       e.preventDefault();
     }
   });
 
+
+  
 })
 
+// botão show/hide nos campos de senha
+function togglePasswordVisibility(inputId, button) {
+  const input = document.getElementById(inputId);
+  const img = button.querySelector("img");
 
-
+  if (input.type === "password") {
+    input.type = "text";
+    img.src = "/imagens/hide_icon.png";
+  } else {
+    input.type = "password";
+    img.src = "/imagens/show_icon.png";
+  }
+}

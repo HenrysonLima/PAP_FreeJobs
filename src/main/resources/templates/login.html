@@ -1,36 +1,49 @@
 <!DOCTYPE html>
 <html>
+
 <head th:replace="~{fragments/head :: head('FreeJobs - Login')}">
 
 <body>
 
-  <!-- importar ficheiros css -->
-  <link th:href="@{/css/base.css}" rel="stylesheet">
-  <link th:href="@{css/auth.css}" rel="stylesheet">
-  
-  <!-- alertas com js -->
-  <script th:if="${param.errologin}">alert("Email ou password inexistente")</script>
-  <script th:if="${sucessocriarperfil}"> alert("Perfil criado com sucesso!")</script>
-  <script th:if="${loginnecessario}">alert("Para ter acesso a esse serviço é necessário fazer login")</script>
+    <!-- importar ficheiros css -->
+    <link th:href="@{/css/base.css}" rel="stylesheet">
+    <link th:href="@{css/auth.css}" rel="stylesheet">
+
+    <!-- importar ficheiro js -->
+    <script th:src="@{/js/script.js}" defer></script>
+
+    <!-- alertas com js -->
+    <script th:if="${param.errologin}">alert("Email ou password inexistente")</script>
+    <script th:if="${sucessocriarperfil}"> alert("Perfil criado com sucesso!")</script>
+    <script th:if="${loginnecessario}">alert("Para ter acesso a esse serviço é necessário fazer login")</script>
 
 
-  <header th:replace="~{fragments/header-secundario :: header-secundario}"></header>
-  
-  <main class="auth-main">
+    <header th:replace="~{fragments/header-secundario :: header-secundario}"></header>
+
+    <main class="auth-main">
         <div class="auth-container">
             <div class="auth-box">
                 <h2 class="auth-title">Login</h2>
-                
-                <form th:action="@{/login}" method="post"
-                      class="auth-form" id="loginForm">
+
+                <form th:action="@{/login}" method="post" class="auth-form" id="loginForm">
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="Digite seu email" required autocomplete="off">
+                        <input type="email" id="email" name="email" placeholder="Digite seu email" required
+                            autocomplete="off">
                     </div>
 
                     <div class="form-group">
                         <label for="password">Senha</label>
-                        <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+
+                        <div class="password-wrapper">
+                            <input type="password" id="password" name="password" placeholder="Digite sua senha"
+                                required>
+                            <!-- show/hide -->
+                            <button type="button" class="toggle-password"
+                                onclick="togglePasswordVisibility('password', this)">
+                                <img th:src="@{/imagens/show_icon.png}" class="eye-icon">
+                            </button>
+                        </div>
                     </div>
 
                     <button type="submit" class="btn-primary">Entrar</button>
@@ -43,6 +56,7 @@
         </div>
     </main>
 
-  <footer th:replace="~{fragments/footer :: footer}"></footer>
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
 </body>
+
 </html>

@@ -105,6 +105,10 @@
   align-items: center;
 }
 
+.header-btn .icon img{
+  width: 20px;
+}
+
 /* AUTH BUTTONS */
 .auth-buttons {
   display: flex;

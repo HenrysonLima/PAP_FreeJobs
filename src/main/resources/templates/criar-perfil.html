@@ -13,7 +13,8 @@
     <script th:src="@{/js/script.js}" defer></script>
 
     <!-- alerta lançado na tentativa de criar um perfil com credenciais ja existentes -->
-    <script th:if="${erroaocriarperfil}">alert("Já existe um utilizador com essas credenciais. Por favor, escolha outro email ou username")</script>
+    <script
+        th:if="${erroaocriarperfil}">alert("Já existe um utilizador com essas credenciais. Por favor, escolha outro email ou username")</script>
 
     <header th:replace="~{fragments/header-secundario :: header-secundario}"></header>
 
@@ -21,69 +22,76 @@
         <div class="auth-container">
             <div class="auth-box auth-box-large">
                 <h2 class="auth-title">Criar perfil</h2>
-                
-                <form class="auth-form" id="createAccountForm" 
-                th:action="@{/criarperfil}" 
-                th:object="${criarPerfil_dto}" 
-                method="post"
-                enctype="multipart/form-data">
+
+                <form class="auth-form" id="createAccountForm" th:action="@{/criarperfil}"
+                    th:object="${criarPerfil_dto}" method="post" enctype="multipart/form-data">
 
                     <div class="form-group">
                         <label for="username">Nome de utilizador</label>
-                        <input th:field="*{utilizador_dto.username}" type="text" id="username" name="username" autocomplete="off" placeholder="Digite seu nome de utilizador" required>
+                        <input th:field="*{utilizador_dto.username}" type="text" id="username" name="username"
+                            autocomplete="off" placeholder="Digite seu nome de utilizador" required>
                     </div>
 
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input th:field="*{utilizador_dto.email}" type="email" id="email" name="email" autocomplete="off" placeholder="Digite seu email" required>
+                        <input th:field="*{utilizador_dto.email}" type="email" id="email" name="email"
+                            autocomplete="off" placeholder="Digite seu email" required>
                     </div>
 
                     <div class="form-group">
                         <label for="password">Senha</label>
-                        <input th:field="*{utilizador_dto.senha}" type="password" id="password" name="password" autocomplete="off" placeholder="Digite sua senha" required>
+
+                        <div class="password-wrapper">
+                            <input th:field="*{utilizador_dto.senha}" type="password" id="password" name="password"
+                                autocomplete="off" placeholder="Digite sua senha" required
+                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                                title="A senha deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma minúscula, um número e um símbolo.">
+
+                            <!-- show/hide -->
+                            <button type="button" class="toggle-password"
+                                onclick="togglePasswordVisibility('password', this)">
+                                <img th:src="@{/imagens/show_icon.png}" class="eye-icon">
+                            </button>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label for="profilePhoto">Foto de perfil</label>
-                        <input th:field="*{utilizador_dto.foto_de_perfil}" type="file" id="profilePhoto" name="profilePhoto" accept="image/*">
+                        <input th:field="*{utilizador_dto.foto_de_perfil}" type="file" id="profilePhoto"
+                            name="profilePhoto" accept="image/*">
                     </div>
 
                     <!-- ciclo for para mostrar 4 campos de contacto -->
-                    <div th:each="contacto, iterStat : *{contactos.contactos}"
-                        class="form-group">
+                    <div th:each="contacto, iterStat : *{contactos.contactos}" class="form-group">
 
-                        <label>Contacto [[${iterStat.index + 1}]] 
+                        <label>Contacto [[${iterStat.index + 1}]]
                             <!-- se o contacto tiver index 0, indica que é obrigatorio -->
-                            <span th:if="${iterStat.index == 0}" class="required-indicator">*</span> 
+                            <span th:if="${iterStat.index == 0}" class="required-indicator">*</span>
                             <span th:if="${iterStat.index != 0}" class="optional-indicator">(opcional)</span>
                         </label>
-                        
+
                         <!-- Tipo de contacto -->
                         <div class="contact-group">
                             <select th:field="*{contactos.contactos[__${iterStat.index}__].forma_de_contacto}"
-                            th:id="'contactType' + ${iterStat.index + 1}"
-                            th:attr="required=${iterStat.index == 0}">
-                                <option value="none" selected hidden >Selecione tipo de contacto</option>
+                                th:id="'contactType' + ${iterStat.index + 1}" th:attr="required=${iterStat.index == 0}">
+                                <option value="none" selected hidden>Selecione tipo de contacto</option>
                                 <option value="Telefone">Telefone</option>
                                 <option value="Instagram">Instagram</option>
                                 <option value="Facebook">Facebook</option>
                                 <option value="Email">Email</option>
                             </select>
-                            
-                            <!-- Contacto -->
-                            <input type="text" 
-                            th:id="'contact' + ${iterStat.index + 1}" name="contacto"
-                            th:field="*{contactos.contactos[__${iterStat.index}__].contacto}"
-                            th:attr="required=${iterStat.index == 0}" autocomplete="off" placeholder="Contacto">
 
-                            <button type="button"
-                            class="btn-reset-contact"
-                            th:attr="data-contact=${iterStat.index + 1}"
-                            title="Limpar contacto">✕</button>
-                            
+                            <!-- Contacto -->
+                            <input type="text" th:id="'contact' + ${iterStat.index + 1}" name="contacto"
+                                th:field="*{contactos.contactos[__${iterStat.index}__].contacto}"
+                                th:attr="required=${iterStat.index == 0}" autocomplete="off" placeholder="Contacto">
+
+                            <button type="button" class="btn-reset-contact" th:attr="data-contact=${iterStat.index + 1}"
+                                title="Limpar contacto">✕</button>
+
                             <!-- Nivel de contacto -->
-                            <input type="hidden" 
-                            th:field="*{contactos.contactos[__${iterStat.index}__].nivel_de_contacto}">
+                            <input type="hidden"
+                                th:field="*{contactos.contactos[__${iterStat.index}__].nivel_de_contacto}">
                         </div>
                     </div>
 
@@ -91,8 +99,10 @@
                         <div class="terms-group">
                             <input type="checkbox" id="terms" name="terms" required>
                             <label for="terms" class="terms-label">
-                                Eu aceito os <a th:href="@{/termoscondicoes}" class="terms-link" target="_blank" rel="noopener noreferrer">Termos e Condições</a>
-                                 e a <a th:href="@{/politicasprivacidade}" class="terms-link" target="_blank" rel="noopener noreferrer">Política de Privacidade</a>
+                                Eu aceito os <a th:href="@{/termoscondicoes}" class="terms-link" target="_blank"
+                                    rel="noopener noreferrer">Termos e Condições</a>
+                                e a <a th:href="@{/politicasprivacidade}" class="terms-link" target="_blank"
+                                    rel="noopener noreferrer">Política de Privacidade</a>
                             </label>
                         </div>
                     </div>
@@ -110,4 +120,5 @@
     <footer th:replace="~{fragments/footer :: footer}"></footer>
 
 </body>
+
 </html>

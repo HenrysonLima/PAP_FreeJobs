@@ -28,7 +28,7 @@
         <!-- ACTION BUTTONS -->
         <div class="header-actions">
           <a sec:authorize="!isAnonymous()" th:href="@{/favoritos}" class="header-btn">
-            <span class="icon">⭐</span>
+            <span class="icon"><img th:src="@{/imagens/star_icon.png}"></span>
             <span>Favoritos</span>
           </a>
 
@@ -38,7 +38,7 @@
           </a>
 
           <a th:href="@{/meuperfil}" class="header-btn">
-            <span class="icon">👤</span>
+            <span class="icon"><img th:src="@{/imagens/profile_icon.png}"></span>
             <span>Meu Perfil</span>
           </a>
 
