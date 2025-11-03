@@ -10,7 +10,7 @@
     <link th:href="@{css/auth.css}" rel="stylesheet">
 
     <!-- importar ficheiro js -->
-    <script th:src="@{/js/script.js}" defer></script>
+    <script th:src="@{/js/auth.js}" defer></script>
 
     <!-- alertas com js -->
     <script th:if="${param.errologin}">alert("Email ou password inexistente")</script>
@@ -51,6 +51,10 @@
 
                 <p class="auth-switch">
                     Não tem uma conta? <a th:href="@{/criarperfil}">Criar conta</a>
+                </p>
+
+                <p class="auth-switch">
+                    Esqueceu a senha? <a th:href="@{/recuperarsenha}">Recuperar</a>
                 </p>
             </div>
         </div>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head th:replace="~{fragments/head :: head('FreeJobs - Criar Perfil')}">
+
+<body>
+
+    <!-- importar ficheiros css -->
+    <link th:href="@{/css/base.css}" rel="stylesheet">
+    <link th:href="@{css/auth.css}" rel="stylesheet">
+
+    <!-- importar ficheiro js -->
+    <script th:src="@{/js/auth.js}" defer></script>
+
+    <header th:replace="~{fragments/header-secundario :: header-secundario}"></header>
+
+    <main class="auth-main">
+        <div class="auth-container">
+            <div class="auth-box">
+                <h2 class="auth-title">Recuperar Senha</h2>
+
+                <form class="auth-form" id="recoveryForm">
+
+
+                    <!-- fazer  -->
+                    <div class="form-group">
+                        <label for="question1">Qual é o nome do seu primeiro animal de estimação?</label>
+                        <input type="text" id="question1" name="question1" placeholder="Responda a pergunta" required
+                            autocomplete="off">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newPassword">Nova Senha</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="newPassword" placeholder="Digite sua nova senha" required
+                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                                title="A senha deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma minúscula, um número e um símbolo.">
+                            <button type="button" class="toggle-password"
+                                onclick="togglePasswordVisibility('newPassword', this)">
+                                <img th:src="@{/imagens/show_icon.png}" class="eye-icon">
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirmar Senha</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="confirmPassword" placeholder="Confirme sua nova senha" required
+                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                                title="A senha deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma minúscula, um número e um símbolo.">
+                            <button type="button" class="toggle-password"
+                                onclick="togglePasswordVisibility('confirmPassword', this)">
+                                <img th:src="@{/imagens/show_icon.png}" class="eye-icon">
+                            </button>
+
+                        </div>
+                        
+                        <small id="passwordFeedback" class="password-feedback"></small>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Recuperar Senha</button>
+                </form>
+
+                <p class="auth-switch">
+                    Lembrou da sua senha? <a th:href="@{/login}">Faça login</a>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+
+</body>
+
+</html>

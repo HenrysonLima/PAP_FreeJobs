@@ -72,6 +72,12 @@ body {
   background: #ff5722;
 }
 
+.btn-primary:disabled {
+  opacity: 65%;
+}
+
+
+
 .btn-secondary {
   padding: 14px 30px;
   background: #f0f0f0;

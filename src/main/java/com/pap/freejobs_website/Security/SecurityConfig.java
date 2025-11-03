@@ -21,7 +21,8 @@ public class SecurityConfig {
                                 "/perfil/**",
                                 "/termoscondicoes",
                                 "/politicasprivacidade",
-                                "/contacto"
+                                "/contacto",
+                                "/recuperarsenha"
                         ).permitAll()
                         .requestMatchers(
                                 "/css/**",

@@ -9,8 +9,14 @@
     <link th:href="@{/css/base.css}" rel="stylesheet">
     <link th:href="@{css/auth.css}" rel="stylesheet">
 
+    <style>
+        .auth-form .form-group {
+            margin-bottom: 25px;
+        }
+    </style>
+
     <!-- importar ficheiro js -->
-    <script th:src="@{/js/script.js}" defer></script>
+    <script th:src="@{/js/auth.js}" defer></script>
 
     <!-- alerta lançado na tentativa de criar um perfil com credenciais ja existentes -->
     <script
@@ -26,88 +32,110 @@
                 <form class="auth-form" id="createAccountForm" th:action="@{/criarperfil}"
                     th:object="${criarPerfil_dto}" method="post" enctype="multipart/form-data">
 
-                    <div class="form-group">
-                        <label for="username">Nome de utilizador</label>
-                        <input th:field="*{utilizador_dto.username}" type="text" id="username" name="username"
-                            autocomplete="off" placeholder="Digite seu nome de utilizador" required>
+                    <!-- Informação do utilizador -->
+                    <div class="form-step active" id="step1">
+                        <div class="form-group">
+                            <label for="username">Nome de utilizador</label>
+                            <input th:field="*{utilizador_dto.username}" type="text" id="username" autocomplete="off"
+                                placeholder="Digite seu nome de utilizador" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input th:field="*{utilizador_dto.email}" type="email" id="email" autocomplete="off"
+                                placeholder="Digite seu email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Senha</label>
+                            <div class="password-wrapper">
+                                <input th:field="*{utilizador_dto.senha}" type="password" id="password"
+                                    placeholder="Digite sua senha" required
+                                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                                    title="A senha deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma minúscula, um número e um símbolo.">
+                                <button type="button" class="toggle-password"
+                                    onclick="togglePasswordVisibility('password', this)">
+                                    <img th:src="@{/imagens/show_icon.png}" class="eye-icon">
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="profilePhoto">Foto de perfil</label>
+                            <input th:field="*{utilizador_dto.foto_de_perfil}" type="file" id="profilePhoto"
+                                accept="image/*">
+                        </div>
+
+                        <button type="button" class="btn-primary btn-next">Próximo</button>
                     </div>
 
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input th:field="*{utilizador_dto.email}" type="email" id="email" name="email"
-                            autocomplete="off" placeholder="Digite seu email" required>
-                    </div>
+                    <!-- Contactos -->
+                    <div class="form-step" id="step2">
+                        <h3>Contactos</h3>
 
-                    <div class="form-group">
-                        <label for="password">Senha</label>
+                        <div th:each="contacto, iterStat : *{contactos.contactos}" class="form-group">
+                            <label>Contacto [[${iterStat.index + 1}]]
+                                <span th:if="${iterStat.index == 0}" class="required-indicator">* Obrigatório</span>
+                                <span th:if="${iterStat.index != 0}" class="optional-indicator">(opcional)</span>
+                            </label>
 
-                        <div class="password-wrapper">
-                            <input th:field="*{utilizador_dto.senha}" type="password" id="password" name="password"
-                                autocomplete="off" placeholder="Digite sua senha" required
-                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
-                                title="A senha deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma minúscula, um número e um símbolo.">
+                            <div class="contact-group">
+                                <select th:field="*{contactos.contactos[__${iterStat.index}__].forma_de_contacto}"
+                                    th:id="'contactType' + ${iterStat.index + 1}"
+                                    th:attr="required=${iterStat.index == 0}">
+                                    <option value="none" selected hidden>Selecione tipo de contacto</option>
+                                    <option value="Telefone">Telefone</option>
+                                    <option value="Instagram">Instagram</option>
+                                    <option value="Facebook">Facebook</option>
+                                    <option value="Email">Email</option>
+                                </select>
 
-                            <!-- show/hide -->
-                            <button type="button" class="toggle-password"
-                                onclick="togglePasswordVisibility('password', this)">
-                                <img th:src="@{/imagens/show_icon.png}" class="eye-icon">
-                            </button>
+                                <input type="text" th:id="'contact' + ${iterStat.index + 1}"
+                                    th:field="*{contactos.contactos[__${iterStat.index}__].contacto}"
+                                    th:attr="required=${iterStat.index == 0}" placeholder="Contacto"
+                                    autocomplete="offS">
+
+                                <button type="button" class="btn-reset-contact"
+                                    th:attr="data-contact=${iterStat.index + 1}" title="Limpar contacto">✕</button>
+
+                                <input type="hidden"
+                                    th:field="*{contactos.contactos[__${iterStat.index}__].nivel_de_contacto}">
+                            </div>
+                        </div>
+
+                        <div class="step-buttons">
+                            <button type="button" class="btn-prev">Voltar</button>
+                            <button type="button" class="btn-next btn-primary">Próximo</button>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="profilePhoto">Foto de perfil</label>
-                        <input th:field="*{utilizador_dto.foto_de_perfil}" type="file" id="profilePhoto"
-                            name="profilePhoto" accept="image/*">
-                    </div>
-
-                    <!-- ciclo for para mostrar 4 campos de contacto -->
-                    <div th:each="contacto, iterStat : *{contactos.contactos}" class="form-group">
-
-                        <label>Contacto [[${iterStat.index + 1}]]
-                            <!-- se o contacto tiver index 0, indica que é obrigatorio -->
-                            <span th:if="${iterStat.index == 0}" class="required-indicator">*</span>
-                            <span th:if="${iterStat.index != 0}" class="optional-indicator">(opcional)</span>
-                        </label>
-
-                        <!-- Tipo de contacto -->
-                        <div class="contact-group">
-                            <select th:field="*{contactos.contactos[__${iterStat.index}__].forma_de_contacto}"
-                                th:id="'contactType' + ${iterStat.index + 1}" th:attr="required=${iterStat.index == 0}">
-                                <option value="none" selected hidden>Selecione tipo de contacto</option>
-                                <option value="Telefone">Telefone</option>
-                                <option value="Instagram">Instagram</option>
-                                <option value="Facebook">Facebook</option>
-                                <option value="Email">Email</option>
-                            </select>
-
-                            <!-- Contacto -->
-                            <input type="text" th:id="'contact' + ${iterStat.index + 1}" name="contacto"
-                                th:field="*{contactos.contactos[__${iterStat.index}__].contacto}"
-                                th:attr="required=${iterStat.index == 0}" autocomplete="off" placeholder="Contacto">
-
-                            <button type="button" class="btn-reset-contact" th:attr="data-contact=${iterStat.index + 1}"
-                                title="Limpar contacto">✕</button>
-
-                            <!-- Nivel de contacto -->
-                            <input type="hidden"
-                                th:field="*{contactos.contactos[__${iterStat.index}__].nivel_de_contacto}">
+                    <!-- Perguntas de Segurança -->
+                    <div class="form-step" id="step3">
+                        <h3>Perguntas de Segurança</h3>
+                        <div class="form-group">
+                            <input type="text" name="perguntasDeSeguranca[0].pergunta" placeholder="Pergunta 1"
+                                required>
+                            <input type="text" name="perguntasDeSeguranca[0].resposta" placeholder="Resposta" required>
+                        </div>
+                        <div class="step-buttons">
+                            <button type="button" class="btn-prev">Voltar</button>
+                            <button type="submit" class="btn-primary">Concluir</button>
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group terms-step">
                         <div class="terms-group">
                             <input type="checkbox" id="terms" name="terms" required>
                             <label for="terms" class="terms-label">
-                                Eu aceito os <a th:href="@{/termoscondicoes}" class="terms-link" target="_blank"
+                                Eu aceito os
+                                <a th:href="@{/termoscondicoes}" class="terms-link" target="_blank"
                                     rel="noopener noreferrer">Termos e Condições</a>
-                                e a <a th:href="@{/politicasprivacidade}" class="terms-link" target="_blank"
+                                e a
+                                <a th:href="@{/politicasprivacidade}" class="terms-link" target="_blank"
                                     rel="noopener noreferrer">Política de Privacidade</a>
                             </label>
                         </div>
                     </div>
-
-                    <button type="submit" class="btn-primary">Criar</button>
                 </form>
 
                 <p class="auth-switch">

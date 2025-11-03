@@ -39,12 +39,28 @@
   font-weight: 500;
 }
 
+.auth-form label {
+  display: block;
+  font-weight: 500;
+}
+
+.auth-form input,
+.auth-form select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+
 /* Contact group container */
 .contact-group {
   display: flex;
-  align-items: stretch; /* make all children same height */
+  align-items: stretch;
+  /* make all children same height */
   gap: 10px;
-  flex-wrap: wrap; /* allows responsive wrapping if needed */
+  flex-wrap: wrap;
+  /* allows responsive wrapping if needed */
 }
 
 /* Select styling */
@@ -62,14 +78,16 @@
 
 /* Input styling */
 .contact-group input[type="text"] {
-  flex: 1; /* fill remaining space */
+  flex: 1;
+  /* fill remaining space */
   padding: 12px 10px;
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 14px;
   height: 46px;
   box-sizing: border-box;
-  min-width: 0; /* prevents overflow in flexbox */
+  min-width: 0;
+  /* prevents overflow in flexbox */
 }
 
 /* Ensure hidden inputs stay hidden */
@@ -184,7 +202,8 @@
 
 .password-wrapper input {
   width: 100%;
-  padding-right: 45px; /* leave room for the icon */
+  padding-right: 45px;
+  /* leave room for the icon */
 }
 
 .toggle-password {
@@ -207,4 +226,56 @@
 
 .toggle-password:hover .eye-icon {
   opacity: 1;
+}
+
+.step-buttons {
+  margin-top: 15px;
+
+}
+
+.step-buttons .btn-prev {
+  padding: 14px 30px;
+  background: #0f31c7;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 10px 15px;
+  border-radius: 8px;
+  color: white;
+  transition: all 0.3s;
+  margin-right: 10px;
+}
+
+.step-buttons .btn-prev:hover {
+  background: #0023c0;
+}
+
+.form-step {
+  display: none;
+}
+
+.form-step.active {
+  display: block;
+}
+
+.step-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.form-step h3{
+  margin-bottom: 10px;
+}
+
+.password-feedback {
+  font-size: 0.9rem;
+  margin-top: 6px;
+  font-weight: 500;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.password-feedback:empty {
+  transform: scale(0.95);
+  opacity: 0.7;
 }

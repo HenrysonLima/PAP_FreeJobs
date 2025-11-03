@@ -15,21 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
     heroTitle.textContent = randomTitle
   }
 
-  //botões de limpar campos de contactos (criar perfil)
-  const resetButtons = document.querySelectorAll(".btn-reset-contact")
-  resetButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const contactNumber = button.getAttribute("data-contact")
-      const selectElement = document.getElementById(`contactType${contactNumber}`)
-      const inputElement = document.getElementById(`contact${contactNumber}`)
-
-      if (selectElement && inputElement) {
-        selectElement.value = "none"
-        inputElement.value = ""
-      }
-    })
-  })
-
   //desativar botão de busca quando barra de pesquisa está vazia (header principal)
   const input = document.getElementById("searchInput");
   const button = document.getElementById("searchButton");
@@ -47,17 +32,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
   
 })
-
-// botão show/hide nos campos de senha
-function togglePasswordVisibility(inputId, button) {
-  const input = document.getElementById(inputId);
-  const img = button.querySelector("img");
-
-  if (input.type === "password") {
-    input.type = "text";
-    img.src = "/imagens/hide_icon.png";
-  } else {
-    input.type = "password";
-    img.src = "/imagens/show_icon.png";
-  }
-}
