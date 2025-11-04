@@ -10,12 +10,22 @@ public class PerguntaDeSeguranca {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, length = 255)
     private String pergunta;
+
+    @Column(nullable = false, length = 255)
     private String resposta;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "utilizador_id", nullable = false)
     private Utilizador utilizador;
+
+    //construtor
+    public PerguntaDeSeguranca(String pergunta, String resposta, Utilizador utilizador){
+        this.pergunta = pergunta;
+        this.resposta = resposta;
+        this.utilizador = utilizador;
+    }
 
     //Getters e Setters
 

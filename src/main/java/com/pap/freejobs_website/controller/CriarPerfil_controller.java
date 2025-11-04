@@ -1,11 +1,9 @@
 package com.pap.freejobs_website.controller;
 
-import com.pap.freejobs_website.dto.ContactoDeUtilizador_dto;
-import com.pap.freejobs_website.dto.ContactosWrapper_dto;
-import com.pap.freejobs_website.dto.CriarPerfil_dto;
-import com.pap.freejobs_website.dto.Utilizador_dto;
+import com.pap.freejobs_website.dto.*;
 import com.pap.freejobs_website.entity.Utilizador;
 import com.pap.freejobs_website.service.ContactoDeUtilizador_servico;
+import com.pap.freejobs_website.service.PerguntaDeSeguranca_servico;
 import com.pap.freejobs_website.service.Utilizador_servico;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,10 +23,12 @@ public class CriarPerfil_controller {
 
     private final Utilizador_servico utilizador_servico;
     private final ContactoDeUtilizador_servico contactoDeUtilizador_servico;
+    private final PerguntaDeSeguranca_servico perguntaDeSeguranca_servico;
 
-    public CriarPerfil_controller(Utilizador_servico utilizador_servico, ContactoDeUtilizador_servico contactoDeUtilizador_servico){
+    public CriarPerfil_controller(Utilizador_servico utilizador_servico, ContactoDeUtilizador_servico contactoDeUtilizador_servico, PerguntaDeSeguranca_servico perguntaDeSeguranca_servico){
         this.utilizador_servico = utilizador_servico;
         this.contactoDeUtilizador_servico = contactoDeUtilizador_servico;
+        this.perguntaDeSeguranca_servico = perguntaDeSeguranca_servico;
     }
 
     //Mostra o formulário HTML
@@ -47,6 +48,13 @@ public class CriarPerfil_controller {
         }
         dto.setContactos(contactosWrapper_dto);
 
+        //Inicializar 3 perguntas de segurança
+        List<PerguntaDeSeguranca_dto> perguntas = new ArrayList<>();
+        for (int i = 1; i <= 3; i++){
+            perguntas.add(new PerguntaDeSeguranca_dto());
+        }
+        dto.setPerguntasDeSeguranca(perguntas);
+
         model.addAttribute("criarPerfil_dto", dto);
         return "criar-perfil";
     }
@@ -60,6 +68,7 @@ public class CriarPerfil_controller {
         try {
             Utilizador utilizadorSalvo = utilizador_servico.salvar_utilizador(utilizador_dto);
             contactoDeUtilizador_servico.salvar_contacto(contactos, utilizadorSalvo);
+            perguntaDeSeguranca_servico.salvarPerguntas(criarPerfil_dto.getPerguntasDeSeguranca(), utilizadorSalvo);
 
             redirectAttributes.addFlashAttribute("sucessocriarperfil", true);
             return "redirect:/login";
