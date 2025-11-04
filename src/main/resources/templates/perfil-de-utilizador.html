@@ -8,8 +8,8 @@
 
   <!-- importar ficheiros css -->
   <link th:href="@{/css/base.css}" rel="stylesheet">
-  <link th:href="@{/css/cards.css}" rel="stylesheet">
   <link th:href="@{/css/profile.css}" rel="stylesheet">
+  <link th:href="@{/css/cards.css}" rel="stylesheet">
 
   <main class="main-content">
     <div class="container">
@@ -62,7 +62,7 @@
                 </div>
 
                 <h3 class="card-title" th:text="${a.titulo}"></h3>
-                <p class="card-price" th:text="${a.preco + ' €'}"></p>
+                <p class="card-price" th:text="${a.preco + ' €'}" style="color: #244cfc;"></p>
                 <p class="card-desc"
                   th:text="${#strings.length(a.descricao) > 80 ? #strings.substring(a.descricao, 0, 80) + '...' : a.descricao}">
                 </p> <!-- mostra apenas os primeiros 80 caracteres da descrição dos anuncios -->

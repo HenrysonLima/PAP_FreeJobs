@@ -66,11 +66,11 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             if (match) {
-                feedback.textContent = "✅ As senhas coincidem.";
+                feedback.textContent = "✅ As senhas são iguais.";
                 feedback.style.color = "#28a745";
                 submitBtn.disabled = false;
             } else {
-                feedback.textContent = "❌ As senhas não coincidem.";
+                feedback.textContent = "❌ As senhas não são iguais.";
                 feedback.style.color = "#dc3545";
                 submitBtn.disabled = true;
             }

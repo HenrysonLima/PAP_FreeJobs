@@ -6,10 +6,11 @@
   <header th:fragment="header-principal" class="header">
 
     <link th:href="@{/css/header.css}" rel="stylesheet"><!-- importar ficheiro css -->
-    <script th:src="@{/js/script.js}" defer></script>
+    <script th:src="@{/js/header.js}" defer></script><!-- importar ficheiro js -->
 
     <div class="container">
       <div class="header-content">
+
         <!-- LOGO -->
         <h1 class="logo">
           <a th:href="@{/}"><img th:src="@{/imagens/FreeJobs_LettersLogo.png}"></a>
@@ -17,28 +18,33 @@
 
         <!-- SEARCH BAR -->
         <div class="search-container">
-          <form th:action="@{/anuncio/pesquisa}" method="get" id="searchForm">
-            <input type="text" name="q" class="search-input" placeholder="Escreva aqui o que procura" autocomplete="off"
-              id="searchInput">
-            <button type="submit" class="menu-btn" id="searchButton" disabled>Pesquisar</button>
+          <form th:action="@{/anuncio/pesquisa}" method="get" id="searchForm" class="search-form">
+            <div class="search-wrapper">
+              <input type="text" name="q" class="search-input" placeholder="Escreva aqui o que procura"
+                autocomplete="off" id="searchInput">
+              <button type="submit" class="search-button" id="searchButton" disabled>
+                <img th:src="@{/imagens/lupa_icon.png}" class="search-icon">
+              </button>
+            </div>
           </form>
         </div>
 
         <!-- ACTION BUTTONS -->
         <div class="header-actions">
-          <a sec:authorize="!isAnonymous()" th:href="@{/favoritos}" class="header-btn">
+
+          <a id="favoritosLink" sec:authorize="!isAnonymous()" th:href="@{/favoritos}" class="header-btn">
             <span class="icon"><img th:src="@{/imagens/star_icon.png}"></span>
-            <span>Favoritos</span>
+            <span class="textoheader">Favoritos</span>
           </a>
 
           <a th:href="@{/criaranuncio}" class="header-btn">
-            <span class="icon">$</span>
-            <span>Criar Anúncio</span>
+            <span class="icon" style=".icon:hover{color: white;}">$</span>
+            <span class="textoheader">Criar Anúncio</span>
           </a>
 
           <a th:href="@{/meuperfil}" class="header-btn">
             <span class="icon"><img th:src="@{/imagens/profile_icon.png}"></span>
-            <span>Meu Perfil</span>
+            <span class="textoheader">Meu Perfil</span>
           </a>
 
           <div sec:authorize="isAnonymous()" class="auth-buttons">
