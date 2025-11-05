@@ -13,7 +13,10 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login").anonymous()
+                        .requestMatchers(
+                                "/login",
+                                "/recuperarsenha/**"
+                        ).anonymous()
                         .requestMatchers(
                                 "/",
                                 "/criarperfil",
@@ -21,8 +24,7 @@ public class SecurityConfig {
                                 "/perfil/**",
                                 "/termoscondicoes",
                                 "/politicasprivacidade",
-                                "/contacto",
-                                "/recuperarsenha"
+                                "/contacto"
                         ).permitAll()
                         .requestMatchers(
                                 "/css/**",

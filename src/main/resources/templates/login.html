@@ -16,6 +16,7 @@
     <script th:if="${param.errologin}">alert("Email ou password inexistente")</script>
     <script th:if="${sucessocriarperfil}"> alert("Perfil criado com sucesso!")</script>
     <script th:if="${loginnecessario}">alert("Para ter acesso a esse serviço é necessário fazer login")</script>
+    <script th:if="${sucessoRecuperarSenha}">alert("Senha alterada com sucesso")</script>
 
 
     <header th:replace="~{fragments/header-secundario :: header-secundario}"></header>

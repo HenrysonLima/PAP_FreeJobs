@@ -50,7 +50,7 @@ public class CriarPerfil_controller {
 
         //Inicializar 3 perguntas de segurança
         List<PerguntaDeSeguranca_dto> perguntas = new ArrayList<>();
-        for (int i = 1; i <= 3; i++){
+        for (int i = 1; i <= 2; i++){
             perguntas.add(new PerguntaDeSeguranca_dto());
         }
         dto.setPerguntasDeSeguranca(perguntas);

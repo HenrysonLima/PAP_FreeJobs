@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt">
 
-<head th:replace="~{fragments/head :: head('FreeJobs - Criar Perfil')}">
+<head th:replace="~{fragments/head :: head('FreeJobs - Recuperar Senha')}"></head>
 
 <body>
 
-    <!-- importar ficheiros css -->
     <link th:href="@{/css/base.css}" rel="stylesheet">
-    <link th:href="@{css/auth.css}" rel="stylesheet">
-
-    <!-- importar ficheiro js -->
+    <link th:href="@{/css/auth.css}" rel="stylesheet">
     <script th:src="@{/js/auth.js}" defer></script>
+
+    <!-- alertas com javascript -->
+    <script th:if="${erroUtilizadorSemPerguntas}">alert("Este utilizador não possui perguntas de segurança");</script>
 
     <header th:replace="~{fragments/header-secundario :: header-secundario}"></header>
 
@@ -19,21 +19,23 @@
             <div class="auth-box">
                 <h2 class="auth-title">Recuperar Senha</h2>
 
-                <form class="auth-form" id="recoveryForm">
+                <form th:action="@{/recuperarsenha/atualizar}" method="post" class="auth-form" id="recoveryForm">
+                    <!-- Hidden email -->
+                    <input type="hidden" name="email" th:value="${utilizadorEmail}">
 
-
-                    <!-- fazer  -->
-                    <div class="form-group">
-                        <label for="question1">Qual é o nome do seu primeiro animal de estimação?</label>
-                        <input type="text" id="question1" name="question1" placeholder="Responda a pergunta" required
+                    <!-- Perguntas de segurança -->
+                    <div th:each="pergunta, iterStat : ${perguntas}" class="form-group">
+                        <label th:text="${pergunta.pergunta}">Pergunta</label>
+                        <input type="text" name="respostas" placeholder="Responda a pergunta" required
                             autocomplete="off">
                     </div>
 
+                    <!-- Nova senha -->
                     <div class="form-group">
                         <label for="newPassword">Nova Senha</label>
                         <div class="password-wrapper">
-                            <input type="password" id="newPassword" placeholder="Digite sua nova senha" required
-                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                            <input type="password" id="newPassword" name="novaSenha" placeholder="Digite sua nova senha"
+                                required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
                                 title="A senha deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma minúscula, um número e um símbolo.">
                             <button type="button" class="toggle-password"
                                 onclick="togglePasswordVisibility('newPassword', this)">
@@ -42,19 +44,16 @@
                         </div>
                     </div>
 
+                    <!-- Confirmar senha -->
                     <div class="form-group">
                         <label for="confirmPassword">Confirmar Senha</label>
                         <div class="password-wrapper">
-                            <input type="password" id="confirmPassword" placeholder="Confirme sua nova senha" required
-                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
-                                title="A senha deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma minúscula, um número e um símbolo.">
+                            <input type="password" id="confirmPassword" placeholder="Confirme sua nova senha" required>
                             <button type="button" class="toggle-password"
                                 onclick="togglePasswordVisibility('confirmPassword', this)">
                                 <img th:src="@{/imagens/show_icon.png}" class="eye-icon">
                             </button>
-
                         </div>
-                        
                         <small id="passwordFeedback" class="password-feedback"></small>
                     </div>
 
@@ -69,7 +68,6 @@
     </main>
 
     <footer th:replace="~{fragments/footer :: footer}"></footer>
-
 </body>
 
 </html>

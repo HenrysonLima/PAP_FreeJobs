@@ -4,6 +4,7 @@ import com.pap.freejobs_website.dto.ContactoDeUtilizador_dto;
 import com.pap.freejobs_website.dto.Utilizador_dto;
 import com.pap.freejobs_website.entity.ContactoDeUtilizador;
 import com.pap.freejobs_website.entity.Utilizador;
+import com.pap.freejobs_website.repository.PerguntaDeSeguranca_repositorio;
 import com.pap.freejobs_website.repository.Utilizador_repositorio;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class Utilizador_servico {
     private final Utilizador_repositorio utilizador_repositorio;
     private final PasswordEncoder passwordEncoder;
 
-    public Utilizador_servico(Utilizador_repositorio utilizadorRepositorio, PasswordEncoder passwordEncoder){
+    public Utilizador_servico(Utilizador_repositorio utilizadorRepositorio, PasswordEncoder passwordEncoder, PerguntaDeSeguranca_repositorio perguntaDeSeguranca_repositorio){
         this.utilizador_repositorio = utilizadorRepositorio;
         this.passwordEncoder = passwordEncoder;
     }
@@ -42,7 +43,7 @@ public class Utilizador_servico {
     public Utilizador salvar_utilizador(Utilizador_dto dto) {
 
         //Regras de negócio
-        if(utilizador_repositorio.existsByEmail(dto.getEmail()) || utilizador_repositorio.existsByUsername(dto.getUsernameLowerCase())){
+        if(utilizador_repositorio.existsByEmail(dto.getEmail()) || utilizador_repositorio.existsByUsernameIgnoreCase(dto.getUsername().toLowerCase())){
             throw new IllegalArgumentException("Credenciais já existentes");
         }
 
@@ -109,4 +110,16 @@ public class Utilizador_servico {
         utilizador_repositorio.save(utilizador);
     }
 
+    @Transactional
+    public void atualizarSenha(Utilizador utilizador, String novaSenha) {
+        if (novaSenha == null || novaSenha.isBlank()) {
+            throw new IllegalArgumentException("A nova senha não pode estar vazia.");
+        }
+
+        //encriptar a nova senha
+        String senhaCriptografada = passwordEncoder.encode(novaSenha);
+        utilizador.setSenha(senhaCriptografada);
+
+        utilizador_repositorio.save(utilizador);
+    }
 }

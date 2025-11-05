@@ -10,17 +10,19 @@ public class PerguntaDeSeguranca {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, length = 100)
     private String pergunta;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, length = 100)
     private String resposta;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "utilizador_id", nullable = false)
     private Utilizador utilizador;
 
-    //construtor
+    //construtores
+    public PerguntaDeSeguranca (){}
+
     public PerguntaDeSeguranca(String pergunta, String resposta, Utilizador utilizador){
         this.pergunta = pergunta;
         this.resposta = resposta;

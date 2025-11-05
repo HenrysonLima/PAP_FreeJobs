@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head th:replace="~{fragments/head :: head('FreeJobs - Criar Perfil')}">
+
+<body>
+
+    <!-- importar ficheiros css -->
+    <link th:href="@{/css/base.css}" rel="stylesheet">
+    <link th:href="@{css/auth.css}" rel="stylesheet">
+
+    <!-- alerta com js -->
+    <script th:if="${erroAoEncontrarEmail}">alert("Nenhum utilizador encontrado com esse email");</script>
+    <script th:if="${erroRecuperarSenha}">alert("Alguma resposta está incorreta");</script>
+
+    <header th:replace="~{fragments/header-secundario :: header-secundario}"></header>
+
+    <main class="auth-main">
+        <div class="auth-container">
+            <div class="auth-box">
+                <h2 class="auth-title">Recuperar Senha</h2>
+
+                <form th:action="@{/recuperarsenha/verificar}" method="post" class="auth-form" id="recoveryForm">
+                    <div class="form-group">
+                        <label for="email">Digite seu email</label>
+                        <input type="email" id="email" name="email" placeholder="exemplo@email.com" required autocomplete="off">
+                    </div>
+                    <button type="submit" class="btn-primary">Continuar</button>
+                </form>
+
+                <p class="auth-switch">
+                    Lembrou da sua senha? <a th:href="@{/login}">Faça login</a>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+
+</body>
+
+</html>

@@ -5,6 +5,7 @@ import com.pap.freejobs_website.entity.PerguntaDeSeguranca;
 import com.pap.freejobs_website.entity.Utilizador;
 import com.pap.freejobs_website.repository.PerguntaDeSeguranca_repositorio;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,9 +13,11 @@ import java.util.List;
 public class PerguntaDeSeguranca_servico {
 
     private final PerguntaDeSeguranca_repositorio perguntaDeSeguranca_repositorio;
+    private final Utilizador_servico utilizador_servico;
 
-    public PerguntaDeSeguranca_servico(PerguntaDeSeguranca_repositorio perguntaDeSeguranca_repositorio){
+    public PerguntaDeSeguranca_servico(Utilizador_servico utilizador_servico, PerguntaDeSeguranca_repositorio perguntaDeSeguranca_repositorio){
         this.perguntaDeSeguranca_repositorio = perguntaDeSeguranca_repositorio;
+        this.utilizador_servico = utilizador_servico;
     }
 
     public void salvarPerguntas(List<PerguntaDeSeguranca_dto> perguntasDto, Utilizador utilizador){
@@ -33,5 +36,34 @@ public class PerguntaDeSeguranca_servico {
             perguntaDeSeguranca_repositorio.save(pergunta);
         }
 
+    }
+
+    @Transactional(readOnly = true)
+    public List<PerguntaDeSeguranca_dto> buscarPerguntasDoUtilizador(Utilizador utilizador){
+        return perguntaDeSeguranca_repositorio.findByUtilizador(utilizador)
+                .stream()
+                .map(PerguntaDeSeguranca_dto::new)
+                .toList();
+    }
+
+    public void validarRespostasEAtualizarSenha(String email, List<String> respostas, String novaSenha) {
+        Utilizador utilizador = utilizador_servico.findByEmail(email);
+        if (utilizador == null) {
+            throw new IllegalArgumentException("Utilizador não encontrado.");
+        }
+
+        List<PerguntaDeSeguranca> perguntas = perguntaDeSeguranca_repositorio.findByUtilizador(utilizador);
+
+        if (perguntas.size() != respostas.size()) {
+            throw new IllegalArgumentException("Número de respostas inválido.");
+        }
+
+        for (int i = 0; i < perguntas.size(); i++) {
+            if (!perguntas.get(i).getResposta().equalsIgnoreCase(respostas.get(i).trim())) {
+                throw new IllegalArgumentException("Resposta incorreta para a pergunta " + (i + 1));
+            }
+        }
+
+        utilizador_servico.atualizarSenha(utilizador, novaSenha);
     }
 }
