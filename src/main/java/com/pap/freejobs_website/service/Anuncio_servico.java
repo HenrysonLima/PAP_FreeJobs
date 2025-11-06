@@ -64,8 +64,8 @@ public class Anuncio_servico {
     }
 
     // funções para pesquisa
-    public List<Anuncio> buscarPorTitulo(String termo) {
-        return anuncio_repositorio.findBytituloContainingIgnoreCase(termo);
+    public List<Anuncio> buscarPorTituloDescricaoOuUtilizador(String termo) {
+        return anuncio_repositorio.searchByTituloDescricaoOuUtilizador(termo);
     }
 
     // para quando o termo de pesquisa é null, carregar os 3 anuncios mais recentes

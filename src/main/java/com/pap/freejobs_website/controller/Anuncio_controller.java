@@ -30,8 +30,8 @@ public class Anuncio_controller {
         List<Anuncio> resultados;
 
         if (termo != null && !termo.trim().isEmpty()) {
-            // Se o termo existir, procura por título
-            resultados = anuncio_servico.buscarPorTitulo(termo);
+            // Se o termo existir, procura por título, descricao ou username do autor
+            resultados = anuncio_servico.buscarPorTituloDescricaoOuUtilizador(termo);
         } else {
             // Se o termo estiver vazio, mostra os 3 últimos anúncios
             resultados = anuncio_servico.buscarUltimos3();
