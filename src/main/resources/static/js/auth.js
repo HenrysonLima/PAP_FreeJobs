@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     showStep(currentStep);
 
-    // Recuperar Senha – Validação de campos
+    // Recuperar Senha – Validação de campos para feedback visual
     const recoveryForm = document.getElementById("recoveryForm");
     if (recoveryForm) {
         const newPassword = document.getElementById("newPassword");

@@ -19,7 +19,8 @@
     <script th:src="@{/js/auth.js}" defer></script>
 
     <!-- alerta lançado na tentativa de criar um perfil com credenciais ja existentes -->
-    <script th:if="${erroaocriarperfil}">alert("Já existe um utilizador com essas credenciais. Por favor, escolha outro email ou username")</script>
+    <script
+        th:if="${erroaocriarperfil}">alert("Já existe um utilizador com essas credenciais. Por favor, escolha outro email ou username")</script>
 
     <header th:replace="~{fragments/header-secundario :: header-secundario}"></header>
 
@@ -35,18 +36,18 @@
                     <div class="form-step active" id="step1">
                         <div class="form-group">
                             <label for="username">Nome de utilizador</label>
-                            <input th:field="*{utilizador_dto.username}" type="text" id="username" autocomplete="off" maxlength="100"
-                                placeholder="Digite seu nome de utilizador" required>
+                            <input th:field="*{utilizador_dto.username}" type="text" id="username" autocomplete="off"
+                                maxlength="100" placeholder="Digite seu nome de utilizador" required>
                         </div>
 
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input th:field="*{utilizador_dto.email}" type="email" id="email" autocomplete="off" maxlength="100"
-                                placeholder="Digite seu email" required>
+                            <input th:field="*{utilizador_dto.email}" type="email" id="email" autocomplete="off"
+                                maxlength="100" placeholder="Digite seu email" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="password">Senha</label>
+                            <label for="password">Senha  <span style="color:red;">(deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma minúscula, um número e um símbolo.)</span></label>
                             <div class="password-wrapper">
                                 <input th:field="*{utilizador_dto.senha}" type="password" id="password"
                                     placeholder="Digite sua senha" required maxlength="100"
@@ -91,8 +92,8 @@
 
                                 <input type="text" th:id="'contact' + ${iterStat.index + 1}"
                                     th:field="*{contactos.contactos[__${iterStat.index}__].contacto}"
-                                    th:attr="required=${iterStat.index == 0}" placeholder="Contacto"
-                                    autocomplete="off" maxlength="100">
+                                    th:attr="required=${iterStat.index == 0}" placeholder="Contacto" autocomplete="off"
+                                    maxlength="100">
 
                                 <button type="button" class="btn-reset-contact"
                                     th:attr="data-contact=${iterStat.index + 1}" title="Limpar contacto">✕</button>
@@ -109,7 +110,7 @@
                     </div>
 
                     <!-- Perguntas de Segurança -->
-                    <div class="form-step" id="step3">
+                    <div class="form-step" id="step3" data-validate="utilizador">
                         <h3>Perguntas de Segurança</h3>
 
                         <div th:each="pergunta, iterStat : *{perguntasDeSeguranca}" class="form-group">
@@ -120,24 +121,26 @@
                                 placeholder="Digite sua resposta" required autocomplete="off" maxlength="100">
                         </div>
 
+                        <!-- checkbox termos e condições -->
+                        <div class="form-group terms-step" style="margin-top: 10px;">
+                            <div class="terms-group">
+                                <input type="checkbox" id="terms" name="terms" required>
+                                <label for="terms" class="terms-label">
+                                    Eu aceito os
+                                    <a th:href="@{/termoscondicoes}" class="terms-link" target="_blank"
+                                        rel="noopener noreferrer">Termos e Condições</a>
+                                    e a
+                                    <a th:href="@{/politicasprivacidade}" class="terms-link" target="_blank"
+                                        rel="noopener noreferrer">Política de Privacidade</a>
+                                </label>
+                            </div>
+                        </div>
+
                         <div class="step-buttons">
                             <button type="button" class="btn-prev">Voltar</button>
                             <button type="submit" class="btn-primary">Concluir</button>
                         </div>
-                    </div>
-
-                    <div class="form-group terms-step">
-                        <div class="terms-group">
-                            <input type="checkbox" id="terms" name="terms" required>
-                            <label for="terms" class="terms-label">
-                                Eu aceito os
-                                <a th:href="@{/termoscondicoes}" class="terms-link" target="_blank"
-                                    rel="noopener noreferrer">Termos e Condições</a>
-                                e a
-                                <a th:href="@{/politicasprivacidade}" class="terms-link" target="_blank"
-                                    rel="noopener noreferrer">Política de Privacidade</a>
-                            </label>
-                        </div>
+                        
                     </div>
                 </form>
 
