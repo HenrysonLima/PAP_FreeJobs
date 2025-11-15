@@ -25,3 +25,34 @@
   flex-direction: column;
   gap: 20px;
 }
+
+@media (max-width: 768px) {
+  .contact-page {
+    padding: 25px;
+  }
+
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .contact-form-container {
+    padding: 20px;
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-page {
+    padding: 15px;
+    border-radius: 15px;
+  }
+
+  .contact-form-container {
+    padding: 15px;
+  }
+
+  .contact-form {
+    gap: 15px;
+  }
+}

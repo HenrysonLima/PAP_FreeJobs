@@ -1,10 +1,10 @@
 /* Estilos que servirão para em todas as páginas */
 
 @font-face {
-    font-family: 'Neo Tech';
-    src: url("../fonts/Neo Tech Std Regular.otf") format("opentype");
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'Neo Tech';
+  src: url("../fonts/Neo Tech Std Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 * {
@@ -75,8 +75,6 @@ body {
 .btn-primary:disabled {
   opacity: 65%;
 }
-
-
 
 .btn-secondary {
   padding: 14px 30px;
@@ -169,4 +167,49 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 24px;
+    margin-bottom: 25px;
+  }
+
+  .page-title {
+    font-size: 24px;
+  }
+
+  .container {
+    padding: 0 15px;
+  }
+
+  .main-content {
+    padding: 25px 0;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 20px;
+  }
+
+  .page-title {
+    font-size: 20px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-size: 16px;
+  }
 }

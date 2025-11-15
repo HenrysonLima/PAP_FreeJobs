@@ -23,7 +23,8 @@
                 <form th:action="@{/recuperarsenha/verificar}" method="post" class="auth-form" id="recoveryForm">
                     <div class="form-group">
                         <label for="email">Digite seu email</label>
-                        <input type="email" id="email" name="email" placeholder="exemplo@email.com" required autocomplete="off">
+                        <input type="email" id="email" name="email" placeholder="exemplo@email.com" required
+                            autocomplete="off">
                     </div>
                     <button type="submit" class="btn-primary">Continuar</button>
                 </form>
@@ -38,5 +39,14 @@
     <footer th:replace="~{fragments/footer :: footer}"></footer>
 
 </body>
+
+<!-- estilos especificos da pagina  -->
+<style>
+    @media (max-width: 768px) {
+        footer {
+            margin-top: 180px;
+        }
+    }
+</style>
 
 </html>

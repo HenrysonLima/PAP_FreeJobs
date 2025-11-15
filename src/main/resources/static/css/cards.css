@@ -451,3 +451,126 @@
   background: #e02d22;
   transform: scale(1.05);
 }
+
+@media (max-width: 1024px) {
+  .flipping-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .flipping-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .card-image {
+    height: 150px;
+  }
+
+  .categories-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .category-card {
+    padding: 20px;
+  }
+
+  .category-icon {
+    font-size: 36px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .steps-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .step-card {
+    padding: 20px;
+  }
+
+  .hero-search {
+    flex-direction: column;
+  }
+
+  .hero-search-btn {
+    width: 100%;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+  }
+
+  .cta-btn {
+    width: 100%;
+  }
+
+  .section-title {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+
+  .hero-subtitle {
+    font-size: 16px;
+  }
+
+  .cta-section {
+    padding: 30px 20px;
+  }
+
+  .cta-section h3 {
+    font-size: 24px;
+  }
+
+  .btn-remove-fav {
+    padding: 8px 12px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .flipping-card,
+  .category-card,
+  .stat-card,
+  .step-card,
+  .info-card {
+    padding: 15px;
+  }
+
+  .card-title {
+    font-size: 16px;
+  }
+
+  .card-price {
+    font-size: 20px;
+  }
+
+  .stat-number {
+    font-size: 28px;
+  }
+
+  .step-number {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+  }
+}

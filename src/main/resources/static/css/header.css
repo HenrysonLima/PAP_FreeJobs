@@ -34,7 +34,8 @@
   position: relative;
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 300px;
+  margin-right: 70px;
 }
 
 .search-input {
@@ -86,7 +87,7 @@
 }
 
 /* ACTION BUTTONS */
-.header-actions {
+.header-actions .autenticated-buttons{
   display: flex;
   align-items: center;
   gap: 25px;
@@ -189,4 +190,64 @@
   width: 150px;
   display: block;
   object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .header{
+    height: auto;
+  }
+
+  .logo img {
+    width: 120px;
+  }
+
+  .search-input {
+    font-size: 13px;
+  }
+
+  .header-content {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .search-container {
+    max-width: 100%;
+    order: 3;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .search-wrapper{
+    margin: auto;
+  }
+
+  .header-actions {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .auth-buttons {
+    text-align: center;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .sign-in-btn,
+  .log-in-btn {
+    flex: 1;
+    padding: 8px 15px;
+    font-size: 13px;
+  }
+
+  .header-btn {
+    padding: 8px 12px;
+    font-size: 12px;
+    gap: 5px;
+  }
+
+  .header-btn .icon {
+    font-size: 16px;
+  }
 }

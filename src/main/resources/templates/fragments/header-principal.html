@@ -32,20 +32,23 @@
         <!-- ACTION BUTTONS -->
         <div class="header-actions">
 
-          <a id="favoritosLink" sec:authorize="!isAnonymous()" th:href="@{/favoritos}" class="header-btn">
-            <span class="icon"><img th:src="@{/imagens/star_icon.png}"></span>
-            <span class="textoheader">Favoritos</span>
-          </a>
+          <div sec:authorize="!isAnonymous()" class="autenticated-buttons">
+            <a id="favoritosLink" th:href="@{/favoritos}" class="header-btn">
+              <span class="icon"><img th:src="@{/imagens/star_icon.png}"></span>
+              <span class="textoheader">Favoritos</span>
+            </a>
 
-          <a th:href="@{/criaranuncio}" class="header-btn">
-            <span class="icon" style=".icon:hover{color: white;}">$</span>
-            <span class="textoheader">Criar Anúncio</span>
-          </a>
+            <a th:href="@{/criaranuncio}" class="header-btn">
+              <span class="icon" style=".icon:hover{color: white;}">$</span>
+              <span class="textoheader">Criar Anúncio</span>
+            </a>
 
-          <a th:href="@{/meuperfil}" class="header-btn">
-            <span class="icon"><img th:src="@{/imagens/profile_icon.png}"></span>
-            <span class="textoheader">Meu Perfil</span>
-          </a>
+            <a th:href="@{/meuperfil}" class="header-btn">
+              <span class="icon"><img th:src="@{/imagens/profile_icon.png}"></span>
+              <span class="textoheader">Meu Perfil</span>
+            </a>
+          </div>
+
 
           <div sec:authorize="isAnonymous()" class="auth-buttons">
             <a th:href="@{/criarperfil}" class="sign-in-btn">Criar conta</a>

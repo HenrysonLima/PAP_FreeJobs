@@ -55,3 +55,49 @@
 .legal-container a:hover {
   text-decoration: underline;
 }
+
+@media (max-width: 768px) {
+  .legal-container {
+    margin: 25px auto;
+    padding: 25px;
+  }
+
+  .legal-container h1 {
+    font-size: 2rem;
+  }
+
+  .legal-container h2 {
+    font-size: 1.3rem;
+  }
+
+  .legal-container p,
+  .legal-container li {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .legal-container {
+    margin: 15px auto;
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  .legal-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .legal-container h2 {
+    font-size: 1.1rem;
+    margin-top: 20px;
+  }
+
+  .legal-container p,
+  .legal-container li {
+    font-size: 14px;
+  }
+
+  .legal-container ul {
+    margin-left: 15px;
+  }
+}
